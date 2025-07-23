@@ -73,11 +73,19 @@ const Catalog = ({ scrollY, onScrollEnd, isInteractive }) => {
 
     // Динамический zoomFactor
     let zoomFactor = 1;
-    if (screenWidth >= 2000) {
-      zoomFactor = 1.759;
+    if (screenWidth >= 3840) {
+      zoomFactor = 2.273;
+    } else if (screenWidth >= 2560) {
+      zoomFactor = 1.540;
+    } else if (screenWidth >= 2048) {
+      zoomFactor = 1.204;
+    } else if (screenWidth >= 1920) {
+      zoomFactor = 1.123;
+    } else if (screenWidth >= 1680) {
+      zoomFactor = 1.175;
     } else if (screenWidth >= 1600) {
-      zoomFactor = 1.307;
-    }
+      zoomFactor = 1.001;
+    } 
 
     const adjustedWidth = screenWidth / zoomFactor;
     const shift = Math.max(adjustedWidth - footerWidth, 0);
@@ -506,7 +514,7 @@ const handleProjectMouseLeave = () => {
                 position: 'absolute',
                 zIndex: 2, // Это выше, чем основной блок, чтобы быть поверх
                 borderRadius: '36px', // Скругление углов
-                border: '1px solid rgba(197, 197, 197, 0.7)', // Обводка
+                border: '2.5px solid rgba(197, 197, 197, 0.7)', // Обводка
                 boxShadow: '0 1px 20px rgba(0, 0, 0, 0.25)', // Тень к обводке
                 pointerEvents: 'none',
                 ...(isMobile
@@ -543,7 +551,7 @@ const handleProjectMouseLeave = () => {
                 position: 'absolute',
                 zIndex: 3, // Это выше, чем первый блок, но ниже основного
                 borderRadius: '36px', // Скругление углов
-                border: '1.5px solid rgba(255, 255, 255, 0.7)', // Обводка
+                border: '2px solid rgba(255, 255, 255, 0.7)', // Обводка
                 pointerEvents: 'none', // Блок с обводкой не блокирует клики
                 ...(isMobile
                   ? {
@@ -555,7 +563,7 @@ const handleProjectMouseLeave = () => {
                     }
                   : {
                       top: 0,
-                      right: "27px", // Сдвигаем на 1 пиксель вправо
+                      right: "28px", // Сдвигаем на 1 пиксель вправо
                       width: '270px',
                       height: '100%',
                     }),
