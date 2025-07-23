@@ -212,7 +212,7 @@ useEffect(() => {
     url: "https://tiffali.ru",
     image: "/images/tiffali123.png",
     hoverColor: "#ffa5e5",
-    position: { left: "180px", top: "60px" },
+    position: { left: "330px", top: "55px" },
     size: { width: "auto", height: "auto" },
     imageSize: { width: "1380px", height: "auto" },
     mobilePosition: { left: "-450px", top: "230px" },
@@ -380,7 +380,13 @@ const handleProjectMouseLeave = () => {
 
         <div className="top-dashed-line"></div>
         
-        <div className="catalog-content">
+        <div
+          className="catalog-content"
+          style={{
+            transform: `translateX(${-11 + progress * 11}%)`,
+            transition: 'transform 0.3s ease-out'
+          }}
+        >
           <div className="catalog-title-container" style={{ position: 'relative' }}>
             <motion.h2
               className="catalog-title-outline"
