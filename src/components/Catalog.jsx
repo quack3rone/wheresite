@@ -192,6 +192,26 @@ useEffect(() => {
     }, 100);
     return () => clearInterval(interval);
   }, [lastScrollTime, isScrolling, outlineOpacity]);
+  
+  const [smoothedProgress, setSmoothedProgress] = useState(0);
+
+  useEffect(() => {
+  let animationFrame;
+
+  const animate = () => {
+    setSmoothedProgress(prev => {
+      const diff = progress - prev;
+      const speed = 0.1; // 0.05 — медленно, 0.2 — быстро
+      if (Math.abs(diff) < 0.001) return progress;
+      return prev + diff * speed;
+    });
+    animationFrame = requestAnimationFrame(animate);
+  };
+
+  animationFrame = requestAnimationFrame(animate);
+  return () => cancelAnimationFrame(animationFrame);
+}, [progress]);
+
 
   // useEffect(() => {
   //   const tiffa = projects.find(p => p.name === "TiffaLi");
@@ -344,6 +364,11 @@ const handleProjectMouseLeave = () => {
 
 };
 
+const targetMargin = progress >= 1
+  ? 0
+  : (1 - smoothedProgress) * -shift;
+
+
   return (
     <>
       {/* Белый фон */}
@@ -384,11 +409,13 @@ const handleProjectMouseLeave = () => {
 
         <div className="top-dashed-line"></div>
         
-        <div
+        <motion.div
           className="catalog-content"
-          style={{
-            marginLeft: `${(1 - progress) * -shift}px`,
-            transition: 'margin-left 0.4s ease-out',
+          animate={{ marginLeft: `${targetMargin}px` }}
+          transition={{
+            type: "tween",
+            duration: progress >= 1 ? 0 : 0.4,
+            ease: "easeOut"
           }}
         >
 
@@ -716,7 +743,7 @@ const handleProjectMouseLeave = () => {
               }}
             />
 
-        </div>
+        </motion.div>
         <About transitionActive={transitionActive} />
 
       </motion.div>
