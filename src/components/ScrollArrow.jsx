@@ -7,7 +7,8 @@ const ScrollArrow = ({ onClick, scrollY }) => {
   const controlsMain = useAnimation();
   const controlsShadow = useAnimation();
   const isMobile = window.innerWidth <= 768;
-  const arrowSize = isMobile ? 75 : 85;
+  const is2K = window.innerWidth >= 2048;
+  const arrowSize = isMobile ? 75 : is2K ? 105 : 85;
   const arrowOffset = isMobile ? '5px' : '50px';
 
   useEffect(() => {

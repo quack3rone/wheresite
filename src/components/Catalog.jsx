@@ -31,6 +31,10 @@ const Catalog = ({ scrollY, onScrollEnd, isInteractive }) => {
   const autoSwitchInterval = useRef(null);
   const manualHoverTimeout = useRef(null);
 
+  const mobileShift = 40;
+  const desktopShift = 200;
+  const shift = isMobile ? mobileShift : desktopShift;
+
   // Динамическое вычисление left в зависимости от ширины экрана
   const leftPosition = window.innerWidth <= 450
     ? "30px"
@@ -212,7 +216,7 @@ useEffect(() => {
     url: "https://tiffali.ru",
     image: "/images/tiffali123.png",
     hoverColor: "#ffa5e5",
-    position: { left: "330px", top: "55px" },
+    position: { left: "180px", top: "60px" },
     size: { width: "auto", height: "auto" },
     imageSize: { width: "1380px", height: "auto" },
     mobilePosition: { left: "-450px", top: "230px" },
@@ -383,10 +387,12 @@ const handleProjectMouseLeave = () => {
         <div
           className="catalog-content"
           style={{
-            transform: `translateX(${-11 + progress * 11}%)`,
-            transition: 'transform 0.3s ease-out'
+            marginLeft: `${(1 - progress) * -shift}px`,
+            transition: 'margin-left 0.4s ease-out',
           }}
         >
+
+
           <div className="catalog-title-container" style={{ position: 'relative' }}>
             <motion.h2
               className="catalog-title-outline"

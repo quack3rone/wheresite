@@ -97,7 +97,18 @@
     max-width: 1000px;
     object-fit: contain;
   }
-  
+
+  @media (min-width: 1680px) {
+    .sidebar-image {
+      top: 22%;
+    }
+  }
+
+  @media (min-width: 1920px) {
+    .sidebar-image {
+      top: 20%;
+    }
+  }
 
   @media (min-width: 2560px) {
     .sidebar-image {
