@@ -47,8 +47,8 @@ const VerticalText2 = ({ isAnimationComplete, scrollY, lastScrollTime }) => {
 
   const outlineTextStyle = {
     color: 'transparent',
-    WebkitTextStroke: '1.5px rgba(255, 255, 255, 0.6)',
-    textStroke: '1.5px rgba(213, 199, 179, 0.6)',
+    WebkitTextStroke: '1px rgba(255, 255, 255, 0.8)',
+    textStroke: '1px rgba(255, 255, 255, 0.8)',
     display: 'inline-block'
   };
 
@@ -59,7 +59,7 @@ const VerticalText2 = ({ isAnimationComplete, scrollY, lastScrollTime }) => {
         position: 'absolute',
         top: 0,
         left: 0,
-        zIndex: 1,
+        zIndex: 0,
         pointerEvents: 'none'
       }}
     >
@@ -72,26 +72,41 @@ const VerticalText2 = ({ isAnimationComplete, scrollY, lastScrollTime }) => {
         return (
           <motion.div
             key={index}
-            initial={{ opacity: 0, y: initialY }}
+            initial={
+              !isAnimationComplete
+                ? {
+                    opacity: 0,
+                    y: initialY,
+                    scaleY: 0.6,
+                    scaleX: 1.3,
+                  }
+                : undefined
+            }
             animate={{
               opacity: isAnimationComplete ? undefined : 1,
               y: isAnimationComplete ? scrollOffset : 0,
+              scaleY: 1,
+              scaleX: 1,
             }}
-            style={{ 
+            style={{
               opacity: isAnimationComplete ? smoothOpacity : undefined,
               marginLeft: `${index * 0.1 - 30}px`,
               position: 'relative',
               zIndex: words.length - index,
               display: 'flex',
               flexDirection: 'column',
-              alignItems: 'center'
+              alignItems: 'center',
             }}
-            transition={{ 
-              duration: isAnimationComplete ? 2 : 1.2,
-              delay: isAnimationComplete ? 0 : index * 0.3 ,
-              ease: isAnimationComplete 
+            transition={{
+              type: !isAnimationComplete ? 'spring' : 'tween',
+              stiffness: !isAnimationComplete ? 370 : undefined,
+              damping: !isAnimationComplete ? 24 : undefined,
+              mass: !isAnimationComplete ? 1 : undefined,
+              duration: isAnimationComplete ? 2 : undefined,
+              delay: isAnimationComplete ? 0 : index * 0.3,
+              ease: isAnimationComplete
                 ? [0.2, 1, 0.2, 1]
-                : [0.48, 1, 0.09, 1]
+                : [0.48, 1, 0.09, 1],
             }}
             className="text-word"
           >

@@ -29,7 +29,7 @@ const ScrollArrow = ({ onClick, scrollY }) => {
       });
 
       controlsShadow.start({
-        y: [0, 10, 0],
+        y: [0, 8, 0],
         opacity: [0.01, 0.8, 0.002],
         transition: {
           duration: 1.5,
@@ -79,7 +79,7 @@ const ScrollArrow = ({ onClick, scrollY }) => {
         viewBox="0 0 25 25"
         fill="none"
         stroke="#ffffff"
-        strokeWidth="0.5"
+        strokeWidth="0.3"
         xmlns="http://www.w3.org/2000/svg"
         style={{ position: 'absolute', top: 0, left: 0 }}
       >

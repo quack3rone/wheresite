@@ -29,23 +29,38 @@ const VerticalText = ({ onEnd, isAnimationComplete, scrollY }) => {
         return (
           <motion.div
             key={index}
-            initial={{ opacity: 0, y: initialY }}
+            initial={
+              !isAnimationComplete
+                ? {
+                    opacity: 0,
+                    y: initialY,
+                    scaleY: 0.6,
+                    scaleX: 1.3,
+                  }
+                : undefined
+            }
             animate={{
               opacity: 1,
               y: isAnimationComplete ? scrollOffset : 0,
+              scaleY: 1,
+              scaleX: 1,
             }}
-            transition={{ 
-              duration: 0.6,
+            transition={{
+              type: !isAnimationComplete ? 'spring' : 'tween',
+              stiffness: !isAnimationComplete ? 300 : undefined,
+              damping: !isAnimationComplete ? 24 : undefined,
+              mass: !isAnimationComplete ? 1 : undefined,
+              duration: isAnimationComplete ? 0.6 : undefined,
               delay: isAnimationComplete ? 0 : index * 0.3,
-              ease: "easeOut"
+              ease: isAnimationComplete ? 'easeOut' : [0.48, 1, 0.09, 1],
             }}
-            style={{ 
+            style={{
               marginLeft: `${index * 0.1 - 30}px`,
               position: 'relative',
               zIndex: words.length - index,
               display: 'flex',
               flexDirection: 'column',
-              alignItems: 'center'
+              alignItems: 'center',
             }}
             className="text-word"
           >
@@ -53,7 +68,9 @@ const VerticalText = ({ onEnd, isAnimationComplete, scrollY }) => {
               style={{
                 writingMode: 'vertical-lr',
                 transform: 'rotate(180deg) scaleX(1.2)',
-                display: 'inline-block'
+                display: 'inline-block',
+                WebkitTextStroke: '1.5px white',
+                textStroke: '1.5px white',
               }}
             >
               {word}
@@ -63,7 +80,7 @@ const VerticalText = ({ onEnd, isAnimationComplete, scrollY }) => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{
                     delay: isAnimationComplete ? 0 : (index * 0.3 + 1.2),
-                    duration: 0.4
+                    duration: 0.8
                   }}
                   style={{
                     display: 'inline-block',
