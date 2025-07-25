@@ -182,7 +182,7 @@
     text-decoration: none;
     color: #101010;
     font-weight: bold;
-    bottom: 3.5rem;
+    bottom: 4.5rem;
  }
   
   .catalog-title{
@@ -208,7 +208,7 @@
   .projects-list {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 1rem;
     flex-grow: 1;
     z-index: 0;
   }
@@ -220,7 +220,7 @@
     text-decoration: none;
     color: #101010;
     font-weight: bold;
-    bottom: 3.5rem;
+    bottom: 6.5rem;
     max-width: fit-content;
   }
   
@@ -519,11 +519,11 @@
   }
 
   .projects-list {
-    gap: 1.5rem;
+    gap: 2rem;
   }
 
   .project-item-container {
-    bottom: 2rem;
+    bottom: 3rem;
   }
   
   .project-item {
@@ -609,11 +609,11 @@
  }
   
   .catalog-title{
-    font-size: 2.5rem;
+    font-size: 3rem;
  }
 
   .catalog-title-outline {
-    font-size: 2.5rem;
+    font-size: 3rem;
   }
 
   .projects-list {
@@ -621,7 +621,7 @@
   }
 
   .project-item-container {
-    bottom: 2rem;
+    bottom: 3rem;
   }
   
   .project-item {
@@ -789,22 +789,22 @@
 
 .vertical-line.left-1 {
   left: 35%;
-  transform: rotate(10deg);
+  transform: rotate(11deg);
 }
 
 .vertical-line.left-2 {
   left: 20%;
-  transform: rotate(15deg);
+  transform: rotate(16deg);
 }
 
 .vertical-line.right-1 {
   left: 65%;
-  transform: rotate(-10deg);
+  transform: rotate(-11deg);
 }
 
 .vertical-line.right-2 {
   left: 80%;
-  transform: rotate(-15deg);
+  transform: rotate(-16deg);
 }
 
 .left-rounded-bar {

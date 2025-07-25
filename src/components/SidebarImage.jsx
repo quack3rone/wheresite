@@ -39,7 +39,7 @@ const SidebarImage = ({ scrollY }) => {
         position: 'fixed',
         left: isMobile
           ? `calc(75% - ${scrollY * 0.6}%)`
-          : `calc(85% - ${scrollY * 0.6}%)`,
+          : `calc(85% - ${scrollY * 0.65}%)`,
         willChange: 'left',
         transform: 'translateZ(0)',
         
