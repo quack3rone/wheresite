@@ -226,54 +226,60 @@ useEffect(() => {
     url: "localhost:3000",
     image: "/images/tiffali123.png",
     hoverColor: "#FF0733",
-    position: { left: "300px", top: "-90px" },
-    size: { width: "auto", height: "auto" },
-    mobilePosition: { left: "20px", top: "30px" },
-    mobileSize: { width: "120px", height: "auto" }
+    position: { left: "50%", top: "10%" },
+    size: { width: "640px", height: "auto" },
+    imageSize: { width: "640px", height: "auto" },
+    mobilePosition: { left: "30%", top: "50%" },
+    mobileSize: { width: "320px", height: "auto" },
+    mobileImageSize: { width: "320px", height: "auto" }
   },
   {
     name: "TiffaLi",
     url: "https://tiffali.ru",
-    image: "/images/tiffali123.png",
+    image: "/images/tttt.png",
     hoverColor: "#ffa5e5",
-    position: { left: "180px", top: "60px" },
-    size: { width: "auto", height: "auto" },
-    imageSize: { width: "1380px", height: "auto" },
-    mobilePosition: { left: "-450px", top: "230px" },
-    mobileSize: { width: "auto", height: "auto" },
-    mobileImageSize: { width: "1200px", height: "auto" }
+    position: { left: "50%", top: "10%" },
+    size: { width: "640px", height: "auto" },
+    imageSize: { width: "640px", height: "auto" },
+    mobilePosition: { left: "30%", top: "50%" },
+    mobileSize: { width: "320px", height: "auto" },
+    mobileImageSize: { width: "320px", height: "auto" }
   },
   {
-    name: "AMVERA",
+    name: "mbirthday",
     url: "https://example.com/amvera",
     image: "/images/tiffali123.png",
     hoverColor: "#FF5733",
-    position: { left: "250px", top: "40px" },
-    size: { width: "auto", height: "auto" },
-    imageSize: { width: "300px", height: "auto" },
-    mobilePosition: { left: "20px", top: "30px" },
-    mobileSize: { width: "120px", height: "auto" },
-    mobileImageSize: { width: "200px", height: "auto" }
+    position: { left: "50%", top: "10%" },
+    size: { width: "640px", height: "auto" },
+    imageSize: { width: "640px", height: "auto" },
+    mobilePosition: { left: "30%", top: "50%" },
+    mobileSize: { width: "320px", height: "auto" },
+    mobileImageSize: { width: "320px", height: "auto" }
   },
   {
     name: "Peakstore",
     url: "https://example.com/peakstore",
     image: "/images/tiffali123.png",
     hoverColor: "#FF5733",
-    position: { left: "300px", top: "100px" },
-    size: { width: "auto", height: "auto" },
-    mobilePosition: { left: "20px", top: "30px" },
-    mobileSize: { width: "120px", height: "auto" }
+    position: { left: "50%", top: "10%" },
+    size: { width: "640px", height: "auto" },
+    imageSize: { width: "640px", height: "auto" },
+    mobilePosition: { left: "30%", top: "50%" },
+    mobileSize: { width: "320px", height: "auto" },
+    mobileImageSize: { width: "320px", height: "auto" }
   },
   {
     name: "LeetCode",
     url: "https://leetcode.com",
     image: "/images/tiffali123.png",
     hoverColor: "#FF5733",
-    position: { left: "150px", top: "120px" },
-    size: { width: "auto", height: "auto" },
-    mobilePosition: { left: "20px", top: "30px" },
-    mobileSize: { width: "120px", height: "auto" }
+    position: { left: "50%", top: "10%" },
+    size: { width: "640px", height: "auto" },
+    imageSize: { width: "640px", height: "auto" },
+    mobilePosition: { left: "30%", top: "50%" },
+    mobileSize: { width: "320px", height: "auto" },
+    mobileImageSize: { width: "320px", height: "auto" }
   },
 ];
 
@@ -407,7 +413,7 @@ const targetMargin = progress >= 1
         }}
       >
         <div className="left-rounded-bar"></div>
-        
+
         <div className="grid-overlay">
           {/* Горизонтальные */}
           <div className="horizontal-line" />
@@ -448,8 +454,8 @@ const targetMargin = progress >= 1
               }}
               transition={{
                 type: 'spring',
-                stiffness: 40,
-                damping: 20
+                stiffness: 90,
+                damping: 5
               }}
             >
               Наши проекты
@@ -464,16 +470,32 @@ const targetMargin = progress >= 1
             {activeProject && (
               <motion.div
                 key={activeProject.name}
-                initial={{ x: -30, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                exit={{ x: -30, opacity: 0 }}
+                initial={{
+                  x: isMobile ? 0 : -800,
+                  y: isMobile ? 800 : 0,
+                  scale: 1.6,
+                  opacity: 0,
+                }}
+                animate={{
+                  x: -100,
+                  y: 0,
+                  scale: 1,
+                  opacity: 1,
+                }}
+                exit={{
+                  x: isMobile ? 0 : 800,
+                  y: isMobile ? 800 : 0,
+                  scale: 1.6,
+                  opacity: 0,
+                }}
                 transition={{
-                  type: 'spring',
-                  stiffness: 300,
-                  damping: 40,
+                  type: "spring",
+                  stiffness: 90,
+                  damping: 20,
+                  mass: 0.8,
                 }}
                 style={{
-                  position: 'fixed',
+                  position: "fixed",
                   left: isMobile
                     ? activeProject.mobilePosition?.left
                     : activeProject.position.left,
@@ -487,30 +509,31 @@ const targetMargin = progress >= 1
                     ? activeProject.mobileSize?.height
                     : activeProject.size.height,
                   zIndex: 1,
-                  pointerEvents: 'none',
-                  overflow: 'hidden',  // 👈 обрезка
-                  clipPath: 'inset(0 0 0 0)', // 👈 дополнительная обрезка
+                  pointerEvents: "none",
+                  overflow: "hidden",
+                  clipPath: "inset(0 0 0 0)",
+                  transformOrigin: "right center",
                 }}
               >
-                <img
-                src={activeProject.image}
-                alt={activeProject.name}
-                style={{
-                  width: isMobile
-                    ? activeProject.mobileImageSize?.width
-                    : activeProject.imageSize?.width,
-                  height: isMobile
-                    ? activeProject.mobileImageSize?.height
-                    : activeProject.imageSize?.height,
-                  objectFit: "cover",
-                  transform: isMobile ? "rotate(90deg) scale(0.6)" : "none",
-                  transformOrigin: "center center",
-                }}
-              />
+                <motion.img
+                  src={activeProject.image}
+                  alt={activeProject.name}
+                  initial={false}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.6 }}
+                  style={{
+                    width: isMobile
+                      ? activeProject.mobileImageSize?.width
+                      : activeProject.imageSize?.width,
+                    height: isMobile
+                      ? activeProject.mobileImageSize?.height
+                      : activeProject.imageSize?.height,
+                    objectFit: "cover",
+                  }}
+                />
               </motion.div>
             )}
           </AnimatePresence>
-
            {/* Блюр-зона справа */}
            <motion.div
               className="blur-zone"
@@ -657,8 +680,8 @@ const targetMargin = progress >= 1
                   }}
                   transition={{
                     type: 'spring',
-                    stiffness: 40,
-                    damping: 20
+                    stiffness: 90,
+                    damping: 5
                   }}
                 >
                   {project.name}

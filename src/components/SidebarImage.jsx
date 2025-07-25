@@ -32,9 +32,13 @@ const SidebarImage = ({ scrollY }) => {
   return (
     <motion.div
       className="sidebar-image"
-      initial={{ x: 100, opacity: 0 }}
-      animate={{ x: 0, opacity: 1 }}
-      transition={{ duration: 0.5, delay: 2.5 }}
+      initial={{ x: 200, opacity: 0, scale: 1, filter: "blur(6px)" }}
+      animate={{ x: 0, opacity: 1, scale: 1, filter: "blur(0px)" }}
+      transition={{
+        duration: 1.2,
+        ease: [0.22, 1, 0.36, 1],
+        delay: 2.2
+      }}
       style={{
         position: 'fixed',
         left: isMobile
@@ -42,7 +46,7 @@ const SidebarImage = ({ scrollY }) => {
           : `calc(85% - ${scrollY * 0.65}%)`,
         willChange: 'left',
         transform: 'translateZ(0)',
-        
+        zIndex: 4
       }}
     >
       <img 

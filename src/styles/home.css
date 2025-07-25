@@ -13,9 +13,9 @@
     justify-content: flex-start;
     font-family: 'Sansation-Bold';
     height: 100vh;
-    gap: 30px;
+    gap: 0;
     font-size: 150px;
-    letter-spacing: 10px;
+    letter-spacing: 8px;
     color: #ffffff;
     padding-left: 200px;
     margin-top: -23px;
@@ -25,44 +25,42 @@
   .vertical-text-container {
     font-size: 100px;
     padding-left: 60px;
-    gap: 10px;
   }
 }
 
 @media (max-width: 480px) {
   .vertical-text-container {
-    font-size: 85px;
-    padding-left: 40px;
-    gap: 25px;
+    font-size: 80px;
+    padding-left: 25px;
   }
 }
 
   @media (min-width: 1600px) {
     .vertical-text-container {
-      font-size: 160px;
-      padding-left: 280px;
+      font-size: 155px;
+      padding-left: 270px;
     }
   }
 
   @media (min-width: 1680px) {
     .vertical-text-container {
-      font-size: 175px;
-      padding-left: 280px;
+      font-size: 170px;
+      padding-left: 260px;
     }
   }
 
   @media (min-width: 1920px) {
     .vertical-text-container {
-      font-size: 180px;
-      padding-left: 280px;
+      font-size: 175px;
+      padding-left: 270px;
     }
   }
 
 
   @media (min-width: 2048px) {
     .vertical-text-container {
-      font-size: 200px;
-      padding-left: 350px;
+      font-size: 195px;
+      padding-left: 340px;
     }
   }
 
@@ -76,7 +74,7 @@
   @media (min-width: 3840px) {
     .vertical-text-container {
       font-size: 330px;
-      padding-left: 650px;
+      padding-left: 620px;
     }
   }
   
@@ -100,6 +98,7 @@
   @media (min-width: 1680px) {
     .sidebar-image {
       top: 22%;
+      max-width: 900px;
     }
   }
 
@@ -186,7 +185,7 @@
  }
   
   .catalog-title{
-    font-family: 'Arial Black';
+    font-family: 'g';
     font-size: 5rem;
     font-weight: bold;
     color: #101010;
@@ -194,11 +193,11 @@
  }
 
   .catalog-title-outline {
-    font-family: 'Arial Black';
+    font-family: 'g';
     font-size: 5rem;
-    font-weight: bold;
     color: transparent;
-    -webkit-text-stroke: 0.8px #101010;
+    font-weight: 200;
+    -webkit-text-stroke: 1.5px #101010;
     z-index: 1;
     pointer-events: none;
     white-space: nowrap;
@@ -225,7 +224,7 @@
   }
   
   .project-item {
-    font-family: 'Arial Black';
+    font-family: 'g';
     font-size: 5rem;
     color: #101010;
     font-weight: bold;
@@ -236,21 +235,21 @@
   }
   
   .project-item-outline {
-    font-family: 'Arial Black';
+    font-family: 'g';
     font-size: 5rem;
-    font-weight: bold;
     position: absolute;
+    font-weight: 200;
     top: 0;
     left: 0;
     color: transparent;
-    -webkit-text-stroke: 0.8px #101010;
+    -webkit-text-stroke: 1.5px #101010;
     z-index: 1;
     pointer-events: none;
     overflow: hidden;
   }
 
   .catalog-footer {
-    font-family: 'WS';
+    font-family: 'g';
     font-size: 2.5rem;
     font-weight: bold;
     color: #101010;
@@ -292,7 +291,7 @@
 
 .footer-label {
   margin-top: 0.5rem;
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 
   .footer-links {
@@ -305,8 +304,8 @@
   
   .footer-link {
     position: relative;
-    font-family: 'WS';
-    font-size: 1.6rem;
+    font-family: 'g';
+    font-size: 1.3rem;
     font-weight: bold;
     color: #101010;
     text-decoration: none;
@@ -379,8 +378,10 @@
     margin-top: auto;
     text-align: center;
     line-height: 1.2;
+    font-weight: 200;
     margin-top: 16.5rem;
-    font-family: 'WS';
+    letter-spacing: -1px;
+    font-family: 'g';
     align-self: flex-start; /* ✅ Блок у левого края */
     width: 240px; /* ✅ Настраиваемая ширина, можно подогнать */
   }
@@ -475,7 +476,7 @@
   }
 
   .footer-label {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     margin-top: 0;
     position: relative;
     bottom: 30px;
@@ -494,16 +495,16 @@
   .footer-links {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0.7rem;
     width: 60%;
     max-width: 250px;
     box-sizing: border-box;
-    margin-top: 0.8rem;
+    margin-top: 1rem;
     margin-left: 0;
   }
 
   .footer-link {
-    font-size: 1.4rem;
+    font-size: 1.1rem;
   }
     
   .catalog-title-container{
@@ -512,10 +513,12 @@
   
   .catalog-title{
     font-size: 2.5rem;
+    letter-spacing: -2px;
  }
 
   .catalog-title-outline {
     font-size: 2.5rem;
+    letter-spacing: -2px;
   }
 
   .projects-list {
@@ -659,13 +662,13 @@
       padding: 1rem 0rem 1rem 11rem;
     }
     .catalog-title-container{
-      bottom: 4.5rem;
+      bottom: 4rem;
     }
     .project-item-container {
-      bottom: 7.5rem;
+      bottom: 6rem;
     }
     .projects-list {
-      gap: 0.4rem;
+      gap: 1.2rem;
     }
     .project-item, .project-item-outline {
       font-size: clamp(2rem, 5vw, 5.5rem);
@@ -679,13 +682,13 @@
       padding: 1rem 0rem 1rem 11.5rem;
     }
     .catalog-title-container{
-      bottom: 5rem;
+      bottom: 4rem;
     }
     .project-item-container {
-      bottom: 7.5rem;
+      bottom: 6rem;
     }
     .projects-list {
-      gap: 0.4rem;
+      gap: 1.2rem;
     }
     .project-item, .project-item-outline {
       font-size: clamp(2rem, 5vw, 5.5rem);
@@ -698,13 +701,13 @@
     padding: 1rem 0rem 1rem 11rem;
   }
   .catalog-title-container{
-    bottom: 4rem;
+    bottom: 3rem;
   }
  .project-item-container {
-    bottom: 5rem;
+    bottom: 3.5rem;
   }
   .projects-list {
-    gap: 1.5rem;
+    gap: 2.5rem;
   }
   .project-item, .project-item-outline {
     font-size: 5.5rem;
@@ -717,13 +720,13 @@
     padding: 1rem 0rem 1rem 11.5rem;
   }
    .catalog-title-container{
-    bottom: 4rem;
+    bottom: 3rem;
  }
  .project-item-container {
-    bottom: 6rem;
+    bottom: 4rem;
   }
   .projects-list {
-    gap: 1.5rem;
+    gap: 2.5rem;
   }
   .project-item, .project-item-outline {
     font-size: 5.5rem;
@@ -736,13 +739,13 @@
     padding: 1rem 0rem 1rem 12rem;
   }
    .catalog-title-container{
-    bottom: 4rem;
+    bottom: 3rem;
  }
  .project-item-container {
-    bottom: 5rem;
+    bottom: 3.5rem;
   }
   .projects-list {
-    gap: 1.5rem;
+    gap: 2.5rem;
   }
   .project-item, .project-item-outline {
     font-size: 5.6rem;

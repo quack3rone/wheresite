@@ -5,7 +5,9 @@ const VerticalText2 = ({ isAnimationComplete, scrollY, lastScrollTime }) => {
   const words = ["Где", "Заказать", "Лучший", "Сайт"];
   const questionMark = "?";
   const [isScrolling, setIsScrolling] = useState(false);
-  
+
+  const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
+
   const opacity = useMotionValue(0);
   const smoothOpacity = useSpring(opacity, {
     damping: 30,
@@ -47,8 +49,8 @@ const VerticalText2 = ({ isAnimationComplete, scrollY, lastScrollTime }) => {
 
   const outlineTextStyle = {
     color: 'transparent',
-    WebkitTextStroke: '1px rgba(255, 255, 255, 0.8)',
-    textStroke: '1px rgba(255, 255, 255, 0.8)',
+    WebkitTextStroke: `${isMobile ? '0.5px' : '1px'} rgba(255, 255, 255, 0.8)`,
+    textStroke: `${isMobile ? '0.5px' : '1px'} rgba(255, 255, 255, 0.8)`,
     display: 'inline-block'
   };
 
