@@ -402,13 +402,29 @@ const targetMargin = progress >= 1
           padding: '1rem',
           overflow: 'hidden',
           pointerEvents: progress >= 1 ? 'auto' : 'none', // ✅ Вот это главное
-          borderRadius: '36px 0px 0px 36px', // ✅ добавлено
+
           overflow: 'hidden', // 🔒 чтобы контент не вылезал за границы
         }}
       >
-
-        <div className="top-dashed-line"></div>
+        <div className="left-rounded-bar"></div>
         
+        <div className="grid-overlay">
+          {/* Горизонтальные */}
+          <div className="horizontal-line" />
+          <div className="horizontal-line" />
+          <div className="horizontal-line" />
+          <div className="horizontal-line" />
+          <div className="horizontal-line" />
+
+          {/* Вертикальные */}
+          <div className="vertical-line center" />
+          <div className="vertical-line left-1" />
+          <div className="vertical-line left-2" />
+          <div className="vertical-line right-1" />
+          <div className="vertical-line right-2" />
+        </div>
+
+                
         <motion.div
           className="catalog-content"
           animate={{ marginLeft: `${targetMargin}px` }}
@@ -682,9 +698,6 @@ const targetMargin = progress >= 1
                 </div>
               </div>
             )}
-
-
-             <div className="right-solid-line"></div>
 
             <div className="footer-links">
               {["О нас", "Заказать сайт", "Наша команда", "Цены"].map((text) => (
