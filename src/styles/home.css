@@ -825,3 +825,9 @@
     display: none;
   }
 }
+
+/* Шрифт для заблокированных проектов */
+.project-item--disabled {
+  font-family: 'disabled';
+  top: 10px;
+}

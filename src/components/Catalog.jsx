@@ -214,7 +214,7 @@ useEffect(() => {
 
 
   // useEffect(() => {
-  //   const tiffa = projects.find(p => p.name === "TiffaLi");
+  //   const tiffa = projects.find(p => p.name === "mbirthday");
   //   setActiveProject(tiffa);
   // }, []);
 
@@ -224,7 +224,7 @@ useEffect(() => {
   {
     name: "Wheresite",
     url: "localhost:3000",
-    image: "/images/tiffali123.png",
+    image: "/images/wheresite.png",
     hoverColor: "#FF0733",
     position: { left: "50%", top: "10%" },
     size: { width: "640px", height: "auto" },
@@ -247,39 +247,41 @@ useEffect(() => {
   },
   {
     name: "mbirthday",
-    url: "https://example.com/amvera",
-    image: "/images/tiffali123.png",
-    hoverColor: "#FF5733",
-    position: { left: "50%", top: "10%" },
+    url: "https://momsbirthday.online",
+    image: "/images/mbirthday.jpg",
+    hoverColor: "#00751bff",
+    position: { left: "65%", top: "15%" },
     size: { width: "640px", height: "auto" },
-    imageSize: { width: "640px", height: "auto" },
-    mobilePosition: { left: "30%", top: "50%" },
+    imageSize: { width: "380px", height: "auto" },
+    mobilePosition: { left: "45%", top: "45%" },
     mobileSize: { width: "320px", height: "auto" },
-    mobileImageSize: { width: "320px", height: "auto" }
+    mobileImageSize: { width: "250px", height: "auto" }
   },
   {
-    name: "Peakstore",
-    url: "https://example.com/peakstore",
-    image: "/images/tiffali123.png",
-    hoverColor: "#FF5733",
+    name: "buysoon",
+    url: "https://example.com",
+    image: "/images/.png",
+    hoverColor: "#808080ff",
     position: { left: "50%", top: "10%" },
     size: { width: "640px", height: "auto" },
     imageSize: { width: "640px", height: "auto" },
     mobilePosition: { left: "30%", top: "50%" },
     mobileSize: { width: "320px", height: "auto" },
-    mobileImageSize: { width: "320px", height: "auto" }
+    mobileImageSize: { width: "320px", height: "auto" },
+    disabled: true,
   },
   {
-    name: "LeetCode",
-    url: "https://leetcode.com",
-    image: "/images/tiffali123.png",
-    hoverColor: "#FF5733",
+    name: "Comesoon",
+    url: "https://example.com",
+    image: "/images/.png",
+    hoverColor: "#808080ff",
     position: { left: "50%", top: "10%" },
     size: { width: "640px", height: "auto" },
     imageSize: { width: "640px", height: "auto" },
     mobilePosition: { left: "30%", top: "50%" },
     mobileSize: { width: "320px", height: "auto" },
-    mobileImageSize: { width: "320px", height: "auto" }
+    mobileImageSize: { width: "320px", height: "auto" },
+    disabled: true,
   },
 ];
 
@@ -673,7 +675,7 @@ const targetMargin = progress >= 1
               {/* Обёртка для ограничения размеров обводки */}
               <div style={{ position: 'relative', display: 'inline-block' }}>
                 <motion.div
-                  className="project-item-outline"
+                  className={`project-item-outline ${project.disabled ? 'project-item--disabled' : ''}`}
                   animate={{ x: offset }}
                   style={{
                     opacity: smoothOpacity
@@ -687,7 +689,9 @@ const targetMargin = progress >= 1
                   {project.name}
                 </motion.div>
             
-                <div className="project-item">
+                <div
+                  className={`project-item ${project.disabled ? 'project-item--disabled' : ''}`}
+                >
                   {project.name}
                 </div>
               </div>
