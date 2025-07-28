@@ -831,3 +831,28 @@
   font-family: 'disabled';
   top: 10px;
 }
+
+
+@media (min-width: 1680px ) {
+  .project-item--disabled {
+    top: 20px;
+  }
+}
+
+@media (min-width: 1920px ) {
+  .project-item--disabled {
+    top: 23px;
+  }
+}
+
+@media (min-width: 2560px ) {
+  .project-item--disabled {
+    top: 25px;
+  }
+}
+
+@media (min-width: 3840px ) {
+  .project-item--disabled {
+    top: 28px;
+  }
+}

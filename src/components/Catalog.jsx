@@ -727,7 +727,7 @@ const targetMargin = progress >= 1
             )}
 
             <div className="footer-links">
-              {["О нас", "Заказать сайт", "Наша команда", "Цены"].map((text) => (
+              {["О нас", "Отзывы", "Цены", "Заказать сайт"].map((text) => (
                 <div
                   key={text}
                   className={`footer-link ${activeLink === text ? "active" : ""}`}
