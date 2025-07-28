@@ -167,6 +167,9 @@ useEffect(() => {
 
   useEffect(() => {
     const handleScroll = (e) => {
+      // ❗ Не обрабатываем скролл, если progress == 1 и мы не на главной
+      if (progress >= 1 && location.pathname !== '/') return;
+
       const direction = e.deltaY > 0 ? 1 : -1;
       setLastScrollTime(Date.now());
       setIsScrolling(true);
@@ -179,7 +182,8 @@ useEffect(() => {
 
     window.addEventListener('wheel', handleScroll);
     return () => window.removeEventListener('wheel', handleScroll);
-  }, [outlineOpacity, progress]);
+  }, [outlineOpacity, progress, location.pathname]);
+
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -670,7 +674,7 @@ const targetMargin = progress >= 1
               className={`project-item-container ${hoveredProjectName === project.name ? 'auto-hovered' : ''}`}
               onMouseEnter={() => handleProjectMouseEnter(project)}
               onMouseLeave={handleProjectMouseLeave}
-              style={{ "--hover-color": project.hoverColor }}
+              style={{ "--hover-color": project.hoverColor, pointerEvents: transitionActive ? 'none' : (progress >= 1 ? 'auto' : 'none'), }}
             >
               {/* Обёртка для ограничения размеров обводки */}
               <div style={{ position: 'relative', display: 'inline-block' }}>
