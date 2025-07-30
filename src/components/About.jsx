@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const About = ({ transitionActive, footerShift }) => {
+const About = ({ transitionActive, footerRef }) => {
   const location = useLocation();
   const isActive = location.pathname === '/about';
   const [showContent, setShowContent] = useState(false);
@@ -11,6 +11,75 @@ const About = ({ transitionActive, footerShift }) => {
   const scrollRef = useRef(null);
   const containerRef = useRef(null);
   const [scrollY, setScrollY] = useState(0);
+  const [footerWidth, setFooterWidth] = useState(268); // начальное значение
+  const [aboutLeftShift, setAboutLeftShift] = useState(0);
+
+   // Получаем ширину футера через footerRef
+  useEffect(() => {
+    const updateFooterWidth = () => {
+      if (footerRef.current) {
+        const computedStyle = window.getComputedStyle(footerRef.current);
+        const width = parseFloat(computedStyle.width);
+        setFooterWidth(width);
+      }
+    };
+
+    updateFooterWidth(); // сразу
+    window.addEventListener('resize', updateFooterWidth);
+
+    return () => {
+      window.removeEventListener('resize', updateFooterWidth);
+    };
+  }, [footerRef]);
+
+  // Также можно использовать ResizeObserver для более точного отслеживания
+  useEffect(() => {
+    if (!footerRef.current) return;
+
+    const observer = new ResizeObserver(entries => {
+      for (let entry of entries) {
+        const width = entry.contentRect.width;
+        setFooterWidth(width);
+      }
+    });
+
+    observer.observe(footerRef.current);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [footerRef]);
+
+  useEffect(() => {
+  const updateAboutPosition = () => {
+    const width = window.innerWidth;
+    let shift = 0;
+
+    if (width < 1680) {
+      shift = -31; // левее на 10px
+    } else if (width >= 1680 && width < 1920) {
+      shift = 15; // правее на 5px
+    } else if (width >= 1920 && width < 2048) {
+      shift = 1;
+    } else if (width >= 2048 && width < 2560) {
+      shift = 22; // примерно правее
+    } else if (width >= 2560 && width < 3840) {
+      shift = 111; // ещё правее
+    } else if (width >= 3840) {
+      shift = 305; // ещё правее
+    }
+
+
+    setAboutLeftShift(shift);
+  };
+
+  updateAboutPosition();
+  window.addEventListener('resize', updateAboutPosition);
+
+    return () => {
+      window.removeEventListener('resize', updateAboutPosition);
+    };
+  }, []);
 
   useEffect(() => {
     if (isActive && transitionActive) {
@@ -46,8 +115,8 @@ return (
           transition={{ duration: 0.4 }}
           style={{
             position: 'fixed',
-            top: isMobile ? "185px" : 0,
-            left: isMobile ? 0 : '270px',
+            top: isMobile ? "187px" : 0,
+            left: isMobile ? 0 : `${footerWidth + aboutLeftShift}px`,
             right: 0,
             bottom: 0,
             overflowY: 'auto',
@@ -67,7 +136,7 @@ return (
                   width: '100vw',
                   height: '10vh',
                   position: 'relative',
-                  top: "20px",
+                  top: "10px",
                   overflowY: 'hidden',
                   scrollbarWidth: 'none', // Скрываем скроллбар в Firefox
                   msOverflowStyle: 'none', // Скрываем скроллбар в IE
@@ -83,12 +152,12 @@ return (
                   style={{
                     display: 'flex',
                     alignItems: 'center',
-                    paddingLeft: '1vw', // Начальное смещение для центрирования
+                    paddingLeft: '3vw', // Начальное смещение для центрирования
                     gap: '20px',
                     fontFamily: 'NauryzRedKeds',
                   }}
                   animate={{ 
-                    x: -scrollY * 0.5, // Коэффициент можно регулировать
+                    x: -scrollY * 1, // Коэффициент можно регулировать
                   }}
                   transition={{ type: 'tween', ease: 'linear', duration: 0.1 }}
                 >
@@ -96,7 +165,7 @@ return (
                     <div
                       key={i}
                       style={{
-                        fontSize: '45px',
+                        fontSize: '40px',
                         fontWeight: 'bold',
                         lineHeight: 1,
                         color: i === 0 ? 'white' : 'rgba(255,255,255,0.25)',
@@ -129,7 +198,7 @@ return (
                 </div>
                 <p style={{
                   fontSize: '1rem',
-                  textAlign: 'center',
+                  textAlign: 'left',
                   lineHeight: 1.6,
                 }}>
                   Делаем сайты, которые работают. Без шаблонов — только индивидуальные решения с аналитикой,
@@ -167,7 +236,7 @@ return (
                 }}>
                   {/* Блок 1 — вертикальный текст */}
                   <motion.div style={{
-                    minWidth: '100vw',
+                    minWidth: '20vw',
                     height: '100%',
                     display: 'flex',
                     justifyContent: 'center',
@@ -176,8 +245,8 @@ return (
                   }}>
                     <motion.div
                       animate={{ 
-                        x: -670,
-                        y: -scrollY + -140,
+                        x: -100,
+                        y: -scrollY + -170,
                       }}
                       transition={{ type: 'tween', ease: 'linear', duration: 0.1 }}
                       style={{
@@ -209,7 +278,7 @@ return (
                   {/* Блок 2 — видео + текст */}
                 <div
                   style={{
-                    minWidth: '100vw',
+                    minWidth: '50vw',
                     height: '100%',
                     display: 'flex',
                     flexDirection: 'column',
@@ -222,8 +291,8 @@ return (
                   <div
                     style={{
                       backgroundColor: '#ccc',
-                      width: '100vw',
-                      height: '300px',
+                      width: '50vw',
+                      height: '500px',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
@@ -236,9 +305,10 @@ return (
                   <p
                     style={{
                       marginTop: '2rem',
+                      marginRight: "25rem",
                       fontSize: '1.2rem',
                       maxWidth: '600px',
-                      textAlign: 'center',
+                      textAlign: 'left',
                       lineHeight: 1.6,
                     }}
                   >

@@ -31,6 +31,8 @@ const Catalog = ({ scrollY, onScrollEnd, isInteractive }) => {
   const autoSwitchInterval = useRef(null);
   const manualHoverTimeout = useRef(null);
 
+  const footerRef = useRef(null); // ✅ добавлено
+
   const mobileShift = 40;
   const desktopShift = 200;
   const shift = isMobile ? mobileShift : desktopShift;
@@ -705,6 +707,7 @@ const targetMargin = progress >= 1
 
           <motion.div
             className="catalog-footer"
+            ref={footerRef}  // 👈 Вот он!
             animate={
               isMobile
                 ? { y: transitionActive ? -footerHeight : 0 }
@@ -788,7 +791,7 @@ const targetMargin = progress >= 1
             />
 
         </motion.div>
-        <About transitionActive={transitionActive} />
+        <About transitionActive={transitionActive} footerRef={footerRef} />
 
       </motion.div>
     </>
