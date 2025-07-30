@@ -1,0 +1,165 @@
+/* Общее */
+.container {
+  height: 8000px;
+  position: relative;
+}
+
+.vertical-text-active {
+  color: white;
+}
+
+.vertical-text-inactive {
+  color: rgba(255,255,255,0.25);
+}
+
+/* Мобильная версия */
+.mobile-horizontal-scroll {
+  width: 100vw;
+  height: 10vh;
+  position: relative;
+  top: 10px;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.mobile-horizontal-scroll::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+  background: transparent;
+}
+
+.mobile-scroll-content {
+  display: flex;
+  align-items: center;
+  padding-left: 3vw;
+  gap: 20px;
+  font-family: 'NauryzRedKeds';
+}
+
+.mobile-scroll-text {
+  font-size: 40px;
+  font-weight: bold;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.mobile-content-section {
+  padding: 2rem;
+  color: white;
+}
+
+.mobile-video-placeholder {
+  background-color: #ccc;
+  width: 100%;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: #101010;
+  margin-bottom: 2rem;
+}
+
+.mobile-description {
+  font-size: 1rem;
+  text-align: left;
+  line-height: 1.6;
+}
+
+.mobile-continue-section {
+  padding: 2rem;
+  color: white;
+  font-size: 1.5rem;
+  text-align: center;
+  min-height: 50vh;
+}
+
+/* Десктоп версия */
+.sticky-section {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+}
+
+.scrolling-content {
+  display: flex;
+  flex-direction: row;
+  transition: transform 0.1s linear;
+  height: 100%;
+}
+
+.vertical-text-section-about {
+  min-width: 20vw;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.vertical-text-container-about {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 220px;
+  font-family: 'NauryzRedKeds';
+}
+
+.vertical-text-about {
+  transform: rotate(-90deg);
+  white-space: nowrap;
+  font-size: 85px;
+  font-weight: bold;
+  line-height: 1;
+}
+
+.content-section {
+  min-width: 50vw;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  padding: 2rem;
+}
+
+.video-placeholder {
+  background-color: #ccc;
+  width: 50vw;
+  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: #101010;
+}
+
+.description {
+  margin-top: 2rem;
+  margin-right: 25rem;
+  font-size: 1.2rem;
+  max-width: 600px;
+  text-align: left;
+  line-height: 1.6;
+}
+
+.continue-section {
+  min-width: 100vw;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 2rem;
+}
+
+@media (max-width: 1680px) {
+}
+
+@media (max-width: 1440px) {
+}

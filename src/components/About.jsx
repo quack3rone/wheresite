@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import '../styles/about.css';
 
 const About = ({ transitionActive, footerRef }) => {
   const location = useLocation();
@@ -129,48 +130,20 @@ return (
         >
           {isMobile ? (
             // Мобильная версия
-            <div style={{ height: '8000px', position: 'relative' }}>
+            <div className="container">
               {/* Блок 1 — горизонтальный текст с прокруткой */}
-              <motion.div 
-                style={{
-                  width: '100vw',
-                  height: '10vh',
-                  position: 'relative',
-                  top: "10px",
-                  overflowY: 'hidden',
-                  scrollbarWidth: 'none', // Скрываем скроллбар в Firefox
-                  msOverflowStyle: 'none', // Скрываем скроллбар в IE
-                  '&::-webkit-scrollbar': { // Скрываем скроллбар в Chrome/Safari
-                    display: 'none',
-                    width: 0,
-                    height: 0,
-                    background: 'transparent'
-                  }
-                }}
-              >
+              <motion.div className="mobile-horizontal-scroll">
                 <motion.div
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    paddingLeft: '3vw', // Начальное смещение для центрирования
-                    gap: '20px',
-                    fontFamily: 'NauryzRedKeds',
-                  }}
+                  className="mobile-scroll-content"
                   animate={{ 
-                    x: -scrollY * 1, // Коэффициент можно регулировать
+                    x: -scrollY * 1,
                   }}
                   transition={{ type: 'tween', ease: 'linear', duration: 0.1 }}
                 >
                   {[...Array(6)].map((_, i) => (
                     <div
                       key={i}
-                      style={{
-                        fontSize: '40px',
-                        fontWeight: 'bold',
-                        lineHeight: 1,
-                        color: i === 0 ? 'white' : 'rgba(255,255,255,0.25)',
-                        whiteSpace: 'nowrap',
-                      }}
+                      className={`mobile-scroll-text ${i === 0 ? 'vertical-text-active' : 'vertical-text-inactive'}`}
                     >
                       О нас
                     </div>
@@ -179,95 +152,40 @@ return (
               </motion.div>
 
               {/* Блок 2 — видео + текст */}
-              <div style={{
-                padding: '2rem',
-                color: 'white',
-              }}>
-                <div style={{
-                  backgroundColor: '#ccc',
-                  width: '100%',
-                  height: '200px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontWeight: 'bold',
-                  color: '#101010',
-                  marginBottom: '2rem'
-                }}>
+              <div className="mobile-content-section">
+                <div className="mobile-video-placeholder">
                   ВИДЕО
                 </div>
-                <p style={{
-                  fontSize: '1rem',
-                  textAlign: 'left',
-                  lineHeight: 1.6,
-                }}>
+                <p className="mobile-description">
                   Делаем сайты, которые работают. Без шаблонов — только индивидуальные решения с аналитикой,
                   продуманным дизайном и мощным кодом. Для бизнеса, а не для галочки.
                 </p>
               </div>
 
               {/* Блок 3 */}
-              <div style={{
-                padding: '2rem',
-                color: 'white',
-                fontSize: '1.5rem',
-                textAlign: 'center',
-                minHeight: '50vh'
-              }}>
+              <div className="mobile-continue-section">
                 Продолжение "О нас"...
               </div>
             </div>
           ) : (
-            // Десктопная версия
-            <div style={{ height: '8000px', position: 'relative' }}>
-              <div style={{
-                position: 'sticky',
-                top: 0,
-                height: '100vh',
-                width: '100%',
-                overflow: 'hidden',
-              }}>
-                <div style={{
-                  display: 'flex',
-                  flexDirection: 'row',
-                  transform: `translateX(-${scrollY}px)`,
-                  transition: 'transform 0.1s linear',
-                  height: '100%',
-                }}>
+            // Десктоп версия
+            <div className="container">
+              <div className="sticky-section">
+                <div className="scrolling-content" style={{ transform: `translateX(-${scrollY}px)` }}>
                   {/* Блок 1 — вертикальный текст */}
-                  <motion.div style={{
-                    minWidth: '20vw',
-                    height: '100%',
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    overflow: 'hidden',
-                  }}>
+                  <motion.div className="vertical-text-section-about">
                     <motion.div
                       animate={{ 
                         x: -100,
                         y: -scrollY + -170,
                       }}
                       transition={{ type: 'tween', ease: 'linear', duration: 0.1 }}
-                      style={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        gap: '220px',
-                        fontFamily: 'NauryzRedKeds',
-                      }}
+                      className="vertical-text-container-about"
                     >
                       {[...Array(6)].map((_, i) => (
                         <div
                           key={i}
-                          style={{
-                            transform: 'rotate(-90deg)',
-                            whiteSpace: 'nowrap',
-                            fontSize: '85px',
-                            fontWeight: 'bold',
-                            lineHeight: 1,
-                            color: i === 4 ? 'white' : 'rgba(255,255,255,0.25)',
-                          }}
+                          className={`vertical-text-about ${i === 4 ? 'vertical-text-active' : 'vertical-text-inactive'}`}
                         >
                           О нас
                         </div>
@@ -276,60 +194,19 @@ return (
                   </motion.div>
 
                   {/* Блок 2 — видео + текст */}
-                <div
-                  style={{
-                    minWidth: '50vw',
-                    height: '100%',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    color: 'white',
-                    padding: '2rem',
-                  }}
-                >
-                  <div
-                    style={{
-                      backgroundColor: '#ccc',
-                      width: '50vw',
-                      height: '500px',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      fontWeight: 'bold',
-                      color: '#101010',
-                    }}
-                  >
-                    ВИДЕО
+                  <div className="content-section">
+                    <div className="video-placeholder">
+                      ВИДЕО
+                    </div>
+                    <p className="description">
+                      Делаем сайты, которые работают. Без шаблонов — только индивидуальные решения с аналитикой,
+                      продуманным дизайном и мощным кодом. Для бизнеса, а не для галочки.
+                    </p>
                   </div>
-                  <p
-                    style={{
-                      marginTop: '2rem',
-                      marginRight: "25rem",
-                      fontSize: '1.2rem',
-                      maxWidth: '600px',
-                      textAlign: 'left',
-                      lineHeight: 1.6,
-                    }}
-                  >
-                    Делаем сайты, которые работают. Без шаблонов — только индивидуальные решения с аналитикой,
-                    продуманным дизайном и мощным кодом. Для бизнеса, а не для галочки.
-                  </p>
-                </div>
 
-                {/* Блок 3 — заглушка под следующее */}
-                <div
-                  style={{
-                    minWidth: '100vw',
-                    height: '100%',
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    color: 'white',
-                    fontSize: '2rem',
-                  }}
-                >
-                  Продолжение “О нас”...
+                  {/* Блок 3 — заглушка под следующее */}
+                  <div className="continue-section">
+                    Продолжение "О нас"...
                   </div>
                 </div>
               </div>
