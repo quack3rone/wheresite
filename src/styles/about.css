@@ -158,8 +158,34 @@
   font-size: 2rem;
 }
 
-@media (max-width: 1680px) {
+@media (min-width: 1600px) {
+.vertical-text-container-about {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 220px;
+  font-family: 'NauryzRedKeds';
+}
+.vertical-text-about {
+  transform: rotate(-90deg);
+  white-space: nowrap;
+  font-size: 85px;
+  font-weight: bold;
+  line-height: 1;
+}
 }
 
-@media (max-width: 1440px) {
+@media (min-width: 1680px) {
+}
+
+@media (max-width: 1920px) {
+}
+
+@media (max-width: 2048px) {
+}
+
+@media (max-width: 2560px) {
+}
+
+@media (max-width: 3840px) {
 }
