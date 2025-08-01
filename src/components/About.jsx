@@ -220,13 +220,12 @@ return (
                       ))}
                     </motion.div>
                   </motion.div>
-
-                  {/* Блок 2 — видео + текст */}
+                  {/* Блок 1 — видео + текст */}
                   <div className="content-section">
                     <div className="video-container">
                       <video
                         ref={videoRef}
-                        src="/video/wheresiteMOVTRAN.mp4"
+                        src="/video/wheresiteMP4101010.mp4"
                         autoPlay
                         muted
                         playsInline
@@ -238,7 +237,7 @@ return (
                       продуманным дизайном и мощным кодом. Для бизнеса, а не для галочки.
                     </p>
                   </div>
-                  {/* Блок 3 — заглушка под следующее */}
+                  {/* Блок 1 — о нас */}
                   <div className="about-info-section">
                     <div className="info-column">
                       <h5>Почему именно мы</h5>
@@ -253,53 +252,53 @@ return (
                         <img src="/icons/sensor-alert.svg" alt="Техническая глубина" className="info-icon" />
                         <div>
                           <h4>Техническая глубина:</h4>
-                          <p>работаем с современными и гибкими технологиями — это позволяет нам реализовывать не просто сайты, а настоящие веб-приложения.</p>
+                          <p>работаем с современными и гибкими технологиями - это позволяет нам реализовывать не просто сайты, а настоящие веб-приложения.</p>
                         </div>
                       </div>
                       <div className="info-block">
                         <img src="/icons/magic-wand.svg" alt="Дизайн" className="info-icon" />
                         <div>
                           <h4>Дизайн, который выделяет:</h4>
-                          <p>мы не используем готовые темы. Каждый макет создаётся вручную, с нуля, чтобы максимально передать дух вашего бренда.</p>
+                          <p>мы не не используем готовые темы. Каждый макет создаётся вручную, с нуля, чтобы максимально передать дух вашего бренда.</p>
                         </div>
                       </div>
                       <div className="info-block">
                         <img src="/icons/key.svg" alt="Полный цикл" className="info-icon" />
                         <div>
                           <h4>Полный цикл:</h4>
-                          <p>от идеи до запуска. Всё — в одних руках. Вам не нужно искать подрядчиков.</p>
+                          <p>от идеи до запуска. Мы разрабатываем, подключаем домен, настраиваем хостинг, SEO и рекламу. Вам не нужно искать подрядчиков — всё в одних руках.</p>
                         </div>
                       </div>
                     </div>
 
                     <div className="info-column">
-                      <h5>Какие сайты мы разрабатываем</h5>
+                      <h5 className="align-title">Какие сайты мы разрабатываем</h5>
                       <div className="info-block">
                         <img src="/icons/money-simple-from-bracket.svg" alt="Лендинги" className="info-icon" />
                         <div>
                           <h4>Лендинги:</h4>
-                          <p>одностраничные сайты для презентации одного продукта или услуги.</p>
+                          <p>Одностраничные сайты, идеально подходящие для презентации одного продукта или услуги.</p>
                         </div>
                       </div>
                       <div className="info-block">
                         <img src="/icons/site-browser.svg" alt="Корпоративные сайты" className="info-icon" />
                         <div>
                           <h4>Корпоративные сайты:</h4>
-                          <p>представляют ваш бизнес: услуги, команда, портфолио, кейсы.</p>
+                          <p>Презентация вашего бизнеса в интернете: услуги, портфолио, команда, кейсы, форма обратной связи.</p>
                         </div>
                       </div>
                       <div className="info-block">
                         <img src="/icons/apps.svg" alt="Веб-приложения" className="info-icon" />
                         <div>
                           <h4>Веб-приложения и платформы:</h4>
-                          <p>интеграции с CRM, аналитикой, платёжками. Удобство и безопасность.</p>
+                          <p>Функциональные, безопасные и удобные в использовании. Интеграции с платёжными системами, CRM, аналитикой и складским учётом.</p>
                         </div>
                       </div>
                       <div className="info-block">
                         <img src="/icons/fingerprint.svg" alt="Интернет-магазины" className="info-icon" />
                         <div>
                           <h4>Интернет-магазины:</h4>
-                          <p>сложные системы: фильтрация, сортировка, аналитика, личные кабинеты.</p>
+                          <p>Сложные системы: базы данных, личные кабинеты, фильтрация, сортировка, аналитика, автоматизация процессов.</p>
                         </div>
                       </div>
                     </div>
@@ -310,8 +309,30 @@ return (
                     animate={{ x: Math.min(scrollY * -1, -500) }} // ограничим до 4 блоков
                     transition={{ type: 'tween', ease: 'linear', duration: 0.1 }}
                   >
-                    {'? '.repeat(14)}
+                    {'? '.repeat(12)}
                   </motion.div>
+                  {/* Блок 2 — вертикальный текст */}
+                  <motion.div className="vertical-text-section-reviews-about">
+                    <motion.div
+                      animate={{ 
+                        x: -2000,
+                        y: -scrollY + getYOffset(window.innerWidth),
+                      }}
+                      transition={{ type: 'tween', ease: 'linear', duration: 0.1 }}
+                      className="vertical-text-container-reviews-about"
+                    >
+                      {[...Array(9)].map((_, i) => (
+                        <div
+                          key={i}
+                          className={`vertical-text-about ${i === 7? 'vertical-text-active' : 'vertical-text-inactive'}`}
+                        >
+                          Отзывы
+                        </div>
+                      ))}
+                    </motion.div>
+                  </motion.div>
+                  {/* Блок 2 — отзывы */}
+                  
                 </div>
               </div>
             </div>

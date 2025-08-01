@@ -140,8 +140,7 @@
   display: flex;
   justify-content: center;    /* горизонтальное центрирование */
   overflow: hidden;
-  border-radius: 6px; /* опционально - скругление углов */
-  border: 8px solid rgb(255, 255, 255); /* ← добавлена обводка */
+  border-radius: 100px; /* опционально - скругление углов */
 }
 
 .video-container video {
@@ -255,40 +254,61 @@
 }
 
 .info-column h5 {
-  font-size: 2.5rem;
-  margin: 0 0 0.5rem;
+  font-size: 2rem;
+  margin: 0 0 0.5rem; /* Увеличил нижний отступ для выравнивания */
   text-align: center;
   white-space: nowrap;
+  height: 3.5rem; /* Фиксированная высота для заголовков */
+  font-family: 'g';
+  font-weight: 600;
+}
+
+.align-title {
+  font-size: 2rem;
+  margin: 0 0 0.5rem; /* Увеличил нижний отступ для выравнивания */
+  text-align: center;
+  white-space: nowrap;
+  height: 3.5rem; /* Фиксированная высота для заголовков */
+  font-family: 'g';
+  font-weight: 600;
+  position: relative;
+  right: 40px;
 }
 
 .info-block {
   display: flex;
   align-items: flex-start;
   gap: 1.5rem;
+  min-height: 120px; /* Минимальная высота блока для выравнивания */
 }
 
 .info-block h4 {
-  font-size: 1.5rem;
-  margin: 0 0 0.5rem;
+  font-size: 1.3rem;
+  margin: 0 0 0.1rem;
   text-align: left;
-  width: 100%; /* или конкретное значение в px/vw */
-  min-width: 400px; /* ограничение максимальной ширины */
+  width: 100%;
+  min-width: 500px;
+  font-family: 'g';
+  font-weight: 600;
 }
 
 .info-block p {
   font-size: 1.1rem;
-  line-height: 1.5;
+  line-height: 1.2;
   margin: 0;
   text-align: left;
-  width: 100%; /* или конкретное значение в px/vw */
-  max-width: 400px; /* ограничение максимальной ширины */
+  width: 100%;
+  max-width: 500px;
+  font-family: 'g';
+  font-weight: 100;
 }
 
 .info-icon {
   width: 85px;
   height: 85px;
   flex-shrink: 0;
-  margin-top: 0.2rem;
+  margin-top: 0.8rem;
+  filter: brightness(0) invert(1);
 }
 
 .question-line {
@@ -298,4 +318,13 @@
   margin-left: -60rem;
   font-family: 'NauryzRedKeds';
   color: rgba(255,255,255,0.1);
+}
+
+.vertical-text-container-reviews-about {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 480px;
+  font-family: 'NauryzRedKeds';
+  margin-left: 0;
 }
