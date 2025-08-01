@@ -46,20 +46,25 @@
 }
 
 .mobile-content-section {
-  padding: 2rem;
+  padding: 1rem;
   color: white;
 }
 
-.mobile-video-placeholder {
-  background-color: #ccc;
-  width: 100%;
-  height: 200px;
+.video-container-mobile {
+  width: 350px;
+  height: 220px;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  color: #101010;
-  margin-bottom: 2rem;
+  overflow: hidden;
+  justify-content: center;    /* горизонтальное центрирование */
+  margin: 0 auto;
+  border-radius: 6px; /* опционально - скругление углов */
+  border: 6px solid rgb(255, 255, 255); /* ← добавлена обводка */
+}
+
+.video-container-mobile video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* заполняет контейнер без искажений */
 }
 
 .mobile-description {
@@ -88,7 +93,7 @@
 .scrolling-content {
   display: flex;
   flex-direction: row;
-  transition: transform 0.1s linear;
+  transition: transform 0.2s linear;
   height: 100%;
 }
 
@@ -107,6 +112,7 @@
   align-items: center;
   gap: 220px;
   font-family: 'NauryzRedKeds';
+  margin-left: 0;
 }
 
 .vertical-text-about {
@@ -118,7 +124,7 @@
 }
 
 .content-section {
-  min-width: 50vw;
+  min-width: 40vw;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -128,24 +134,29 @@
   padding: 2rem;
 }
 
-.video-placeholder {
-  background-color: #ccc;
-  width: 50vw;
+.video-container {
+  width: 800px;
   height: 500px;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  color: #101010;
+  justify-content: center;    /* горизонтальное центрирование */
+  overflow: hidden;
+  border-radius: 6px; /* опционально - скругление углов */
+  border: 8px solid rgb(255, 255, 255); /* ← добавлена обводка */
+}
+
+.video-container video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* заполняет контейнер без искажений */
 }
 
 .description {
+  position: relative;
   margin-top: 2rem;
-  margin-right: 25rem;
-  font-size: 1.2rem;
-  max-width: 600px;
+  font-size: 1.3rem;
   text-align: left;
   line-height: 1.6;
+  font-family: 'g';
 }
 
 .continue-section {
@@ -158,34 +169,133 @@
   font-size: 2rem;
 }
 
+@media (min-width: 768px) {
+  .vertical-text-about {
+    font-size: 75px;
+  }
+
+  .vertical-text-container-about {
+    gap: 225px;
+    margin-left: 80px;
+  }
+}
+
+
 @media (min-width: 1600px) {
-.vertical-text-container-about {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 220px;
-  font-family: 'NauryzRedKeds';
-}
-.vertical-text-about {
-  transform: rotate(-90deg);
-  white-space: nowrap;
-  font-size: 85px;
-  font-weight: bold;
-  line-height: 1;
-}
+  .vertical-text-about {
+    font-size: 75px;
+  }
+
+  .vertical-text-container-about {
+    gap: 225px;
+    margin-left: 0;
+  }
 }
 
 @media (min-width: 1680px) {
+  .vertical-text-about {
+    font-size: 100px;
+  }
+  .vertical-text-container-about {
+    gap: 255px;
+    margin-left: -15px;
+  }
 }
 
-@media (max-width: 1920px) {
+@media (min-width: 1920px) {
+  .vertical-text-about {
+    font-size: 100px;
+  }
+  .vertical-text-container-about {
+    gap: 270px;
+    margin-left: -25px;
+  }
 }
 
-@media (max-width: 2048px) {
+@media (min-width: 2048px) {
+  .vertical-text-about {
+    font-size: 105px;
+  }
+  .vertical-text-container-about {
+    gap: 280px;
+  }
 }
 
-@media (max-width: 2560px) {
+@media (min-width: 2560px) {
+  .vertical-text-about {
+    font-size: 125px;
+  }
+  .vertical-text-container-about {
+    gap: 350px;
+  }
 }
 
-@media (max-width: 3840px) {
+@media (min-width: 3840px) {
+  .vertical-text-about {
+    font-size: 175px;
+  }
+  .vertical-text-container-about {
+    gap: 500px;
+  }
+}
+
+.about-info-section {
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem 28rem;
+  color: white;
+  gap: 15rem;
+}
+
+.info-column {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  flex: 1;
+}
+
+.info-column h5 {
+  font-size: 2.5rem;
+  margin: 0 0 0.5rem;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.info-block {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+}
+
+.info-block h4 {
+  font-size: 1.5rem;
+  margin: 0 0 0.5rem;
+  text-align: left;
+  width: 100%; /* или конкретное значение в px/vw */
+  min-width: 400px; /* ограничение максимальной ширины */
+}
+
+.info-block p {
+  font-size: 1.1rem;
+  line-height: 1.5;
+  margin: 0;
+  text-align: left;
+  width: 100%; /* или конкретное значение в px/vw */
+  max-width: 400px; /* ограничение максимальной ширины */
+}
+
+.info-icon {
+  width: 85px;
+  height: 85px;
+  flex-shrink: 0;
+  margin-top: 0.2rem;
+}
+
+.question-line {
+  font-size: 15rem;
+  white-space: nowrap;
+  margin-top: 44rem;
+  margin-left: -60rem;
+  font-family: 'NauryzRedKeds';
+  color: rgba(255,255,255,0.1);
 }

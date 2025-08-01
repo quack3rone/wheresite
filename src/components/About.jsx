@@ -14,6 +14,27 @@ const About = ({ transitionActive, footerRef }) => {
   const [scrollY, setScrollY] = useState(0);
   const [footerWidth, setFooterWidth] = useState(268); // начальное значение
   const [aboutLeftShift, setAboutLeftShift] = useState(0);
+  const videoRef = useRef(null);
+
+  useEffect(() => {
+  if (isActive && videoRef.current) {
+    videoRef.current.play().catch((e) => {
+      console.error("Video failed to play:", e);
+    });
+  }
+}, [isActive]);
+
+
+
+  const getYOffset = (width) => {
+    if (width < 1680) return -290;
+    if (width >= 1680 && width < 1920) return -240;
+    if (width >= 1920 && width < 2048) return -290;
+    if (width >= 2048 && width < 2560) return -295;
+    if (width >= 2560 && width < 3840) return -335;
+    if (width >= 3840) return -415;
+    return -290; // значение по умолчанию
+  };
 
    // Получаем ширину футера через footerRef
   useEffect(() => {
@@ -153,9 +174,16 @@ return (
 
               {/* Блок 2 — видео + текст */}
               <div className="mobile-content-section">
-                <div className="mobile-video-placeholder">
-                  ВИДЕО
-                </div>
+                <div className="video-container-mobile">
+                      <video
+                        ref={videoRef}
+                        src="/video/wheresiteMOVTRAN.mp4"
+                        autoPlay
+                        muted
+                        playsInline
+                        preload="auto"
+                      />
+                    </div>
                 <p className="mobile-description">
                   Делаем сайты, которые работают. Без шаблонов — только индивидуальные решения с аналитикой,
                   продуманным дизайном и мощным кодом. Для бизнеса, а не для галочки.
@@ -177,7 +205,7 @@ return (
                     <motion.div
                       animate={{ 
                         x: -100,
-                        y: -scrollY + -170,
+                        y: -scrollY + getYOffset(window.innerWidth),
                       }}
                       transition={{ type: 'tween', ease: 'linear', duration: 0.1 }}
                       className="vertical-text-container-about"
@@ -195,19 +223,95 @@ return (
 
                   {/* Блок 2 — видео + текст */}
                   <div className="content-section">
-                    <div className="video-placeholder">
-                      ВИДЕО
+                    <div className="video-container">
+                      <video
+                        ref={videoRef}
+                        src="/video/wheresiteMOVTRAN.mp4"
+                        autoPlay
+                        muted
+                        playsInline
+                        preload="auto"
+                      />
                     </div>
                     <p className="description">
                       Делаем сайты, которые работают. Без шаблонов — только индивидуальные решения с аналитикой,
                       продуманным дизайном и мощным кодом. Для бизнеса, а не для галочки.
                     </p>
                   </div>
-
                   {/* Блок 3 — заглушка под следующее */}
-                  <div className="continue-section">
-                    Продолжение "О нас"...
+                  <div className="about-info-section">
+                    <div className="info-column">
+                      <h5>Почему именно мы</h5>
+                      <div className="info-block">
+                        <img src="/icons/user.svg" alt="Индивидуальный подход" className="info-icon" />
+                        <div>
+                          <h4>Индивидуальный подход:</h4>
+                          <p>никакой работы по шаблону. Мы не подгоняем вас под рамки платформ, мы создаём сайт под вас.</p>
+                        </div>
+                      </div>
+                      <div className="info-block">
+                        <img src="/icons/sensor-alert.svg" alt="Техническая глубина" className="info-icon" />
+                        <div>
+                          <h4>Техническая глубина:</h4>
+                          <p>работаем с современными и гибкими технологиями — это позволяет нам реализовывать не просто сайты, а настоящие веб-приложения.</p>
+                        </div>
+                      </div>
+                      <div className="info-block">
+                        <img src="/icons/magic-wand.svg" alt="Дизайн" className="info-icon" />
+                        <div>
+                          <h4>Дизайн, который выделяет:</h4>
+                          <p>мы не используем готовые темы. Каждый макет создаётся вручную, с нуля, чтобы максимально передать дух вашего бренда.</p>
+                        </div>
+                      </div>
+                      <div className="info-block">
+                        <img src="/icons/key.svg" alt="Полный цикл" className="info-icon" />
+                        <div>
+                          <h4>Полный цикл:</h4>
+                          <p>от идеи до запуска. Всё — в одних руках. Вам не нужно искать подрядчиков.</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="info-column">
+                      <h5>Какие сайты мы разрабатываем</h5>
+                      <div className="info-block">
+                        <img src="/icons/money-simple-from-bracket.svg" alt="Лендинги" className="info-icon" />
+                        <div>
+                          <h4>Лендинги:</h4>
+                          <p>одностраничные сайты для презентации одного продукта или услуги.</p>
+                        </div>
+                      </div>
+                      <div className="info-block">
+                        <img src="/icons/site-browser.svg" alt="Корпоративные сайты" className="info-icon" />
+                        <div>
+                          <h4>Корпоративные сайты:</h4>
+                          <p>представляют ваш бизнес: услуги, команда, портфолио, кейсы.</p>
+                        </div>
+                      </div>
+                      <div className="info-block">
+                        <img src="/icons/apps.svg" alt="Веб-приложения" className="info-icon" />
+                        <div>
+                          <h4>Веб-приложения и платформы:</h4>
+                          <p>интеграции с CRM, аналитикой, платёжками. Удобство и безопасность.</p>
+                        </div>
+                      </div>
+                      <div className="info-block">
+                        <img src="/icons/fingerprint.svg" alt="Интернет-магазины" className="info-icon" />
+                        <div>
+                          <h4>Интернет-магазины:</h4>
+                          <p>сложные системы: фильтрация, сортировка, аналитика, личные кабинеты.</p>
+                        </div>
+                      </div>
+                    </div>
                   </div>
+                  {/* Вопросительные знаки */}
+                  <motion.div
+                    className="question-line"
+                    animate={{ x: Math.min(scrollY * -1, -500) }} // ограничим до 4 блоков
+                    transition={{ type: 'tween', ease: 'linear', duration: 0.1 }}
+                  >
+                    {'? '.repeat(14)}
+                  </motion.div>
                 </div>
               </div>
             </div>
