@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import '../styles/about.css';
 
-const About = ({ transitionActive, footerRef }) => {
+const About = ({ transitionActive, footerRef, targetSection, onSectionReached, isAlreadyOnAbout }) => {
   const location = useLocation();
   const isActive = location.pathname === '/about';
   const [showContent, setShowContent] = useState(false);
@@ -15,6 +15,100 @@ const About = ({ transitionActive, footerRef }) => {
   const [footerWidth, setFooterWidth] = useState(268); // начальное значение
   const [aboutLeftShift, setAboutLeftShift] = useState(0);
   const videoRef = useRef(null);
+
+  const [currentSection, setCurrentSection] = useState("О нас");
+  const [isAutoScrolling, setIsAutoScrolling] = useState(false);
+
+  const getDesktopSectionThresholds = (width) => {
+    // Базовые значения (можно настроить под ваш дизайн)
+    if (width < 1600) return { reviews: 2800, prices: 3650, order: 4850 };
+    if (width < 1680) return { reviews: 2800, prices: 3700, order: 5000 };
+    if (width < 1920) return { reviews: 3200, prices: 4000, order: 5600 };
+    if (width < 2048) return { reviews: 3500, prices: 4300, order: 6000 };
+    if (width < 2560) return { reviews: 3500, prices: 4300, order: 6000 };
+    return { reviews: 4000, prices: 5000, order: 7000 }; // Для очень больших экранов
+  };
+
+  const getMobileSectionThresholds = (width) => {
+    if (width < 380) return { reviews: 1790, prices: 2590, order: 3690 };
+    if (width < 390) return { reviews: 1800, prices: 2600, order: 3605 };
+    if (width < 400) return { reviews: 1810, prices: 2610, order: 3600 };
+    if (width < 420) return { reviews: 1825, prices: 2575, order: 3530 };
+    if (width < 440) return { reviews: 1825, prices: 2555, order: 3450 };
+    return { reviews: 1810, prices: 2610, order: 3600 }; // Примерные значения для мобилок
+  };
+
+  // Сброс скролла при выходе с About
+  useEffect(() => {
+    if (!showContent && scrollRef.current) {
+      // Сбрасываем когда контент скрывается (переход на главную)
+      scrollRef.current.scrollTop = 0;
+      setScrollY(0);
+      setCurrentSection("О нас");
+    }
+  }, [showContent]);
+
+  // Автоскролл к нужной секции
+  useEffect(() => {
+    if (targetSection && !isAutoScrolling) {
+      // Если уже были на About - скролим сразу, если нет - ждем 2 секунды
+      const delay = isAlreadyOnAbout ? 0 : 2000;
+      
+      const timer = setTimeout(() => {
+        // Проверяем что About действительно открыт и готов к скроллу
+        if (!scrollRef.current || !showContent) return;
+        
+        setIsAutoScrolling(true);
+        
+        let targetScrollPosition = 0;
+      
+        // Получаем текущие пороги с учетом ширины экрана
+        const thresholds = isMobile 
+          ? getMobileSectionThresholds(window.innerWidth) 
+          : getDesktopSectionThresholds(window.innerWidth);
+        
+        // Добавляем +10 к каждому порогу
+        switch (targetSection) {
+          case "О нас":
+            targetScrollPosition = 1;
+            break;
+          case "Отзывы":
+            targetScrollPosition = isMobile ? thresholds.reviews + 50 : thresholds.reviews + 10;
+            break;
+          case "Цены":
+            targetScrollPosition = isMobile ? thresholds.prices + 50 : thresholds.prices + 10;
+            break;
+          case "Заказать сайт":
+            targetScrollPosition = isMobile ? thresholds.order + 50 : thresholds.order + 10;
+            break;
+          default:
+            targetScrollPosition = 0;
+        }
+
+        if (scrollRef.current) {
+          scrollRef.current.scrollTo({
+            top: targetScrollPosition,
+            behavior: 'smooth'
+          });
+        }
+
+        // Устанавливаем правильную секцию сразу после начала скролла
+        setTimeout(() => {
+          setCurrentSection(targetSection);
+          if (onSectionReached) {
+            onSectionReached(targetSection);
+          }
+          
+          // Отключаем флаг автоскролла
+          setTimeout(() => {
+            setIsAutoScrolling(false);
+          }, 500);
+        }, 100);
+      }, delay);
+
+      return () => clearTimeout(timer);
+    }
+  }, [targetSection, isAlreadyOnAbout, showContent, onSectionReached]); // Убрали transitionActive из зависимостей
 
   useEffect(() => {
   if (isActive && videoRef.current) {
@@ -112,17 +206,34 @@ const About = ({ transitionActive, footerRef }) => {
   }, [isActive, transitionActive]);
 
   useEffect(() => {
-    const currentRef = scrollRef.current;
-    if (!currentRef) return;
+  const currentRef = scrollRef.current;
+  if (!currentRef) return;
 
-    const handleScroll = () => {
-      setScrollY(currentRef.scrollTop);
-    };
+  const handleScroll = () => {
+    const scrollTop = currentRef.scrollTop;
+    setScrollY(scrollTop);
 
-    currentRef.addEventListener('scroll', handleScroll);
-    return () => currentRef.removeEventListener('scroll', handleScroll);
-  }, [scrollRef.current]); // Добавьте зависимость
+    if (isAutoScrolling) return;
 
+    const thresholds = isMobile 
+      ? getMobileSectionThresholds(window.innerWidth) 
+      : getDesktopSectionThresholds(window.innerWidth);
+
+    let newSection = "О нас";
+
+    if (scrollTop > thresholds.order) newSection = "Заказать сайт";
+    else if (scrollTop > thresholds.prices) newSection = "Цены";
+    else if (scrollTop > thresholds.reviews) newSection = "Отзывы";
+
+    if (newSection !== currentSection) {
+      setCurrentSection(newSection);
+      onSectionReached?.(newSection);
+    }
+  };
+
+  currentRef.addEventListener('scroll', handleScroll);
+  return () => currentRef.removeEventListener('scroll', handleScroll);
+}, [scrollRef.current, currentSection, isMobile, onSectionReached, isAutoScrolling]); // Добавили isAutoScrolling в зависимости
   if (!isActive) return null;
   
 
@@ -638,7 +749,7 @@ return (
                       {[...Array(14)].map((_, i) => (
                         <div
                           key={i}
-                          className={`vertical-text-order-about ${i === 9? 'vertical-text-active' : 'vertical-text-inactive'}`}
+                          className={`vertical-text-order-about ${i === 8? 'vertical-text-active' : 'vertical-text-inactive'}`}
                         >
                           Заказать сайт
                         </div>

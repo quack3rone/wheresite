@@ -37,6 +37,10 @@ const Catalog = ({ scrollY, onScrollEnd, isInteractive }) => {
   const desktopShift = 200;
   const shift = isMobile ? mobileShift : desktopShift;
 
+  const [targetSection, setTargetSection] = useState(null);
+  const [autoScrolling, setAutoScrolling] = useState(false);
+  const [isAutoScrolling, setIsAutoScrolling] = useState(false);
+
   // Динамическое вычисление left в зависимости от ширины экрана
   const leftPosition = window.innerWidth <= 450
     ? "30px"
@@ -126,8 +130,17 @@ useEffect(() => {
     setIsBackNavigation(true);
     setTransitionActive(false); // проигрываем анимацию обратно
     setActiveLink(null);
+    setTargetSection(null); // Добавить эту строку
   }
 }, [location.pathname, navigationType]);
+
+// Сброс при программном переходе на главную
+useEffect(() => {
+  if (location.pathname === '/' && !transitionActive && !isBackNavigation) {
+    setTargetSection(null);
+    setActiveLink(null);
+  }
+}, [location.pathname, transitionActive, isBackNavigation]);
 
 
 useEffect(() => {
@@ -377,6 +390,13 @@ const handleProjectMouseLeave = () => {
   setIsManualHover(false);
 
 };
+
+// Сброс targetSection при переходе на главную
+useEffect(() => {
+  if (location.pathname === '/' && !transitionActive) {
+    setTargetSection(null);
+  }
+}, [location.pathname, transitionActive]);
 
 const targetMargin = progress >= 1
   ? 0
@@ -740,16 +760,26 @@ const targetMargin = progress >= 1
                   className={`footer-link ${activeLink === text ? "active" : ""}`}
                   onClick={() => {
                     const route = "/about";
-                    if (activeLink === text && location.pathname === route) {
+                    const isCurrentlyOnAbout = location.pathname === route;
+                    
+                    if (activeLink === text && isCurrentlyOnAbout) {
+                      // Если уже активная ссылка на About - закрываем
                       setTransitionActive(false);
                       setTimeout(() => {
                         navigate('/');
                         setActiveLink(null);
+                        setTargetSection(null);
                       }, 800);
+                    } else if (isCurrentlyOnAbout) {
+                      // Если уже на About, но другая ссылка - просто скролим
+                      setActiveLink(text);
+                      setTargetSection(text);
                     } else {
+                      // Если не на About - открываем About и устанавливаем целевую секцию
                       setTransitionActive(true);
                       setActiveLink(text);
                       setNavigationTarget(route);
+                      setTargetSection(text);
                     }
                   }}
                 >
@@ -782,7 +812,18 @@ const targetMargin = progress >= 1
               }}
             />
         </motion.div>
-        <About transitionActive={transitionActive} footerRef={footerRef} />
+        <About 
+          transitionActive={transitionActive} 
+          footerRef={footerRef}
+          targetSection={targetSection}
+          isAlreadyOnAbout={location.pathname === '/about'} // Передаем текущее состояние
+          onSectionReached={(section) => {
+            setActiveLink(section);
+            if (section === targetSection) {
+              setTargetSection(null);
+            }
+          }}
+        />
 
       </motion.div>
     </>

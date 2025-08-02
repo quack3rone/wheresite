@@ -86,9 +86,9 @@
   text-shadow:
     0 0 5px #d6f0ff,
     0 0 10px #cbefff,
-    0 0 20px #c2eaff,
-    0 0 40px #aee8ff,
-    0 0 40px #7d9dff;
+    0 0 20px #c2e7ff,
+    0 0 40px #507ba3,
+    0 0 40px #50326c;
   font-family: 'g';
   letter-spacing: 0.02em;
   width: 100%;
@@ -161,9 +161,9 @@
   text-shadow:
     0 0 5px #d6f0ff,
     0 0 10px #cbefff,
-    0 0 20px #c2eaff,
-    0 0 40px #aee8ff,
-    0 0 40px #7d9dff;
+    0 0 20px #c2e7ff,
+    0 0 40px #507ba3,
+    0 0 40px #50326c;
   font-family: 'g';
   letter-spacing: 0.02em;
   width: 100%;
@@ -199,6 +199,11 @@
 }
 
 @media (min-width: 768px) {
+  .container {
+    height: 5700px;
+    position: relative;
+  }
+
   .vertical-text-about {
     font-size: 80px;
   }
@@ -206,6 +211,10 @@
   .vertical-text-container-about {
     gap: 220px;
     margin-left: 30px;
+  }
+  .video-container {
+    width: 750px;
+    height: 450px;
   }
 }
 
@@ -374,7 +383,7 @@
   margin-top: 44rem;
   margin-left: -60rem;
   font-family: 'NauryzRedKeds';
-  color: rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.25);
 }
 
 /* Блок 1 - мобилки*/
@@ -450,7 +459,46 @@
 
 
 @media (min-width: 768px) {
+  .about-info-section {
+    padding: 2rem 28rem;
+    gap: 4rem;
+  }
 
+  .info-column {
+    gap: 0.5rem;
+  }
+
+  .info-column h5 {
+    font-size: 1.7rem;
+    margin: 0 0 0rem;
+    margin-left: -110px;
+  }
+
+  .align-title {
+    font-size: 1.7rem;
+    right: 20px;
+  }
+
+  .info-block h4 {
+    font-size: 1.3rem;
+  }
+
+  .info-block p {
+    font-size: 1rem;
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .info-icon {
+    width: 65px;
+    height: 65px;
+    margin-top: 0.8rem;
+  }
+
+  .question-line {
+    font-size: 15rem;
+    margin-top: 38rem;
+  }
 }
 
 
@@ -822,7 +870,64 @@
 }
 
 @media (min-width: 768px) {
-  
+  .vertical-text-container-reviews-about {
+    gap: 370px;
+    padding: 30rem 0rem;
+  }
+
+  .reviews-section {
+    gap: 7rem;
+    padding: 2rem 0rem;
+    margin-left: -115rem;
+  }
+
+  .review-card {
+    width: 100%;
+    min-width: 600px;
+  }
+
+  .review-header-block {
+    gap: 1.2rem;
+  }
+
+  .quote-icon {
+    width: 95px;
+    height: 95px;
+    margin-top: 0.4rem;
+  }
+
+  .review-header {
+    gap: 0.2rem;
+    margin-top: 30px;
+  }
+
+  .review-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0;
+  }
+
+  .review-role {
+    font-size: 1.1rem;
+    font-weight: 400;
+  }
+
+  .review-body {
+    font-size: 1.2rem;
+    line-height: 1.5;
+    font-weight: 300;
+    margin: 0;
+    max-width: 800px;
+  }
+
+  .review-site {
+    font-size: 1.3rem;
+    font-weight: 900;
+    color: white;
+    text-decoration: none;
+    margin-top: 0.5rem;
+    text-decoration: underline;
+  }
 }
 
 
@@ -927,9 +1032,9 @@
   text-shadow:
     0 0 5px #d6f0ff,
     0 0 10px #cbefff,
-    0 0 20px #c2eaff,
-    0 0 40px #aee8ff,
-    0 0 40px #7d9dff;
+    0 0 20px #c2e7ff,
+    0 0 40px #507ba3,
+    0 0 40px #50326c;
   font-family: 'g';
   letter-spacing: 0.02em;
   padding: 2rem 1rem;
@@ -1018,9 +1123,9 @@
   text-shadow:
     0 0 5px #d6f0ff,
     0 0 10px #cbefff,
-    0 0 20px #c2eaff,
-    0 0 30px #aee8ff,
-    0 0 40px #7d9dff;
+    0 0 20px #c2e7ff,
+    0 0 40px #507ba3,
+    0 0 40px #50326c;
   margin-bottom: 1rem;
   padding: 1rem 0;
 }
@@ -1058,6 +1163,64 @@
   flex-direction: column;
   gap: 0.5rem;
   line-height: 1.5;
+}
+
+@media (min-width: 768px) {
+  .vertical-text-container-price-about {
+  gap: 200px;
+  padding: 36rem 0rem;
+}
+
+.block-3-content {
+  max-width: 800px;
+  padding: 1rem 4rem;
+}
+
+.block-3-text {
+  margin-bottom: 2rem;
+}
+
+.glow-title {
+  font-size: 3rem;
+  padding: 2rem 1rem;
+  width: 100%;
+  min-width: 750px;
+}
+
+.content-wrapper {
+  gap: 3rem;
+}
+
+.text-content {
+  gap: 3rem;
+}
+
+.block-3-paragraph {
+  font-size: 1.3rem;
+  width: 100%;
+  min-width: 500px;
+}
+
+.block-3-list {
+  gap: 0.5rem;
+  margin-top: -1.1rem;
+}
+
+.block-3-subtitle {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.block-3-ul {
+  list-style-type: '·  ';
+  padding-left: 1.2rem;
+  font-size: 1.3rem;
+  gap: 0.5rem;
+  line-height: 1.2;
+  width: 100%;
+  min-width: 300px;
+}
 }
 
 
@@ -1276,32 +1439,65 @@
   text-align: center;
 }
 
+@media (min-width: 768px) {
+  .vertical-text-container-order-about {
+  gap: 690px;
+  padding: 3rem 0rem;
+}
 
-.loading-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
+.vertical-text-order-about {
+  font-size: 80px;
+}
+
+.telegram-contact-section {
+  padding: 1rem 10rem;
+  margin-top: -50px;
+}
+
+.telegram-contact-content {
+  gap: 7rem;
+}
+
+.telegram-text-block {
+  gap: 2.5rem;
+}
+
+.telegram-text-top {
+  font-size: 2.5rem;
+}
+
+.telegram-text-bottom {
+  font-size: 2rem;
+}
+
+.telegram-icons-line {
+  gap: 0.5rem;
+}
+
+.telegram-icon {
+  width: 180px;
+  height: 180px;
+}
+
+.telegram-description {
+  font-size: 1.8rem;
+  line-height: 1.4;
   width: 100%;
+  max-width: 700px;
 }
 
-.loading-spinner {
-  border: 4px solid rgba(255, 255, 255, 0.3);
-  border-radius: 50%;
-  border-top: 4px solid #ffffff;
-  width: 40px;
-  height: 40px;
-  animation: spin 1s linear infinite;
-  margin-bottom: 16px;
+.where-site-block {
+  height: 220px;
+  width: 100vw;
+  margin-left: -37rem;
 }
 
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+.where-site-text {
+  font-size: 4rem;
 }
 
-.loading-container p {
-  color: white;
-  font-size: 16px;
+.where-site-subtext {
+  font-size: 4rem;
+  margin-top: 0rem;
+}
 }

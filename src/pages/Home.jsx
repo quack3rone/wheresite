@@ -81,7 +81,8 @@ const Home = () => {
           <ScrollArrow onClick={handleArrowClick} scrollY={scrollY} />
           <Catalog 
             scrollY={scrollY} 
-            onScrollEnd={setShowCatalog} 
+            onScrollEnd={setShowCatalog}
+            targetSection={null}
           />
         </>
       )}
