@@ -256,7 +256,7 @@ useEffect(() => {
     url: "https://momsbirthday.online",
     image: "/images/mbirthday.jpg",
     hoverColor: "#00751bff",
-    position: { left: "65%", top: "15%" },
+    position: { left: "50%", top: "15%" },
     size: { width: "640px", height: "auto" },
     imageSize: { width: "380px", height: "auto" },
     mobilePosition: { left: "45%", top: "45%" },
@@ -479,13 +479,13 @@ const targetMargin = progress >= 1
               <motion.div
                 key={activeProject.name}
                 initial={{
-                  x: isMobile ? 0 : -800,
+                  x: isMobile ? 0 : 800,
                   y: isMobile ? 800 : 0,
                   scale: 1.6,
                   opacity: 0,
                 }}
                 animate={{
-                  x: -100,
+                  x: 0,
                   y: 0,
                   scale: 1,
                   opacity: 1,
@@ -504,12 +504,11 @@ const targetMargin = progress >= 1
                 }}
                 style={{
                   position: "fixed",
-                  left: isMobile
-                    ? activeProject.mobilePosition?.left
-                    : activeProject.position.left,
+                  left: "50%",
                   top: isMobile
                     ? activeProject.mobilePosition?.top
                     : activeProject.position.top,
+                  transform: "translateX(-50%)",
                   width: isMobile
                     ? activeProject.mobileSize?.width
                     : activeProject.size.width,
@@ -542,6 +541,7 @@ const targetMargin = progress >= 1
               </motion.div>
             )}
           </AnimatePresence>
+
            {/* Блюр-зона справа */}
            <motion.div
               className="blur-zone"

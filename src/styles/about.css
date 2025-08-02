@@ -1,9 +1,4 @@
 /* Общее */
-.container {
-  height: 8000px;
-  position: relative;
-}
-
 .vertical-text-active {
   color: white;
 }
@@ -13,6 +8,11 @@
 }
 
 /* Мобильная версия */
+.container-mobile {
+  height: 3500px;
+  position: relative;
+}
+
 .mobile-horizontal-scroll {
   width: 100vw;
   height: 10vh;
@@ -46,18 +46,19 @@
 }
 
 .mobile-content-section {
-  padding: 1rem;
+  padding: 0.5rem;
   color: white;
 }
 
 .video-container-mobile {
-  width: 350px;
-  height: 220px;
+  width: 390px;
+  height: 280px;
   display: flex;
   overflow: hidden;
   justify-content: center;    /* горизонтальное центрирование */
   margin: 0 auto;
   border-radius: 32px; /* опционально - скругление углов */
+  margin-top: 50px;
 }
 
 .video-container-mobile video {
@@ -72,19 +73,34 @@
   line-height: 1.6;
   font-family: 'g';
   width: 100%;
-  min-width: 150px;
-  padding: 3rem 0rem;
+  max-width: 350px;
+  padding: 3rem 0.5rem;
 }
 
-.mobile-continue-section {
-  padding: 2rem;
-  color: white;
-  font-size: 1.5rem;
+.glow-title-about-mobile {
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: #ffffff;
+  margin: 0 auto;
   text-align: center;
-  min-height: 50vh;
+  text-shadow:
+    0 0 5px #d6f0ff,
+    0 0 10px #cbefff,
+    0 0 20px #c2eaff,
+    0 0 40px #aee8ff,
+    0 0 40px #7d9dff;
+  font-family: 'g';
+  letter-spacing: 0.02em;
+  width: 100%;
+  max-width: 500px;
 }
 
 /* Десктоп версия */
+.container {
+  height: 6500px;
+  position: relative;
+}
+
 .sticky-section {
   position: sticky;
   top: 0;
@@ -134,7 +150,24 @@
   justify-content: center;
   align-items: center;
   color: white;
-  padding: 2rem;
+  padding: 0rem 2rem;
+}
+
+.glow-title-about {
+  font-size: 2.8rem;
+  font-weight: 900;
+  color: #ffffff;
+  text-align: center;
+  text-shadow:
+    0 0 5px #d6f0ff,
+    0 0 10px #cbefff,
+    0 0 20px #c2eaff,
+    0 0 40px #aee8ff,
+    0 0 40px #7d9dff;
+  font-family: 'g';
+  letter-spacing: 0.02em;
+  width: 100%;
+  max-width: 500px;
 }
 
 .video-container {
@@ -154,7 +187,7 @@
 
 .description {
   position: relative;
-  margin-top: 1rem;
+  margin-top: 2rem;
   font-size: 1.3rem;
   text-align: left;
   line-height: 1.2;
@@ -422,6 +455,42 @@
 
 
 @media (min-width: 1600px) {
+  .about-info-section {
+    padding: 2rem 28rem;
+    gap: 8rem;
+  }
+
+  .info-column {
+    gap: 1rem;
+  }
+
+  .info-column h5 {
+    font-size: 1.7rem;
+    margin: 0 0 0.5rem;
+  }
+
+  .align-title {
+    font-size: 1.6rem;
+  }
+
+  .info-block h4 {
+    font-size: 1.3rem;
+  }
+
+  .info-block p {
+    font-size: 1rem;
+  }
+
+  .info-icon {
+    width: 65px;
+    height: 65px;
+    margin-top: 0.8rem;
+  }
+
+  .question-line {
+    font-size: 15rem;
+    margin-top: 40rem;
+  }
 
 }
 
@@ -460,7 +529,7 @@
 
   .question-line {
     font-size: 15rem;
-    margin-top: 45rem;
+    margin-top: 44rem;
   }
 
 }
@@ -651,7 +720,7 @@
 .review-role {
   font-size: 1.1rem;
   font-weight: 400;
-  opacity: 0.8;
+  opacity: 0.5;
   margin: 0;
 }
 
@@ -752,6 +821,75 @@
   text-decoration: underline;
 }
 
+@media (min-width: 768px) {
+  
+}
+
+
+@media (min-width: 1600px) {
+  .vertical-text-container-reviews-about {
+    gap: 370px;
+  }
+
+  .reviews-section {
+    gap: 4rem;
+    padding: 3rem 0rem;
+    margin-left: -115rem;
+  }
+}
+
+@media (min-width: 1680px) {
+  .vertical-text-container-reviews-about {
+    gap: 480px;
+  }
+
+  .reviews-section {
+    gap: 4rem;
+    padding: 5rem 0rem;
+    margin-left: -115rem;
+  }
+}
+
+@media (min-width: 1920px) {
+  .vertical-text-container-reviews-about {
+    gap: 480px;
+  }
+
+  .reviews-section {
+    gap: 5rem;
+    padding: 3rem 0rem;
+    margin-left: -115rem;
+  }
+}
+
+@media (min-width: 2048px) {
+
+}
+
+@media (min-width: 2560px) {
+  .vertical-text-container-reviews-about {
+    gap: 600px;
+  }
+
+  .reviews-section {
+    gap: 5rem;
+    padding: 5rem 0rem;
+    margin-left: -115rem;
+  }
+}
+
+@media (min-width: 3840px) {
+  .vertical-text-container-reviews-about {
+    gap: 800px;
+  }
+
+  .reviews-section {
+    gap: 5rem;
+    padding: 5rem 0rem;
+    margin-left: -115rem;
+  }
+}
+
 
 /* Блок 3 */
 
@@ -762,4 +900,408 @@
   gap: 250px;
   font-family: 'NauryzRedKeds';
   margin-left: 0;
+}
+
+.block-3-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+  padding: 4rem 4rem;
+  font-family: 'g';
+}
+
+.block-3-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 4rem;
+}
+
+.glow-title {
+  font-size: 3rem;
+  font-weight: 900;
+  color: #ffffff;
+  text-align: center;
+  text-shadow:
+    0 0 5px #d6f0ff,
+    0 0 10px #cbefff,
+    0 0 20px #c2eaff,
+    0 0 40px #aee8ff,
+    0 0 40px #7d9dff;
+  font-family: 'g';
+  letter-spacing: 0.02em;
+  padding: 2rem 1rem;
+  width: 100%;
+  min-width: 750px;
+}
+
+.content-wrapper {
+  display: flex;
+  gap: 5rem;
+  justify-content: space-between;
+  align-items: flex-start; /* Добавлено для выравнивания по верху */
+}
+
+.text-content {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.block-3-paragraph {
+  font-size: 1.5rem;
+  font-weight: 300;
+  line-height: 1.6;
+  margin: 0;
+  width: 100%;
+  min-width: 600px;
+}
+
+.block-3-list {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: -1.1rem;
+}
+
+.block-3-subtitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.block-3-ul {
+  list-style-type: '·  ';
+  padding-left: 1.2rem;
+  font-size: 1.5rem;
+  font-weight: 400;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  line-height: 1.5;
+  width: 100%;
+  min-width: 400px;
+}
+
+.mobile-scroll-content-price {
+  display: flex;
+  align-items: center;
+  padding-left: 120rem;
+  gap: 20px;
+  font-family: 'NauryzRedKeds';
+}
+
+.mobile-horizontal-scroll-price {
+  position: relative;
+  top: -100px;
+}
+
+.mobile-block-3 {
+  padding: 1rem 1.5rem;
+  color: #fff;
+  font-family: 'g';
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-top: -100px;
+}
+
+.mobile-glow-title {
+  font-size: 2rem;
+  font-weight: 800;
+  text-align: center;
+  color: #fff;
+  text-shadow:
+    0 0 5px #d6f0ff,
+    0 0 10px #cbefff,
+    0 0 20px #c2eaff,
+    0 0 30px #aee8ff,
+    0 0 40px #7d9dff;
+  margin-bottom: 1rem;
+  padding: 1rem 0;
+}
+
+.mobile-text-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.mobile-block-3-paragraph {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  font-weight: 300;
+  margin: 0;
+}
+
+.mobile-block-3-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.mobile-block-3-subtitle {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.mobile-block-3-ul {
+  list-style-type: '·  ';
+  padding-left: 1rem;
+  font-size: 1.1rem;
+  font-weight: 400;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  line-height: 1.5;
+}
+
+
+/* Блок 4 */
+
+.vertical-text-container-order-about {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 700px;
+  font-family: 'NauryzRedKeds';
+  margin-left: 0;
+  width: 10vw;
+}
+
+.vertical-text-order-about {
+  transform: rotate(-90deg);
+  white-space: nowrap;
+  font-size: 85px;
+  font-weight: bold;
+  line-height: 1;
+}
+
+/* Блок контактов в Telegram */
+.telegram-contact-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 10rem;
+  color: white;
+  margin-top: -50px;
+}
+
+.telegram-contact-content {
+  display: flex;
+  flex-direction: column;
+  gap: 7rem;
+}
+
+.telegram-text-block {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.telegram-text-top {
+  font-size: 3rem;
+  font-weight: 900;
+  margin: 0;
+  font-family: 'g';
+  line-height: 1;
+}
+
+.telegram-text-bottom {
+  font-size: 2rem;
+  font-weight: 900;
+  margin: 0;
+  font-family: 'g';
+  line-height: 1;
+}
+
+.telegram-icons-line {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  text-decoration: none;
+}
+
+.telegram-icon {
+  width: 200px;
+  height: 200px;
+  filter: brightness(0) invert(1);
+}
+
+.telegram-description {
+  font-size: 1.8rem;
+  font-family: 'g';
+  font-weight: 300;
+  line-height: 1.5;
+  margin: 0;
+  width: 100%;
+  max-width: 900px;
+}
+
+.where-site-block {
+  background: white;
+  transform: rotate(-90deg);
+  color: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 250px;
+  width: 100vw;
+  margin-left: -40rem;
+}
+
+.where-site-text {
+  font-size: 4.5rem;
+  font-weight: 900;
+  font-family: "NauryzRedKeds";
+  white-space: nowrap;
+  margin: 0 auto;
+}
+
+.where-site-subtext {
+  font-size: 4rem;
+  font-weight: 900;
+  font-family: 'g';
+  margin-top: 0.5rem;
+  white-space: nowrap;
+}
+
+.mobile-scroll-content-order {
+  display: flex;
+  align-items: center;
+  padding-left: 130rem;
+  gap: 20px;
+  font-family: 'NauryzRedKeds';
+}
+
+.mobile-horizontal-scroll-order {
+  position: relative;
+  top: 50px;
+}
+
+.mobile-scroll-text-order {
+  font-size: 35px;
+  font-weight: bold;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.mobile-telegram-contact-section {
+  display: flex;
+  flex-direction: column;
+  margin-top: 100px;
+  color: white;
+  font-family: 'g';
+  gap: 1rem;
+}
+
+.mobile-telegram-contact-content {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  padding: 0rem 1rem;
+}
+
+.mobile-telegram-text-block {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.mobile-telegram-text-top {
+  font-size: 1.8rem;
+  font-weight: 900;
+  line-height: 1;
+  margin: 0;
+}
+
+.mobile-telegram-text-bottom {
+  font-size: 1.5rem;
+  font-weight: 900;
+  line-height: 1;
+  margin: 0;
+}
+
+.mobile-telegram-icons-line {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+}
+
+.mobile-telegram-icon {
+  width: 100px;
+  height: 100px;
+  filter: brightness(0) invert(1);
+}
+
+.mobile-telegram-description {
+  font-size: 1.1rem;
+  font-weight: 300;
+  line-height: 1.5;
+  margin: 0 auto;
+  max-width: 100%;
+  text-align: center;
+}
+
+.mobile-where-site-block {
+  background: white;
+  color: #101010;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 140px;
+  width: 100vw;
+  margin-top: 2rem;
+}
+
+.mobile-where-site-text {
+  font-size: 2rem;
+  font-weight: 900;
+  font-family: "NauryzRedKeds";
+  text-align: center;
+}
+
+.mobile-where-site-subtext {
+  font-size: 1.6rem;
+  font-weight: 900;
+  font-family: 'g';
+  margin-top: 0.5rem;
+  text-align: center;
+}
+
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+
+.loading-spinner {
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top: 4px solid #ffffff;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin-bottom: 16px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-container p {
+  color: white;
+  font-size: 16px;
 }

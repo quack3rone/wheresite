@@ -151,7 +151,7 @@ return (
         >
           {isMobile ? (
             // Мобильная версия
-            <div className="container">
+            <div className="container-mobile">
               {/* Блок 1 - горизонтальный текст с прокруткой */}
               <motion.div className="mobile-horizontal-scroll">
                 <motion.div
@@ -174,6 +174,7 @@ return (
 
               {/* Блок 1 - видео + текст */}
               <div className="mobile-content-section">
+                <h2 className="glow-title-about-mobile">Умный дизайн. Чистый код.</h2>
                 <div className="video-container-mobile">
                       <video
                         ref={videoRef}
@@ -275,10 +276,10 @@ return (
                   }}
                   transition={{ type: 'tween', ease: 'linear', duration: 0.1 }}
                 >
-                  {[...Array(9)].map((_, i) => (
+                  {[...Array(12)].map((_, i) => (
                     <div
                       key={i}
-                      className={`mobile-scroll-text ${i === 7 ? 'vertical-text-active' : 'vertical-text-inactive'}`}
+                      className={`mobile-scroll-text ${i === 8 ? 'vertical-text-active' : 'vertical-text-inactive'}`}
                     >
                       Отзывы
                     </div>
@@ -319,6 +320,91 @@ return (
                   </a>
                 </div>
               </div>
+              {/* Блок 3 - горизонтальный текст с прокруткой */}
+              <motion.div className="mobile-horizontal-scroll-price">
+                <motion.div
+                  className="mobile-scroll-content-price"
+                  animate={{ 
+                    x: -scrollY * 1,
+                  }}
+                  transition={{ type: 'tween', ease: 'linear', duration: 0.1 }}
+                >
+                  {[...Array(9)].map((_, i) => (
+                    <div
+                      key={i}
+                      className={`mobile-scroll-text ${i === 5 ? 'vertical-text-active' : 'vertical-text-inactive'}`}
+                    >
+                      Цены
+                    </div>
+                  ))}
+                </motion.div>
+              </motion.div>
+              {/* Блок 3 - цены */}
+              <div className="mobile-block-3">
+                <h2 className="mobile-glow-title">Ваш бюджет. Наши идеи. Идеальная пара.</h2>
+
+                <div className="mobile-text-content">
+                  <p className="mobile-block-3-paragraph">
+                    Мы подходим к каждому проекту индивидуально — цена зависит от объёма, задач, функционала и сроков.
+                  </p>
+                  <p className="mobile-block-3-paragraph">
+                    Мы только запустились, и сейчас работаем без жёсткой ценовой сетки, поэтому вы можете получить по-настоящему качественный сайт по гибкой и выгодной стоимости — в зависимости от ваших целей и задач.
+                  </p>
+                </div>
+
+                <div className="mobile-block-3-list">
+                  <p className="mobile-block-3-subtitle">Обратитесь к нам, и мы:</p>
+                  <ul className="mobile-block-3-ul">
+                    <li>Поймём, что нужно именно вам</li>
+                    <li>Придумаем оптимальный формат сайта</li>
+                    <li>Согласуем цену и сроки</li>
+                  </ul>
+                </div>
+              </div>
+              {/* Блок 4 - горизонтальный текст с прокруткой */}
+              <motion.div className="mobile-horizontal-scroll-order">
+                <motion.div
+                  className="mobile-scroll-content-order"
+                  animate={{ 
+                    x: -scrollY * 1,
+                  }}
+                  transition={{ type: 'tween', ease: 'linear', duration: 0.1 }}
+                >
+                  {[...Array(9)].map((_, i) => (
+                    <div
+                      key={i}
+                      className={`mobile-scroll-text-order ${i === 5 ? 'vertical-text-active' : 'vertical-text-inactive'}`}
+                    >
+                      Заказать сайт
+                    </div>
+                  ))}
+                </motion.div>
+              </motion.div>
+              {/* Блок 4 - заказать сайт */}
+              <div className="mobile-telegram-contact-section">
+                <div className="mobile-telegram-contact-content">
+                  <div className="mobile-telegram-text-block">
+                    <p className="mobile-telegram-text-top">Начните с простого шага.</p>
+                    <p className="mobile-telegram-text-bottom">Напишите нам.</p>
+                  </div>
+
+                  <a href="https://t.me/quack3r1" target="_blank" rel="noopener noreferrer" className="mobile-telegram-icons-line">
+                    <img src="/icons/telegram.svg" alt="Telegram" className="mobile-telegram-icon" />
+                    <img src="/icons/telegram.svg" alt="Telegram" className="mobile-telegram-icon" style={{ opacity: 0.25 }} />
+                    <img src="/icons/telegram.svg" alt="Telegram" className="mobile-telegram-icon" style={{ opacity: 0.25 }} />
+                    <img src="/icons/telegram.svg" alt="Telegram" className="mobile-telegram-icon" style={{ opacity: 0.25 }} />
+                  </a>
+
+                  <p className="mobile-telegram-description">
+                    Без менеджеров. Без автоответов. Только честный диалог и реальные решения.
+                  </p>
+                </div>
+
+                <div className="mobile-where-site-block">
+                  <div className="mobile-where-site-text">WHERE SITE?</div>
+                  <div className="mobile-where-site-subtext">Вы уже знаете, где.</div>
+                </div>
+              </div>
 
 
             </div>
@@ -349,6 +435,7 @@ return (
                   </motion.div>
                   {/* Блок 1 - видео + текст */}
                   <div className="content-section">
+                    <h2 className="glow-title-about">Умный дизайн. Чистый код.</h2>
                     <div className="video-container">
                       <video
                         ref={videoRef}
@@ -448,7 +535,7 @@ return (
                       transition={{ type: 'tween', ease: 'linear', duration: 0.1 }}
                       className="vertical-text-container-reviews-about"
                     >
-                      {[...Array(9)].map((_, i) => (
+                      {[...Array(14)].map((_, i) => (
                         <div
                           key={i}
                           className={`vertical-text-about ${i === 7? 'vertical-text-active' : 'vertical-text-inactive'}`}
@@ -502,7 +589,7 @@ return (
                       transition={{ type: 'tween', ease: 'linear', duration: 0.1 }}
                       className="vertical-text-container-price-about"
                     >
-                      {[...Array(16)].map((_, i) => (
+                      {[...Array(20)].map((_, i) => (
                         <div
                           key={i}
                           className={`vertical-text-about ${i === 14? 'vertical-text-active' : 'vertical-text-inactive'}`}
@@ -512,6 +599,77 @@ return (
                       ))}
                     </motion.div>
                   </motion.div>
+                  {/* Блок 3 - цены*/}
+                  <div className="block-3-content">
+                    <div className="block-3-text">
+                      <h2 className="glow-title">Ваш бюджет. Наши идеи. Идеальная пара.</h2>
+                    </div>
+                    
+                    <div className="content-wrapper">
+                      <div className="text-content">
+                        <p className="block-3-paragraph">
+                          Мы подходим к каждому проекту индивидуально — цена зависит от объёма, задач, функционала и сроков.
+                        </p>
+                        <p className="block-3-paragraph">
+                          Мы только запустились, и сейчас работаем без жёсткой ценовой сетки, поэтому вы можете получить по-настоящему качественный сайт по гибкой и выгодной стоимости — в зависимости от ваших целей и задач.
+                        </p>
+                      </div>
+                      
+                      <div className="block-3-list">
+                        <p className="block-3-subtitle">Обратитесь к нам, и мы:</p>
+                        <ul className="block-3-ul">
+                          <li>Поймём, что нужно именно вам</li>
+                          <li>Придумаем оптимальный формат сайта</li>
+                          <li>Согласуем цену и сроки</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  {/* Блок 4 — вертикальный текст */}
+                  <motion.div className="vertical-text-section-order-about">
+                    <motion.div
+                      animate={{ 
+                        x: 100,
+                        y: -scrollY + getYOffset(window.innerWidth) - 750,
+                      }}
+                      transition={{ type: 'tween', ease: 'linear', duration: 0.1 }}
+                      className="vertical-text-container-order-about"
+                    >
+                      {[...Array(14)].map((_, i) => (
+                        <div
+                          key={i}
+                          className={`vertical-text-order-about ${i === 9? 'vertical-text-active' : 'vertical-text-inactive'}`}
+                        >
+                          Заказать сайт
+                        </div>
+                      ))}
+                    </motion.div>
+                  </motion.div>
+                  {/* Блок 4 — заказать сайт */}
+                  <div className="telegram-contact-section">
+                    <div className="telegram-contact-content">
+                      <div className="telegram-text-block">
+                        <p className="telegram-text-top">Начните с простого шага.</p>
+                        <p className="telegram-text-bottom">Напишите нам.</p>
+                      </div>
+                      
+                      <a href="https://t.me/quack3r1" target="_blank" rel="noopener noreferrer" className="telegram-icons-line">
+                        <img src="/icons/telegram.svg" alt="Telegram" className="telegram-icon" />
+                        <img src="/icons/telegram.svg" alt="Telegram" className="telegram-icon" style={{opacity: 0.25}} />
+                        <img src="/icons/telegram.svg" alt="Telegram" className="telegram-icon" style={{opacity: 0.25}} />
+                        <img src="/icons/telegram.svg" alt="Telegram" className="telegram-icon" style={{opacity: 0.25}} />
+                      </a>
+                      
+                      <p className="telegram-description">
+                        Без менеджеров. Без автоответов. Только честный диалог и реальные решения.
+                      </p>
+                    </div>
+
+                    <div className="where-site-block">
+                      <div className="where-site-text">WHERE SITE?</div>
+                      <div className="where-site-subtext">Вы уже знаете, где.</div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
