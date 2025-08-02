@@ -170,12 +170,12 @@
 
 @media (min-width: 768px) {
   .vertical-text-about {
-    font-size: 75px;
+    font-size: 80px;
   }
 
   .vertical-text-container-about {
-    gap: 225px;
-    margin-left: 80px;
+    gap: 220px;
+    margin-left: 60px;
   }
 }
 

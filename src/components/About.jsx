@@ -27,13 +27,13 @@ const About = ({ transitionActive, footerRef }) => {
 
 
   const getYOffset = (width) => {
-    if (width < 1680) return -290;
+    if (width < 1680) return -190;
     if (width >= 1680 && width < 1920) return -240;
     if (width >= 1920 && width < 2048) return -290;
     if (width >= 2048 && width < 2560) return -295;
     if (width >= 2560 && width < 3840) return -335;
     if (width >= 3840) return -415;
-    return -290; // значение по умолчанию
+    return -190; // значение по умолчанию
   };
 
    // Получаем ширину футера через footerRef
