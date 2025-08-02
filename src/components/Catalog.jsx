@@ -782,11 +782,17 @@ const targetMargin = progress >= 1
                 bottom: 0,
                 left: isMobile ? 0 : `${footerWidth}px`,
                 height: isMobile ? `${footerHeight}px` : '100%',
-                backgroundColor: '#101010',
+                backgroundColor: '#111111',
                 zIndex: 8,
                 pointerEvents: 'none',
                 borderRadius: isMobile ? '36px 36px 0px 0px' : '36px 0px 0px 36px', // ✅ добавлено
                 overflow: 'hidden', // 🔒 чтобы контент не вылезал за границы
+              }}
+              css={{
+                '@media (color-gamut: p3)': {
+                  // Для устройств с широким цветовым охватом (MacBook Pro, OLED)
+                  backgroundColor: '#101010',
+                },
               }}
             />
 
