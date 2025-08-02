@@ -177,7 +177,7 @@ return (
                 <div className="video-container-mobile">
                       <video
                         ref={videoRef}
-                        src="/video/wheresiteMOVTRAN.mp4"
+                        src="/video/wheresiteMP4WHITE.mp4"
                         autoPlay
                         muted
                         playsInline
@@ -225,7 +225,7 @@ return (
                     <div className="video-container">
                       <video
                         ref={videoRef}
-                        src="/video/wheresiteMP4101010.mp4"
+                        src="/video/wheresitemp52white.mp4"
                         autoPlay
                         muted
                         playsInline
@@ -234,7 +234,7 @@ return (
                     </div>
                     <p className="description">
                       Делаем сайты, которые работают. Без шаблонов — только индивидуальные решения с аналитикой,
-                      продуманным дизайном и мощным кодом. Для бизнеса, а не для галочки.
+                      продуманным дизайном и мощным кодом.
                     </p>
                   </div>
                   {/* Блок 1 — о нас */}

@@ -135,8 +135,8 @@
 }
 
 .video-container {
-  width: 800px;
-  height: 500px;
+  width: 850px;
+  height: 550px;
   display: flex;
   justify-content: center;    /* горизонтальное центрирование */
   overflow: hidden;
@@ -151,21 +151,15 @@
 
 .description {
   position: relative;
-  margin-top: 2rem;
+  margin-top: 1rem;
   font-size: 1.3rem;
   text-align: left;
-  line-height: 1.6;
+  line-height: 1.2;
   font-family: 'g';
-}
-
-.continue-section {
-  min-width: 100vw;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  font-size: 2rem;
+  width: 100%;
+  min-width: 670px;
+  left: 10px;
+  margin-bottom: 100px;
 }
 
 @media (min-width: 768px) {
@@ -175,7 +169,7 @@
 
   .vertical-text-container-about {
     gap: 220px;
-    margin-left: 60px;
+    margin-left: 30px;
   }
 }
 
