@@ -152,7 +152,7 @@ return (
           {isMobile ? (
             // Мобильная версия
             <div className="container">
-              {/* Блок 1 — горизонтальный текст с прокруткой */}
+              {/* Блок 1 - горизонтальный текст с прокруткой */}
               <motion.div className="mobile-horizontal-scroll">
                 <motion.div
                   className="mobile-scroll-content"
@@ -172,12 +172,12 @@ return (
                 </motion.div>
               </motion.div>
 
-              {/* Блок 2 — видео + текст */}
+              {/* Блок 1 - видео + текст */}
               <div className="mobile-content-section">
                 <div className="video-container-mobile">
                       <video
                         ref={videoRef}
-                        src="/video/wheresiteMP4WHITE.mp4"
+                        src="/video/wheresitemp52white.mp4"
                         autoPlay
                         muted
                         playsInline
@@ -190,17 +190,144 @@ return (
                 </p>
               </div>
 
-              {/* Блок 3 */}
-              <div className="mobile-continue-section">
-                Продолжение "О нас"...
+              {/* Блок 1 - о нас */}
+              <div className="mobile-about-info-wrapper">
+                <div className="mobile-info-column">
+                  <h5>Почему именно мы</h5>
+                  <div className="mobile-info-block">
+                    <img src="/icons/user.svg" alt="Индивидуальный подход" className="mobile-info-icon" />
+                    <div>
+                      <h4>Индивидуальный подход:</h4>
+                      <p>никакой работы по шаблону. Мы не подгоняем вас под рамки платформ, мы создаём сайт под вас.</p>
+                    </div>
+                  </div>
+                  <div className="mobile-info-block">
+                    <img src="/icons/sensor-alert.svg" alt="Техническая глубина" className="mobile-info-icon" />
+                    <div>
+                      <h4>Техническая глубина:</h4>
+                      <p>работаем с современными и гибкими технологиями - это позволяет нам реализовывать не просто сайты, а настоящие веб-приложения.</p>
+                    </div>
+                  </div>
+                  <div className="mobile-info-block">
+                    <img src="/icons/magic-wand.svg" alt="Дизайн" className="mobile-info-icon" />
+                    <div>
+                      <h4>Дизайн, который выделяет:</h4>
+                      <p>мы не используем готовые темы. Каждый макет создаётся вручную, чтобы передать дух вашего бренда.</p>
+                    </div>
+                  </div>
+                  <div className="mobile-info-block">
+                    <img src="/icons/key.svg" alt="Полный цикл" className="mobile-info-icon" />
+                    <div>
+                      <h4>Полный цикл:</h4>
+                      <p>от идеи до запуска. Мы настраиваем хостинг, SEO и рекламу. Всё — в одних руках.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mobile-info-column">
+                  <h5>Какие сайты мы разрабатываем</h5>
+                  <div className="mobile-info-block">
+                    <img src="/icons/money-simple-from-bracket.svg" alt="Лендинги" className="mobile-info-icon" />
+                    <div>
+                      <h4>Лендинги:</h4>
+                      <p>Одностраничные сайты, идеально подходящие для презентации одного продукта или услуги.</p>
+                    </div>
+                  </div>
+                  <div className="mobile-info-block">
+                    <img src="/icons/site-browser.svg" alt="Корпоративные сайты" className="mobile-info-icon" />
+                    <div>
+                      <h4>Корпоративные сайты:</h4>
+                      <p>Презентация вашего бизнеса в интернете: услуги, портфолио, команда, кейсы, форма обратной связи.</p>
+                    </div>
+                  </div>
+                  <div className="mobile-info-block">
+                    <img src="/icons/apps.svg" alt="Веб-приложения" className="mobile-info-icon" />
+                    <div>
+                      <h4>Веб-приложения и платформы:</h4>
+                      <p>Интеграции с платёжными системами, CRM, аналитикой и складским учётом.</p>
+                    </div>
+                  </div>
+                  <div className="mobile-info-block">
+                    <img src="/icons/fingerprint.svg" alt="Интернет-магазины" className="mobile-info-icon" />
+                    <div>
+                      <h4>Интернет-магазины:</h4>
+                      <p>Базы данных, личные кабинеты, фильтрация, аналитика, автоматизация процессов.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <motion.div
+                  className="mobile-question-column"
+                  animate={{ y: scrollY * -0.7 }}
+                  transition={{ type: 'tween', ease: 'linear', duration: 0.1 }}
+                >
+                  {'?'.repeat(23).split('').map((char, i) => (
+                    <div key={i} className="vertical-question">{char}</div>
+                  ))}
+                </motion.div>
               </div>
+              {/* Блок 2 - горизонтальный текст с прокруткой */}
+              <motion.div className="mobile-horizontal-scroll-reviews">
+                <motion.div
+                  className="mobile-scroll-content-reviews"
+                  animate={{ 
+                    x: -scrollY * 1,
+                  }}
+                  transition={{ type: 'tween', ease: 'linear', duration: 0.1 }}
+                >
+                  {[...Array(9)].map((_, i) => (
+                    <div
+                      key={i}
+                      className={`mobile-scroll-text ${i === 7 ? 'vertical-text-active' : 'vertical-text-inactive'}`}
+                    >
+                      Отзывы
+                    </div>
+                  ))}
+                </motion.div>
+              </motion.div>
+              {/* Блок 2 — отзывы */}
+              <div className="mobile-reviews-section">
+                <div className="mobile-review-card">
+                  <div className="mobile-review-header-block">
+                    <img src="/icons/quote.svg" alt="quote" className="mobile-quote-icon" />
+                    <div className="mobile-review-header">
+                      <h3 className="mobile-review-name">Людмила</h3>
+                      <p className="mobile-review-role">Сайт-приглашение на день рождения</p>
+                    </div>
+                  </div>
+                  <p className="mobile-review-body">
+                    Спасибо за качественную, оперативную работу. Работа с моим сайтом из-за моих обстоятельств несколько затягивалась, однако на все мои письма я сразу же получала ответ, работа выполнена качественно.
+                  </p>
+                  <a className="mobile-review-site" href="https://momsbirthday.ru" target="_blank" rel="noopener noreferrer">
+                    momsbirthday.ru
+                  </a>
+                </div>
+
+                <div className="mobile-review-card">
+                  <div className="mobile-review-header-block">
+                    <img src="/icons/quote.svg" alt="quote" className="mobile-quote-icon" />
+                    <div className="mobile-review-header">
+                      <h3 className="mobile-review-name">Надежда</h3>
+                      <p className="mobile-review-role">Интернет-магазин цветов с доставкой</p>
+                    </div>
+                  </div>
+                  <p className="mobile-review-body">
+                    Все круто. Ребята молодцы. Куча шаблонов на выбор. Грамотные специалисты, быстро реагирующие на просьбы. Я лично в восторге, что у меня личный интернет-магазин. Мегагрупп — это лучшее, с чем я сталкивалась!
+                  </p>
+                  <a className="mobile-review-site" href="https://tiffali.ru" target="_blank" rel="noopener noreferrer">
+                    tiffali.ru
+                  </a>
+                </div>
+              </div>
+
+
             </div>
           ) : (
             // Десктоп версия
             <div className="container">
               <div className="sticky-section">
                 <div className="scrolling-content" style={{ transform: `translateX(-${scrollY}px)` }}>
-                  {/* Блок 1 — вертикальный текст */}
+                  {/* Блок 1 - вертикальный текст */}
                   <motion.div className="vertical-text-section-about">
                     <motion.div
                       animate={{ 
@@ -220,7 +347,7 @@ return (
                       ))}
                     </motion.div>
                   </motion.div>
-                  {/* Блок 1 — видео + текст */}
+                  {/* Блок 1 - видео + текст */}
                   <div className="content-section">
                     <div className="video-container">
                       <video
@@ -237,7 +364,7 @@ return (
                       продуманным дизайном и мощным кодом.
                     </p>
                   </div>
-                  {/* Блок 1 — о нас */}
+                  {/* Блок 1 - о нас */}
                   <div className="about-info-section">
                     <div className="info-column">
                       <h5>Почему именно мы</h5>
@@ -315,8 +442,8 @@ return (
                   <motion.div className="vertical-text-section-reviews-about">
                     <motion.div
                       animate={{ 
-                        x: -2000,
-                        y: -scrollY + getYOffset(window.innerWidth),
+                        x: -1900,
+                        y: -scrollY + getYOffset(window.innerWidth) - 100,
                       }}
                       transition={{ type: 'tween', ease: 'linear', duration: 0.1 }}
                       className="vertical-text-container-reviews-about"
@@ -332,7 +459,59 @@ return (
                     </motion.div>
                   </motion.div>
                   {/* Блок 2 — отзывы */}
-                  
+                  <div className="reviews-section">
+                    <div className="review-card">
+                      <div className="review-header-block">
+                        <img src="/icons/quote.svg" alt="quote" className="quote-icon" />
+                        <div className="review-header">
+                          <h3 className="review-name">Людмила</h3>
+                          <p className="review-role">Сайт-приглашение на день рождения</p>
+                        </div>
+                      </div>
+                      <p className="review-body">
+                        Спасибо за качественную, оперативную работу. Работа с моим сайтом из-за моих обстоятельств несколько затягивалась, однако на все мои письма я сразу же получала ответ, работа выполнена качественно.
+                      </p>
+                      <a className="review-site" href="https://momsbirthday.ru" target="_blank" rel="noopener noreferrer">
+                        momsbirthday.ru
+                      </a>
+                    </div>
+
+                    <div className="review-card">
+                      <div className="review-header-block">
+                        <img src="/icons/quote.svg" alt="quote" className="quote-icon" />
+                        <div className="review-header">
+                          <h3 className="review-name">Надежда</h3>
+                          <p className="review-role">Интернет-магазин цветов с доставкой</p>
+                        </div>
+                      </div>
+                      <p className="review-body">
+                        Все круто. Ребята молодцы. Куча шаблонов на выбор. Грамотные специалисты, быстро реагирующие на просьбы. Я лично в восторге, что у меня личный интернет-магазин. Мегагрупп — это лучшее, с чем я сталкивалась!
+                      </p>
+                      <a className="review-site" href="https://tiffali.ru" target="_blank" rel="noopener noreferrer">
+                        tiffali.ru
+                      </a>
+                    </div>
+                  </div>
+                  {/* Блок 3 — вертикальный текст */}
+                  <motion.div className="vertical-text-section-price-about">
+                    <motion.div
+                      animate={{ 
+                        x: 10,
+                        y: -scrollY + getYOffset(window.innerWidth),
+                      }}
+                      transition={{ type: 'tween', ease: 'linear', duration: 0.1 }}
+                      className="vertical-text-container-price-about"
+                    >
+                      {[...Array(16)].map((_, i) => (
+                        <div
+                          key={i}
+                          className={`vertical-text-about ${i === 14? 'vertical-text-active' : 'vertical-text-inactive'}`}
+                        >
+                          Цены
+                        </div>
+                      ))}
+                    </motion.div>
+                  </motion.div>
                 </div>
               </div>
             </div>

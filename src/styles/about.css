@@ -57,8 +57,7 @@
   overflow: hidden;
   justify-content: center;    /* горизонтальное центрирование */
   margin: 0 auto;
-  border-radius: 6px; /* опционально - скругление углов */
-  border: 6px solid rgb(255, 255, 255); /* ← добавлена обводка */
+  border-radius: 32px; /* опционально - скругление углов */
 }
 
 .video-container-mobile video {
@@ -71,6 +70,10 @@
   font-size: 1rem;
   text-align: left;
   line-height: 1.6;
+  font-family: 'g';
+  width: 100%;
+  min-width: 150px;
+  padding: 3rem 0rem;
 }
 
 .mobile-continue-section {
@@ -193,6 +196,10 @@
     gap: 255px;
     margin-left: -15px;
   }
+  .video-container {
+    width: 900px;
+    height: 600px;
+  }
 }
 
 @media (min-width: 1920px) {
@@ -201,7 +208,7 @@
   }
   .vertical-text-container-about {
     gap: 270px;
-    margin-left: -25px;
+    margin-left: -60px;
   }
 }
 
@@ -211,6 +218,11 @@
   }
   .vertical-text-container-about {
     gap: 280px;
+    margin-left: -70px;
+  }
+  .video-container {
+    width: 950px;
+    height: 650px;
   }
 }
 
@@ -220,6 +232,14 @@
   }
   .vertical-text-container-about {
     gap: 350px;
+    margin-left: -140px;
+  }
+  .video-container {
+    width: 1100px;
+    height: 750px;
+  }
+  .description {
+    font-size: 1.7rem;
   }
 }
 
@@ -229,8 +249,18 @@
   }
   .vertical-text-container-about {
     gap: 500px;
+    margin-left: -300px;
+  }
+  .video-container {
+    width: 2000px;
+    height: 1350px;
+  }
+  .description {
+    font-size: 2.5rem;
   }
 }
+
+/* Блок 1 */
 
 .about-info-section {
   display: flex;
@@ -249,20 +279,20 @@
 
 .info-column h5 {
   font-size: 2rem;
-  margin: 0 0 0.5rem; /* Увеличил нижний отступ для выравнивания */
+  margin: 0 0 0.5rem;
   text-align: center;
   white-space: nowrap;
-  height: 3.5rem; /* Фиксированная высота для заголовков */
+  height: 3.5rem;
   font-family: 'g';
   font-weight: 600;
 }
 
 .align-title {
   font-size: 2rem;
-  margin: 0 0 0.5rem; /* Увеличил нижний отступ для выравнивания */
+  margin: 0 0 0.5rem;
   text-align: center;
   white-space: nowrap;
-  height: 3.5rem; /* Фиксированная высота для заголовков */
+  height: 3.5rem;
   font-family: 'g';
   font-weight: 600;
   position: relative;
@@ -273,7 +303,7 @@
   display: flex;
   align-items: flex-start;
   gap: 1.5rem;
-  min-height: 120px; /* Минимальная высота блока для выравнивания */
+  min-height: 120px;
 }
 
 .info-block h4 {
@@ -314,11 +344,422 @@
   color: rgba(255,255,255,0.1);
 }
 
+/* Блок 1 - мобилки*/
+
+.mobile-about-info-wrapper {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding: 0rem 0.5rem;
+  color: white;
+  gap: 2rem;
+}
+
+.mobile-info-column {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.mobile-info-column h5 {
+  font-size: 1.3rem;
+  font-family: 'g';
+  font-weight: 600;
+  margin: 0 0 0.5rem;
+}
+
+.mobile-info-block {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  width: 100%;
+  max-width: 330px;
+}
+
+.mobile-info-block h4 {
+  font-size: 1rem;
+  font-family: 'g';
+  font-weight: 600;
+  margin: 0 0 0.2rem;
+}
+
+.mobile-info-block p {
+  font-size: 0.9rem;
+  font-family: 'g';
+  font-weight: 200;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.mobile-info-icon {
+  width: 45px;
+  height: 45px;
+  flex-shrink: 0;
+  filter: brightness(0) invert(1);
+  margin-top: 0.4rem;
+}
+
+.mobile-question-column {
+  position: absolute;
+  top: 0;
+  right: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  font-size: 4rem;
+  color: rgba(255, 255, 255, 0.25);
+  font-family: 'NauryzRedKeds';
+  pointer-events: none;
+}
+
+.vertical-question {
+  line-height: 4.5rem;
+}
+
+
+@media (min-width: 768px) {
+
+}
+
+
+@media (min-width: 1600px) {
+
+}
+
+@media (min-width: 1680px) {
+  .about-info-section {
+    padding: 2rem 28rem;
+    gap: 8rem;
+  }
+
+  .info-column {
+    gap: 2rem;
+  }
+
+  .info-column h5 {
+    font-size: 1.7rem;
+    margin: 0 0 0.5rem;
+  }
+
+  .align-title {
+    font-size: 1.7rem;
+  }
+
+  .info-block h4 {
+    font-size: 1.4rem;
+  }
+
+  .info-block p {
+    font-size: 1.1rem;
+  }
+
+  .info-icon {
+    width: 65px;
+    height: 65px;
+    margin-top: 0.8rem;
+  }
+
+  .question-line {
+    font-size: 15rem;
+    margin-top: 45rem;
+  }
+
+}
+
+@media (min-width: 1920px) {
+  .about-info-section {
+    padding: 2rem 28rem;
+    gap: 10rem;
+  }
+
+  .info-column {
+    gap: 2rem;
+  }
+
+  .info-column h5 {
+    font-size: 1.7rem;
+    margin: 0 0 0.5rem;
+  }
+
+  .align-title {
+    font-size: 1.7rem;
+  }
+
+
+  .info-block h4 {
+    font-size: 1.4rem;
+  }
+
+  .info-block p {
+    font-size: 1.1rem;
+  }
+
+  .info-icon {
+    width: 70px;
+    height: 70px;
+    margin-top: 0.8rem;
+  }
+
+  .question-line {
+    font-size: 15rem;
+    margin-top: 43rem;
+  }
+}
+
+@media (min-width: 2048px) {
+
+}
+
+@media (min-width: 2560px) {
+  .about-info-section {
+    padding: 4rem 28rem;
+    gap: 20rem;
+  }
+
+  .info-column {
+    gap: 3rem;
+  }
+
+  .info-column h5 {
+    font-size: 2.5rem;
+  }
+
+  .align-title {
+    font-size: 2.5rem;
+  }
+
+
+  .info-block h4 {
+    font-size: 1.8rem;
+  }
+
+  .info-block p {
+    font-size: 1.4rem;
+    width: 100%;
+    max-width: 600px;
+  }
+
+  .info-icon {
+    width: 90px;
+    height: 90px;
+    margin-top: 0.8rem;
+  }
+
+  .question-line {
+    font-size: 20rem;
+    margin-top: 56rem;
+  }
+}
+
+@media (min-width: 3840px) {
+  .about-info-section {
+    padding: 8rem 28rem;
+    gap: 30rem;
+  }
+
+  .info-column {
+    gap: 5rem;
+  }
+
+  .info-column h5 {
+    font-size: 4rem;
+  }
+
+  .align-title {
+    font-size: 4rem;
+  }
+
+
+  .info-block h4 {
+    font-size: 3.1rem;
+  }
+
+  .info-block p {
+    font-size: 2.2rem;
+    width: 100%;
+    min-width: 1000px;
+  }
+
+  .info-icon {
+    width: 120px;
+    height: 120px;
+    margin-top: 0.8rem;
+  }
+
+  .question-line {
+    font-size: 25rem;
+    margin-top: 85rem;
+  }
+}
+
+/* Блок 2 */
+
 .vertical-text-container-reviews-about {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 480px;
+  font-family: 'NauryzRedKeds';
+  margin-left: 0;
+  width: 10vw;
+}
+
+.reviews-section {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  padding: 5rem 0rem;
+  color: white;
+  margin-left: -115rem;
+}
+
+.review-card {
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+  font-family: 'g';
+  width: 100%;
+  min-width: 600px;
+}
+
+.review-header-block {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.2rem;
+}
+
+.quote-icon {
+  width: 95px;
+  height: 95px;
+  flex-shrink: 0;
+  filter: brightness(0) invert(1);
+  margin-top: 0.4rem;
+}
+
+.review-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  margin-top: 30px;
+}
+
+.review-name {
+  font-size: 1.7rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.review-role {
+  font-size: 1.1rem;
+  font-weight: 400;
+  opacity: 0.8;
+  margin: 0;
+}
+
+.review-body {
+  font-size: 1.3rem;
+  line-height: 1.5;
+  font-weight: 300;
+  margin: 0;
+  max-width: 800px;
+}
+
+.review-site {
+  font-size: 1.3rem;
+  font-weight: 900;
+  color: white;
+  text-decoration: none;
+  margin-top: 0.5rem;
+  text-decoration: underline;
+}
+
+/* Блок 2 - мобилки */
+
+.mobile-scroll-content-reviews {
+  display: flex;
+  align-items: center;
+  padding-left: 10rem;
+  gap: 20px;
+  font-family: 'NauryzRedKeds';
+}
+
+.mobile-horizontal-scroll-reviews {
+  position: relative;
+  top: 100px;
+}
+
+.mobile-reviews-section {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  padding: 9rem 1.5rem;
+  color: white;
+}
+
+.mobile-review-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  font-family: 'g';
+}
+
+.mobile-review-header-block {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.mobile-quote-icon {
+  width: 55px;
+  height: 55px;
+  flex-shrink: 0;
+  filter: brightness(0) invert(1);
+  margin-top: 0.6rem;
+}
+
+.mobile-review-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  margin-top: 0.2rem;
+}
+
+.mobile-review-name {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.mobile-review-role {
+  font-size: 1rem;
+  font-weight: 400;
+  opacity: 0.8;
+  margin: 0;
+}
+
+.mobile-review-body {
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.mobile-review-site {
+  font-size: 1rem;
+  font-weight: 800;
+  color: white;
+  text-decoration: none;
+  margin-top: 0.5rem;
+  text-decoration: underline;
+}
+
+
+/* Блок 3 */
+
+.vertical-text-container-price-about {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 250px;
   font-family: 'NauryzRedKeds';
   margin-left: 0;
 }
