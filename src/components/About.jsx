@@ -370,7 +370,7 @@ return (
 
                 <motion.div
                   className="mobile-question-column"
-                  animate={{ y: scrollY * -0.7 }}
+                  animate={{ y: scrollY * -0.3 }}
                   transition={{ type: 'tween', ease: 'linear', duration: 0.1 }}
                 >
                   {'?'.repeat(23).split('').map((char, i) => (
