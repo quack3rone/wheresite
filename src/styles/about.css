@@ -87,8 +87,7 @@
     0 0 5px #d6f0ff,
     0 0 10px #cbefff,
     0 0 20px #c2e7ff,
-    0 0 40px #507ba3,
-    0 0 40px #50326c;
+    0 0 40px #507ba3;
   font-family: 'g';
   letter-spacing: 0.02em;
   width: 100%;
@@ -1124,8 +1123,7 @@
     0 0 5px #d6f0ff,
     0 0 10px #cbefff,
     0 0 20px #c2e7ff,
-    0 0 40px #507ba3,
-    0 0 40px #50326c;
+    0 0 40px #507ba3;
   margin-bottom: 1rem;
   padding: 1rem 0;
 }
