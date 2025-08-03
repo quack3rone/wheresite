@@ -8,5 +8,5 @@ meta:
 build:
   additionalCommands: npm install && npm run build
   artifacts:
-    dist/*: /
+    build/*: /
 run: {}
