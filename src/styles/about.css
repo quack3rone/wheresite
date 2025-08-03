@@ -199,7 +199,7 @@
 
 @media (min-width: 768px) {
   .container {
-    height: 5820px;
+    height: 5815px;
     position: relative;
   }
 
@@ -895,7 +895,7 @@
 
   .reviews-section {
     gap: 5rem;
-    padding: 2rem 0rem;
+    padding: 3rem 0rem;
     margin-left: -115rem;
   }
 

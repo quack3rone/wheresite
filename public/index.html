@@ -30,25 +30,9 @@
     <!-- index.html -->
     <style>
       @font-face {
-        font-family: 'N';
-        src: url('/fonts/p.otf') format('opentype'),
-            url('/fonts/p.otf') format('opentype');
-        font-weight: normal;
-        font-style: normal;
-        font-display: swap;
-      }
-      @font-face {
         font-family: 'WS';
         src: url('/fonts/WS.otf') format('opentype'),
             url('/fonts/WS.otf') format('opentype');
-        font-weight: normal;
-        font-style: normal;
-        font-display: swap;
-      }
-      @font-face {
-        font-family: 'o';
-        src: url('/fonts/t.otf') format('opentype'),
-            url('/fonts/t.otf') format('opentype');
         font-weight: normal;
         font-style: normal;
         font-display: swap;
@@ -86,6 +70,9 @@
         font-display: swap;
       }
     </style>
+    <link rel="preload" href="/fonts/MPLUS1p-Bold.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+    <link rel="preload" href="/fonts/m.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+    <link rel="preload" href="/fonts/NauryzRedKeds.ttf" as="font" type="font/ttf" crossorigin="anonymous">
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <title>React App</title>

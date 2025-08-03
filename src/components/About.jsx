@@ -3,6 +3,20 @@ import { useLocation } from 'react-router-dom';
 import { motion, AnimatePresence, delay } from 'framer-motion';
 import '../styles/about.css';
 
+  // Добавь перед const About = ({ ... }) => {
+  const debounce = (func, wait) => {
+    let timeout;
+    return function executedFunction(...args) {
+      const later = () => {
+        clearTimeout(timeout);
+        func(...args);
+      };
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+    };
+  };
+
+
 const About = ({ transitionActive, footerRef, targetSection, onSectionReached, isAlreadyOnAbout }) => {
   const location = useLocation();
   const isActive = location.pathname === '/about';
@@ -140,11 +154,13 @@ const About = ({ transitionActive, footerRef, targetSection, onSectionReached, i
       }
     };
 
+    const debouncedResize = debounce(updateFooterWidth, 150);
+
     updateFooterWidth(); // сразу
-    window.addEventListener('resize', updateFooterWidth);
+    window.addEventListener('resize', debouncedResize);
 
     return () => {
-      window.removeEventListener('resize', updateFooterWidth);
+      window.removeEventListener('resize', debouncedResize);
     };
   }, [footerRef]);
 
@@ -167,33 +183,35 @@ const About = ({ transitionActive, footerRef, targetSection, onSectionReached, i
   }, [footerRef]);
 
   useEffect(() => {
-  const updateAboutPosition = () => {
-    const width = window.innerWidth;
-    let shift = 0;
+    const updateAboutPosition = () => {
+      const width = window.innerWidth;
+      let shift = 0;
 
-    if (width < 1680) {
-      shift = -31; // левее на 10px
-    } else if (width >= 1680 && width < 1920) {
-      shift = 15; // правее на 5px
-    } else if (width >= 1920 && width < 2048) {
-      shift = 1;
-    } else if (width >= 2048 && width < 2560) {
-      shift = 22; // примерно правее
-    } else if (width >= 2560 && width < 3840) {
-      shift = 111; // ещё правее
-    } else if (width >= 3840) {
-      shift = 305; // ещё правее
-    }
+      if (width < 1680) {
+        shift = -31; // левее на 10px
+      } else if (width >= 1680 && width < 1920) {
+        shift = 15; // правее на 5px
+      } else if (width >= 1920 && width < 2048) {
+        shift = 1;
+      } else if (width >= 2048 && width < 2560) {
+        shift = 22; // примерно правее
+      } else if (width >= 2560 && width < 3840) {
+        shift = 111; // ещё правее
+      } else if (width >= 3840) {
+        shift = 305; // ещё правее
+      }
 
 
-    setAboutLeftShift(shift);
-  };
+      setAboutLeftShift(shift);
+    };
 
-  updateAboutPosition();
-  window.addEventListener('resize', updateAboutPosition);
+    const debouncedResize = debounce(updateAboutPosition, 150);
+
+    updateAboutPosition();
+    window.addEventListener('resize', debouncedResize);
 
     return () => {
-      window.removeEventListener('resize', updateAboutPosition);
+      window.removeEventListener('resize', debouncedResize);
     };
   }, []);
 
