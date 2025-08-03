@@ -25,12 +25,6 @@ const Catalog = ({ scrollY, onScrollEnd, isInteractive }) => {
 
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
-  const [isManualHover, setIsManualHover] = useState(false);
-  const [autoProjectIndex, setAutoProjectIndex] = useState(0);
-  const [isAutoActive, setIsAutoActive] = useState(false);
-  const autoSwitchInterval = useRef(null);
-  const manualHoverTimeout = useRef(null);
-
   const footerRef = useRef(null); // ✅ добавлено
 
   const mobileShift = 40;
@@ -110,6 +104,25 @@ const Catalog = ({ scrollY, onScrollEnd, isInteractive }) => {
 
 
 // 👉 если на about, сразу активируем transition
+useEffect(() => {
+  const handleClickOutside = (event) => {
+    // Проверяем, был ли клик вне футера
+    if (footerRef.current && !footerRef.current.contains(event.target)) {
+      // Если мы не на about странице и есть активная ссылка - сбрасываем
+      if (location.pathname !== '/about' && activeLink) {
+        setActiveLink(null);
+        setTargetSection(null);
+      }
+    }
+  };
+
+  // Добавляем обработчик только на мобильных устройствах
+  if (isMobile) {
+    document.addEventListener('touchstart', handleClickOutside);
+    return () => document.removeEventListener('touchstart', handleClickOutside);
+  }
+}, [activeLink, location.pathname, isMobile]);
+
 
 useEffect(() => {
   // Обработка прямого перехода на /about
@@ -260,7 +273,7 @@ useEffect(() => {
     position: { left: "50%", top: "10%" },
     size: { width: "640px", height: "auto" },
     imageSize: { width: "640px", height: "auto" },
-    mobilePosition: { left: "30%", top: "50%" },
+    mobilePosition: { left: "10%", top: "30%" },
     mobileSize: { width: "320px", height: "auto" },
     mobileImageSize: { width: "320px", height: "auto" }
   },
@@ -272,7 +285,7 @@ useEffect(() => {
     position: { left: "50%", top: "15%" },
     size: { width: "640px", height: "auto" },
     imageSize: { width: "380px", height: "auto" },
-    mobilePosition: { left: "45%", top: "45%" },
+    mobilePosition: { left: "20%", top: "25%" },
     mobileSize: { width: "320px", height: "auto" },
     mobileImageSize: { width: "250px", height: "auto" }
   },
@@ -304,91 +317,13 @@ useEffect(() => {
   },
 ];
 
-
-  // Добавьте это состояние после существующих useState
-const [hoveredProjectName, setHoveredProjectName] = useState(null);
-const autoSwitchIntervalRef = useRef(null);
-const resumeTimeoutRef = useRef(null);
-
-// Автопереключение - отдельный useEffect для инициализации
-useEffect(() => {
-  if (progress >= 1 && !isAutoActive && isMobile) { // Добавили проверку isMobile
-    const initTimeout = setTimeout(() => {
-      setIsAutoActive(true);
-      setAutoProjectIndex(0);
-      const firstProject = projects[0];
-      setActiveProject(firstProject);
-      setHoveredProjectName(firstProject.name);
-      
-      // Запускаем автопереключение
-      autoSwitchIntervalRef.current = setInterval(() => {
-        setAutoProjectIndex(prevIndex => {
-          const nextIndex = (prevIndex + 1) % projects.length;
-          const nextProject = projects[nextIndex];
-          setActiveProject(nextProject);
-          setHoveredProjectName(nextProject.name);
-          return nextIndex;
-        });
-      }, 3000);
-    }, 3000);
-
-    return () => clearTimeout(initTimeout);
-  }
-}, [progress, isAutoActive, projects.length, isMobile]); // Добавили isMobile в зависимости
-
-// Отдельный useEffect для управления остановкой/возобновлением
-useEffect(() => {
-  if (!isAutoActive || !isMobile) return; // Добавили проверку isMobile
-
-  if (isManualHover) {
-    // Останавливаем автопереключение при наведении
-    if (autoSwitchIntervalRef.current) {
-      clearInterval(autoSwitchIntervalRef.current);
-      autoSwitchIntervalRef.current = null;
-    }
-    // Очищаем таймер возобновления
-    if (resumeTimeoutRef.current) {
-      clearTimeout(resumeTimeoutRef.current);
-      resumeTimeoutRef.current = null;
-    }
-  } else {
-    // Возобновляем автопереключение через 3 секунды после убирания курсора
-    if (!autoSwitchIntervalRef.current) {
-      resumeTimeoutRef.current = setTimeout(() => {
-        autoSwitchIntervalRef.current = setInterval(() => {
-          setAutoProjectIndex(prevIndex => {
-            const nextIndex = (prevIndex + 1) % projects.length;
-            const nextProject = projects[nextIndex];
-            setActiveProject(nextProject);
-            setHoveredProjectName(nextProject.name);
-            return nextIndex;
-          });
-        }, 3000);
-      }, 3000);
-    }
-  }
-
-  // Очистка при размонтировании
-  return () => {
-    if (autoSwitchIntervalRef.current) {
-      clearInterval(autoSwitchIntervalRef.current);
-    }
-    if (resumeTimeoutRef.current) {
-      clearTimeout(resumeTimeoutRef.current);
-    }
-  };
-}, [isManualHover, isAutoActive, projects.length, isMobile]); // Добавили isMobile
-
 // Обработчики событий мыши (остаются без изменений)
 const handleProjectMouseEnter = (project) => {
-  setIsManualHover(true);
   setActiveProject(project);
-  setHoveredProjectName(project.name);
 };
 
 const handleProjectMouseLeave = () => {
-  setIsManualHover(false);
-
+  setActiveProject(null);
 };
 
 // Сброс targetSection при переходе на главную
@@ -524,7 +459,9 @@ const targetMargin = progress >= 1
                 }}
                 style={{
                   position: "fixed",
-                  left: "50%",
+                  left: isMobile
+                    ? activeProject.mobilePosition?.left
+                    : activeProject.position.left,
                   top: isMobile
                     ? activeProject.mobilePosition?.top
                     : activeProject.position.top,
@@ -693,7 +630,7 @@ const targetMargin = progress >= 1
               href={project.url}
               target="_blank"
               rel="noopener noreferrer"
-              className={`project-item-container ${hoveredProjectName === project.name ? 'auto-hovered' : ''}`}
+              className="project-item-container"
               onMouseEnter={() => handleProjectMouseEnter(project)}
               onMouseLeave={handleProjectMouseLeave}
               style={{ "--hover-color": project.hoverColor, pointerEvents: transitionActive ? 'none' : (progress >= 1 ? 'auto' : 'none'), }}
@@ -754,39 +691,50 @@ const targetMargin = progress >= 1
             )}
 
             <div className="footer-links">
-              {["О нас", "Отзывы", "Цены", "Заказать сайт"].map((text) => (
-                <div
-                  key={text}
-                  className={`footer-link ${activeLink === text ? "active" : ""}`}
-                  onClick={() => {
-                    const route = "/about";
-                    const isCurrentlyOnAbout = location.pathname === route;
-                    
-                    if (activeLink === text && isCurrentlyOnAbout) {
-                      // Если уже активная ссылка на About - закрываем
-                      setTransitionActive(false);
-                      setTimeout(() => {
-                        navigate('/');
-                        setActiveLink(null);
-                        setTargetSection(null);
-                      }, 800);
-                    } else if (isCurrentlyOnAbout) {
-                      // Если уже на About, но другая ссылка - просто скролим
-                      setActiveLink(text);
-                      setTargetSection(text);
-                    } else {
-                      // Если не на About - открываем About и устанавливаем целевую секцию
-                      setTransitionActive(true);
-                      setActiveLink(text);
-                      setNavigationTarget(route);
-                      setTargetSection(text);
-                    }
-                  }}
-                >
-                  <span className={activeLink === text ? "active" : ""}>{text}</span>
-                </div>
-              ))}
-            </div>
+  {["О нас", "Отзывы", "Цены", "Заказать сайт"].map((text) => (
+    <div
+      key={text}
+      className={`footer-link ${activeLink === text ? "active" : ""}`}
+      onClick={() => {
+        const route = "/about";
+        const isCurrentlyOnAbout = location.pathname === route;
+        
+        console.log('Click:', { text, activeLink, isCurrentlyOnAbout, transitionActive }); // Для отладки
+        
+        if (activeLink === text && isCurrentlyOnAbout && transitionActive) {
+          // Если уже активная ссылка на About И мы там И transition активен - закрываем
+          setTransitionActive(false);
+          setActiveLink(null);
+          setTargetSection(null);
+          setTimeout(() => {
+            navigate('/');
+          }, 800);
+        } else if (activeLink === text && !isCurrentlyOnAbout) {
+          // Если ссылка активна, но мы НЕ на about странице - деактивируем
+          setActiveLink(null);
+          setTargetSection(null);
+          setTransitionActive(false);
+        } else if (activeLink === text && isCurrentlyOnAbout && !transitionActive) {
+          // Если активна и мы на about но transition неактивен - деактивируем
+          setActiveLink(null);
+          setTargetSection(null);
+        } else if (isCurrentlyOnAbout && activeLink !== text) {
+          // Если уже на About, но другая ссылка - меняем активную секцию
+          setActiveLink(text);
+          setTargetSection(text);
+        } else {
+          // Обычный переход - активируем ссылку и переходим
+          setTransitionActive(true);
+          setActiveLink(text);
+          setNavigationTarget(route);
+          setTargetSection(text);
+        }
+      }}
+    >
+      <span className={activeLink === text ? "active" : ""}>{text}</span>
+    </div>
+  ))}
+</div>
 
             {!isMobile && (
               <div className="footer-meta">

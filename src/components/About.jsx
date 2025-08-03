@@ -32,10 +32,10 @@ const About = ({ transitionActive, footerRef, targetSection, onSectionReached, i
   const getMobileSectionThresholds = (width) => {
     if (width < 380) return { reviews: 1790, prices: 2590, order: 3690 };
     if (width < 390) return { reviews: 1800, prices: 2600, order: 3605 };
-    if (width < 400) return { reviews: 1810, prices: 2610, order: 3600 };
-    if (width < 420) return { reviews: 1825, prices: 2575, order: 3530 };
+    if (width < 400) return { reviews: 1910, prices: 2665, order: 3600 };
+    if (width < 420) return { reviews: 1910, prices: 2670, order: 3535 };
     if (width < 440) return { reviews: 1825, prices: 2555, order: 3450 };
-    return { reviews: 1810, prices: 2610, order: 3600 }; // Примерные значения для мобилок
+    return { reviews: 1915, prices: 2630, order: 3440 }; // Примерные значения для мобилок
   };
 
   // Сброс скролла при выходе с About

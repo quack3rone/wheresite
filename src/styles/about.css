@@ -74,7 +74,7 @@
   font-family: 'g';
   width: 100%;
   max-width: 350px;
-  padding: 3rem 0.5rem;
+  padding: 1rem 0.5rem;
 }
 
 .glow-title-about-mobile {
@@ -418,14 +418,14 @@
 }
 
 .mobile-info-block h4 {
-  font-size: 1rem;
+  font-size: 1.1rem;
   font-family: 'g';
   font-weight: 600;
   margin: 0 0 0.2rem;
 }
 
 .mobile-info-block p {
-  font-size: 0.9rem;
+  font-size: 1rem;
   font-family: 'g';
   font-weight: 200;
   line-height: 1.2;
@@ -456,6 +456,11 @@
   line-height: 4.5rem;
 }
 
+@media (max-width: 480px) {
+  .mobile-question-column {
+    margin-top: 20rem;
+  }
+}
 
 @media (min-width: 768px) {
   .about-info-section {
@@ -800,14 +805,14 @@
 
 .mobile-horizontal-scroll-reviews {
   position: relative;
-  top: 100px;
+  top: 50px;
 }
 
 .mobile-reviews-section {
   display: flex;
   flex-direction: column;
   gap: 3rem;
-  padding: 9rem 1.5rem;
+  padding: 6rem 1rem;
   color: white;
 }
 
@@ -1094,18 +1099,18 @@
 .mobile-scroll-content-price {
   display: flex;
   align-items: center;
-  padding-left: 120rem;
+  padding-left: 128rem;
   gap: 20px;
   font-family: 'NauryzRedKeds';
 }
 
 .mobile-horizontal-scroll-price {
   position: relative;
-  top: -100px;
+  top: -50px;
 }
 
 .mobile-block-3 {
-  padding: 1rem 1.5rem;
+  padding: 3rem 1.5rem;
   color: #fff;
   font-family: 'g';
   display: flex;
@@ -1135,7 +1140,7 @@
 }
 
 .mobile-block-3-paragraph {
-  font-size: 1.1rem;
+  font-size: 1rem;
   line-height: 1.6;
   font-weight: 300;
   margin: 0;
@@ -1155,7 +1160,7 @@
 .mobile-block-3-ul {
   list-style-type: '·  ';
   padding-left: 1rem;
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 400;
   display: flex;
   flex-direction: column;
@@ -1335,14 +1340,14 @@
 .mobile-scroll-content-order {
   display: flex;
   align-items: center;
-  padding-left: 130rem;
+  padding-left: 120rem;
   gap: 20px;
   font-family: 'NauryzRedKeds';
 }
 
 .mobile-horizontal-scroll-order {
   position: relative;
-  top: 50px;
+  top: 0;
 }
 
 .mobile-scroll-text-order {
@@ -1355,9 +1360,9 @@
 .mobile-telegram-contact-section {
   display: flex;
   flex-direction: column;
-  margin-top: 100px;
   color: white;
   font-family: 'g';
+  padding: 0rem 0rem;
   gap: 1rem;
 }
 
@@ -1365,7 +1370,7 @@
   display: flex;
   flex-direction: column;
   gap: 3rem;
-  padding: 0rem 1rem;
+  padding: 3rem  0.5rem 0rem 0.5rem;
 }
 
 .mobile-telegram-text-block {
@@ -1375,14 +1380,14 @@
 }
 
 .mobile-telegram-text-top {
-  font-size: 1.8rem;
+  font-size: 1.4rem;
   font-weight: 900;
   line-height: 1;
   margin: 0;
 }
 
 .mobile-telegram-text-bottom {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   font-weight: 900;
   line-height: 1;
   margin: 0;
@@ -1419,7 +1424,7 @@
   justify-content: center;
   height: 140px;
   width: 100vw;
-  margin-top: 2rem;
+  margin-top: 1rem;
 }
 
 .mobile-where-site-text {
