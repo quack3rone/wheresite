@@ -81,34 +81,18 @@ const Home = () => {
       }, 500);
     }
 
-    // Загрузка изображений и видео
+    // Загрузка изображений
     criticalAssets.forEach(src => {
-      if (src.includes('.mp4')) {
-        // Для видео
-        const video = document.createElement('video');
-        video.onloadeddata = () => {
-          loadedCount++;
-          updateProgress();
-        };
-        video.onerror = () => {
-          loadedCount++;
-          updateProgress();
-        };
-        video.preload = 'metadata'; // загружаем только метаданные для экономии трафика
-        video.src = src;
-      } else {
-        // Для изображений
-        const img = new Image();
-        img.onload = () => {
-          loadedCount++;
-          updateProgress();
-        };
-        img.onerror = () => {
-          loadedCount++;
-          updateProgress();
-        };
-        img.src = src;
-      }
+      const img = new Image();
+      img.onload = () => {
+        loadedCount++;
+        updateProgress();
+      };
+      img.onerror = () => {
+        loadedCount++; // считаем и ошибки, чтобы не зависнуть
+        updateProgress();
+      };
+      img.src = src;
     });
 
     // Интервал для обновления прогресса по времени
