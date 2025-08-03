@@ -219,6 +219,11 @@
 
 
 @media (min-width: 1600px) {
+  .container {
+    height: 5590px;
+    position: relative;
+  }
+
   .vertical-text-about {
     font-size: 75px;
   }
@@ -230,6 +235,10 @@
 }
 
 @media (min-width: 1680px) {
+  .container {
+    height: 6320px;
+    position: relative;
+  }
   .vertical-text-about {
     font-size: 100px;
   }
@@ -244,6 +253,10 @@
 }
 
 @media (min-width: 1920px) {
+  .container {
+    height: 6420px;
+    position: relative;
+  }
   .vertical-text-about {
     font-size: 100px;
   }
@@ -508,7 +521,7 @@
 
 @media (min-width: 1600px) {
   .about-info-section {
-    padding: 2rem 28rem;
+    padding: 2rem 16rem 0rem 28rem;
     gap: 8rem;
   }
 
@@ -548,17 +561,18 @@
 
 @media (min-width: 1680px) {
   .about-info-section {
-    padding: 2rem 28rem;
+    padding: 2rem 15rem 0rem 28rem;
     gap: 8rem;
   }
 
   .info-column {
-    gap: 2rem;
+    gap: 1.5rem;
   }
 
   .info-column h5 {
     font-size: 1.7rem;
     margin: 0 0 0.5rem;
+    margin-left: -100px;
   }
 
   .align-title {
@@ -566,7 +580,7 @@
   }
 
   .info-block h4 {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
   }
 
   .info-block p {
@@ -574,8 +588,8 @@
   }
 
   .info-icon {
-    width: 65px;
-    height: 65px;
+    width: 70px;
+    height: 70px;
     margin-top: 0.8rem;
   }
 
@@ -588,17 +602,18 @@
 
 @media (min-width: 1920px) {
   .about-info-section {
-    padding: 2rem 28rem;
+    padding: 2rem 15rem 0rem 28rem;
     gap: 10rem;
   }
 
   .info-column {
-    gap: 2rem;
+    gap: 1.5rem;
   }
 
   .info-column h5 {
     font-size: 1.7rem;
-    margin: 0 0 0.5rem;
+    margin: 0 0 0rem;
+    margin-left: -100px;
   }
 
   .align-title {
@@ -607,7 +622,7 @@
 
 
   .info-block h4 {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
   }
 
   .info-block p {
@@ -615,8 +630,8 @@
   }
 
   .info-icon {
-    width: 70px;
-    height: 70px;
+    width: 75px;
+    height: 75px;
     margin-top: 0.8rem;
   }
 
@@ -720,7 +735,6 @@
   align-items: center;
   gap: 480px;
   font-family: 'NauryzRedKeds';
-  margin-left: 0;
   width: 10vw;
 }
 
@@ -938,6 +952,7 @@
 @media (min-width: 1600px) {
   .vertical-text-container-reviews-about {
     gap: 370px;
+    padding: 65rem 0rem; 
   }
 
   .reviews-section {
@@ -950,11 +965,12 @@
 @media (min-width: 1680px) {
   .vertical-text-container-reviews-about {
     gap: 480px;
+    padding: 33rem 6rem;  
   }
 
   .reviews-section {
     gap: 4rem;
-    padding: 5rem 0rem;
+    padding: 6rem 0rem;
     margin-left: -115rem;
   }
 }
@@ -962,11 +978,12 @@
 @media (min-width: 1920px) {
   .vertical-text-container-reviews-about {
     gap: 480px;
+    padding: 37rem 6rem;  
   }
 
   .reviews-section {
     gap: 5rem;
-    padding: 3rem 0rem;
+    padding: 5rem 0rem;
     margin-left: -115rem;
   }
 }
@@ -978,6 +995,7 @@
 @media (min-width: 2560px) {
   .vertical-text-container-reviews-about {
     gap: 600px;
+    padding: 10rem 6rem;  
   }
 
   .reviews-section {
@@ -990,6 +1008,7 @@
 @media (min-width: 3840px) {
   .vertical-text-container-reviews-about {
     gap: 800px;
+    padding: 10rem 6rem;  
   }
 
   .reviews-section {
@@ -1009,6 +1028,7 @@
   gap: 250px;
   font-family: 'NauryzRedKeds';
   margin-left: 0;
+  width: 10vw;
 }
 
 .block-3-content {
@@ -1170,60 +1190,246 @@
 
 @media (min-width: 768px) {
   .vertical-text-container-price-about {
-  gap: 200px;
-  padding: 36rem 0rem;
+    gap: 200px;
+    padding: 36rem 0rem;
+  }
+
+  .block-3-content {
+    max-width: 800px;
+    padding: 1rem 4rem;
+  }
+
+  .block-3-text {
+    margin-bottom: 2rem;
+  }
+
+  .glow-title {
+    font-size: 3rem;
+    padding: 2rem 1rem;
+    width: 100%;
+    min-width: 750px;
+  }
+
+  .content-wrapper {
+    gap: 3rem;
+  }
+
+  .text-content {
+    gap: 3rem;
+  }
+
+  .block-3-paragraph {
+    font-size: 1.3rem;
+    width: 100%;
+    min-width: 500px;
+  }
+
+  .block-3-list {
+    gap: 0.5rem;
+    margin-top: -1.1rem;
+  }
+
+  .block-3-subtitle {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  .block-3-ul {
+    list-style-type: '·  ';
+    padding-left: 1.2rem;
+    font-size: 1.3rem;
+    gap: 0.5rem;
+    line-height: 1.2;
+    width: 100%;
+    min-width: 300px;
+  }
+}
+@media (min-width: 1600px) {
+  .vertical-text-container-price-about {
+    gap: 200px;
+    padding: 41rem 0rem;
+  }
+
+  .block-3-content {
+    max-width: 800px;
+    padding: 1rem 4rem;
+  }
+
+  .block-3-text {
+    margin-bottom: 2rem;
+  }
+
+  .glow-title {
+    font-size: 3rem;
+    padding: 2rem 1rem;
+    width: 100%;
+    min-width: 750px;
+  }
+
+  .content-wrapper {
+    gap: 3rem;
+  }
+
+  .text-content {
+    gap: 3rem;
+  }
+
+  .block-3-paragraph {
+    font-size: 1.3rem;
+    width: 100%;
+    min-width: 500px;
+  }
+
+  .block-3-list {
+    gap: 0.5rem;
+    margin-top: -1.1rem;
+  }
+
+  .block-3-subtitle {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  .block-3-ul {
+    list-style-type: '·  ';
+    padding-left: 1.2rem;
+    font-size: 1.3rem;
+    gap: 0.5rem;
+    line-height: 1.2;
+    width: 100%;
+    min-width: 300px;
+  }
 }
 
-.block-3-content {
-  max-width: 800px;
-  padding: 1rem 4rem;
+@media (min-width: 1680px) {
+  .vertical-text-container-price-about {
+    gap: 220px;
+    padding: 36rem 6rem;
+  }
+
+  .block-3-content {
+    max-width: 800px;
+    padding: 1rem 4rem;
+  }
+
+  .block-3-text {
+    margin-bottom: 2rem;
+  }
+
+  .glow-title {
+    font-size: 3rem;
+    padding: 2rem 1rem;
+    width: 100%;
+    min-width: 750px;
+  }
+
+  .content-wrapper {
+    gap: 4rem;
+  }
+
+  .text-content {
+    gap: 3rem;
+  }
+
+  .block-3-paragraph {
+    font-size: 1.3rem;
+    width: 100%;
+    min-width: 500px;
+  }
+
+  .block-3-list {
+    gap: 0.5rem;
+    margin-top: -1.1rem;
+  }
+
+  .block-3-subtitle {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  .block-3-ul {
+    list-style-type: '·  ';
+    padding-left: 1.2rem;
+    font-size: 1.3rem;
+    gap: 0.5rem;
+    line-height: 1.2;
+    width: 100%;
+    min-width: 300px;
+  }
+
 }
 
-.block-3-text {
-  margin-bottom: 2rem;
+@media (min-width: 1920px) {
+  .vertical-text-container-price-about {
+    gap: 220px;
+    padding: 43rem 8rem;
+  }
+
+  .block-3-content {
+    max-width: 800px;
+    padding: 1rem 4rem;
+  }
+
+  .block-3-text {
+    margin-bottom: 2rem;
+  }
+
+  .glow-title {
+    font-size: 3rem;
+    padding: 2rem 1rem;
+    width: 100%;
+    min-width: 750px;
+  }
+
+  .content-wrapper {
+    gap: 4rem;
+  }
+
+  .text-content {
+    gap: 3rem;
+  }
+
+  .block-3-paragraph {
+    font-size: 1.3rem;
+    width: 100%;
+    min-width: 500px;
+  }
+
+  .block-3-list {
+    gap: 0.5rem;
+    margin-top: -1.1rem;
+  }
+
+  .block-3-subtitle {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  .block-3-ul {
+    list-style-type: '·  ';
+    padding-left: 1.2rem;
+    font-size: 1.3rem;
+    gap: 0.5rem;
+    line-height: 1.2;
+    width: 100%;
+    min-width: 300px;
+  }
 }
 
-.glow-title {
-  font-size: 3rem;
-  padding: 2rem 1rem;
-  width: 100%;
-  min-width: 750px;
+@media (min-width: 2048px) {
+
 }
 
-.content-wrapper {
-  gap: 3rem;
+@media (min-width: 2560px) {
+
 }
 
-.text-content {
-  gap: 3rem;
-}
+@media (min-width: 3840px) {
 
-.block-3-paragraph {
-  font-size: 1.3rem;
-  width: 100%;
-  min-width: 500px;
-}
-
-.block-3-list {
-  gap: 0.5rem;
-  margin-top: -1.1rem;
-}
-
-.block-3-subtitle {
-  font-size: 1.3rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-}
-
-.block-3-ul {
-  list-style-type: '·  ';
-  padding-left: 1.2rem;
-  font-size: 1.3rem;
-  gap: 0.5rem;
-  line-height: 1.2;
-  width: 100%;
-  min-width: 300px;
-}
 }
 
 
@@ -1443,6 +1649,321 @@
 }
 
 @media (min-width: 768px) {
+  .vertical-text-container-order-about {
+  gap: 690px;
+  padding: 3rem 0rem;
+}
+
+.vertical-text-order-about {
+  font-size: 80px;
+}
+
+.telegram-contact-section {
+  padding: 1rem 10rem;
+  margin-top: -50px;
+}
+
+.telegram-contact-content {
+  gap: 7rem;
+}
+
+.telegram-text-block {
+  gap: 2.5rem;
+}
+
+.telegram-text-top {
+  font-size: 2.5rem;
+}
+
+.telegram-text-bottom {
+  font-size: 2rem;
+}
+
+.telegram-icons-line {
+  gap: 0.5rem;
+}
+
+.telegram-icon {
+  width: 180px;
+  height: 180px;
+}
+
+.telegram-description {
+  font-size: 1.8rem;
+  line-height: 1.4;
+  width: 100%;
+  max-width: 700px;
+}
+
+.where-site-block {
+  height: 220px;
+  width: 100vw;
+  margin-left: -37rem;
+}
+
+.where-site-text {
+  font-size: 4rem;
+}
+
+.where-site-subtext {
+  font-size: 4rem;
+  margin-top: 0rem;
+}
+}
+
+@media (min-width: 1600px) {
+  .vertical-text-container-order-about {
+  gap: 690px;
+  padding: 0rem 0rem;
+}
+
+.vertical-text-order-about {
+  font-size: 75px;
+}
+
+.telegram-contact-section {
+  padding: 1rem 10rem;
+  margin-top: -50px;
+}
+
+.telegram-contact-content {
+  gap: 7rem;
+}
+
+.telegram-text-block {
+  gap: 2.5rem;
+}
+
+.telegram-text-top {
+  font-size: 2.5rem;
+}
+
+.telegram-text-bottom {
+  font-size: 2rem;
+}
+
+.telegram-icons-line {
+  gap: 0.5rem;
+}
+
+.telegram-icon {
+  width: 180px;
+  height: 180px;
+}
+
+.telegram-description {
+  font-size: 1.8rem;
+  line-height: 1.4;
+  width: 100%;
+  max-width: 700px;
+}
+
+.where-site-block {
+  height: 220px;
+  width: 100vw;
+  margin-left: -37rem;
+}
+
+.where-site-text {
+  font-size: 4rem;
+}
+
+.where-site-subtext {
+  font-size: 4rem;
+  margin-top: 0rem;
+}
+}
+
+@media (min-width: 1680px) {
+  .vertical-text-container-order-about {
+  gap: 690px;
+  padding: 46rem 3rem;
+}
+
+.vertical-text-order-about {
+  font-size: 80px;
+}
+
+.telegram-contact-section {
+  padding: 1rem 10rem;
+  margin-top: -50px;
+}
+
+.telegram-contact-content {
+  gap: 7rem;
+}
+
+.telegram-text-block {
+  gap: 2.5rem;
+}
+
+.telegram-text-top {
+  font-size: 2rem;
+}
+
+.telegram-text-bottom {
+  font-size: 2rem;
+}
+
+.telegram-icons-line {
+  gap: 0.5rem;
+}
+
+.telegram-icon {
+  width: 180px;
+  height: 180px;
+}
+
+.telegram-description {
+  font-size: 1.5rem;
+  line-height: 1.4;
+  width: 100%;
+  max-width: 600px;
+}
+
+.where-site-block {
+  height: 220px;
+  width: 100vw;
+  margin-left: -37rem;
+}
+
+.where-site-text {
+  font-size: 4rem;
+}
+
+.where-site-subtext {
+  font-size: 4rem;
+  margin-top: 0rem;
+}
+}
+
+@media (min-width: 1920px) {
+  .vertical-text-container-order-about {
+  gap: 690px;
+  padding: 54rem 4rem;
+}
+
+.vertical-text-order-about {
+  font-size: 80px;
+}
+
+.telegram-contact-section {
+  padding: 1rem 10rem;
+  margin-top: -50px;
+}
+
+.telegram-contact-content {
+  gap: 7rem;
+}
+
+.telegram-text-block {
+  gap: 2rem;
+}
+
+.telegram-text-top {
+  font-size: 2rem;
+}
+
+.telegram-text-bottom {
+  font-size: 2rem;
+}
+
+.telegram-icons-line {
+  gap: 0.5rem;
+}
+
+.telegram-icon {
+  width: 180px;
+  height: 180px;
+}
+
+.telegram-description {
+  font-size: 1.5rem;
+  line-height: 1.4;
+  width: 100%;
+  max-width: 700px;
+}
+
+.where-site-block {
+  height: 220px;
+  width: 100vw;
+  margin-left: -37rem;
+}
+
+.where-site-text {
+  font-size: 4rem;
+}
+
+.where-site-subtext {
+  font-size: 4rem;
+  margin-top: 0rem;
+}
+}
+
+@media (min-width: 2048px) {
+  .vertical-text-container-order-about {
+  gap: 690px;
+  padding: 3rem 0rem;
+}
+
+.vertical-text-order-about {
+  font-size: 80px;
+}
+
+.telegram-contact-section {
+  padding: 1rem 10rem;
+  margin-top: -50px;
+}
+
+.telegram-contact-content {
+  gap: 7rem;
+}
+
+.telegram-text-block {
+  gap: 2.5rem;
+}
+
+.telegram-text-top {
+  font-size: 2.5rem;
+}
+
+.telegram-text-bottom {
+  font-size: 2rem;
+}
+
+.telegram-icons-line {
+  gap: 0.5rem;
+}
+
+.telegram-icon {
+  width: 180px;
+  height: 180px;
+}
+
+.telegram-description {
+  font-size: 1.8rem;
+  line-height: 1.4;
+  width: 100%;
+  max-width: 700px;
+}
+
+.where-site-block {
+  height: 220px;
+  width: 100vw;
+  margin-left: -37rem;
+}
+
+.where-site-text {
+  font-size: 4rem;
+}
+
+.where-site-subtext {
+  font-size: 4rem;
+  margin-top: 0rem;
+}
+}
+
+@media (min-width: 2560px) {
   .vertical-text-container-order-about {
   gap: 690px;
   padding: 3rem 0rem;

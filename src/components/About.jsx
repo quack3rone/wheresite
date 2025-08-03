@@ -22,9 +22,9 @@ const About = ({ transitionActive, footerRef, targetSection, onSectionReached, i
   const getDesktopSectionThresholds = (width) => {
     // Базовые значения (можно настроить под ваш дизайн)
     if (width < 1600) return { reviews: 2800, prices: 3650, order: 4850 };
-    if (width < 1680) return { reviews: 2800, prices: 3700, order: 5000 };
-    if (width < 1920) return { reviews: 3200, prices: 4000, order: 5600 };
-    if (width < 2048) return { reviews: 3500, prices: 4300, order: 6000 };
+    if (width < 1680) return { reviews: 2770, prices: 3600, order: 4670 };
+    if (width < 1920) return { reviews: 3020, prices: 4075, order: 5340 };
+    if (width < 2048) return { reviews: 3080, prices: 4170, order: 5490 };
     if (width < 2560) return { reviews: 3500, prices: 4300, order: 6000 };
     return { reviews: 4000, prices: 5000, order: 7000 }; // Для очень больших экранов
   };
@@ -649,7 +649,7 @@ return (
                       {[...Array(14)].map((_, i) => (
                         <div
                           key={i}
-                          className={`vertical-text-about ${i === 7? 'vertical-text-active' : 'vertical-text-inactive'}`}
+                          className={`vertical-text-about ${i === 6? 'vertical-text-active' : 'vertical-text-inactive'}`}
                         >
                           Отзывы
                         </div>
@@ -764,7 +764,7 @@ return (
                         <p className="telegram-text-bottom">Напишите нам.</p>
                       </div>
                       
-                      <a href="https://t.me/quack3r1" target="_blank" rel="noopener noreferrer" className="telegram-icons-line">
+                      <a href="https://t.me/wheresite" target="_blank" rel="noopener noreferrer" className="telegram-icons-line">
                         <img src="/icons/telegram.svg" alt="Telegram" className="telegram-icon" />
                         <img src="/icons/telegram.svg" alt="Telegram" className="telegram-icon" style={{opacity: 0.25}} />
                         <img src="/icons/telegram.svg" alt="Telegram" className="telegram-icon" style={{opacity: 0.25}} />
