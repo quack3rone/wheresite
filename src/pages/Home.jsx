@@ -28,6 +28,7 @@ const Home = () => {
       '/images/2primer.png',
       '/images/3primer.png',
       '/images/4primer.png',
+      '/video/wheresitemp52white.mp4', // добавь эту строку
     ];
 
     let loadedCount = 0;
@@ -80,18 +81,34 @@ const Home = () => {
       }, 500);
     }
 
-    // Загрузка изображений
+    // Загрузка изображений и видео
     criticalAssets.forEach(src => {
-      const img = new Image();
-      img.onload = () => {
-        loadedCount++;
-        updateProgress();
-      };
-      img.onerror = () => {
-        loadedCount++; // считаем и ошибки, чтобы не зависнуть
-        updateProgress();
-      };
-      img.src = src;
+      if (src.includes('.mp4')) {
+        // Для видео
+        const video = document.createElement('video');
+        video.onloadeddata = () => {
+          loadedCount++;
+          updateProgress();
+        };
+        video.onerror = () => {
+          loadedCount++;
+          updateProgress();
+        };
+        video.preload = 'metadata'; // загружаем только метаданные для экономии трафика
+        video.src = src;
+      } else {
+        // Для изображений
+        const img = new Image();
+        img.onload = () => {
+          loadedCount++;
+          updateProgress();
+        };
+        img.onerror = () => {
+          loadedCount++;
+          updateProgress();
+        };
+        img.src = src;
+      }
     });
 
     // Интервал для обновления прогресса по времени
