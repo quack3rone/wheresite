@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, delay } from 'framer-motion';
 import '../styles/about.css';
 
 const About = ({ transitionActive, footerRef, targetSection, onSectionReached, isAlreadyOnAbout }) => {
@@ -235,6 +235,31 @@ const About = ({ transitionActive, footerRef, targetSection, onSectionReached, i
   return () => currentRef.removeEventListener('scroll', handleScroll);
 }, [scrollRef.current, currentSection, isMobile, onSectionReached, isAutoScrolling]); // Добавили isAutoScrolling в зависимости
   if (!isActive) return null;
+
+  const aboutVariants = {
+  hidden: {
+    opacity: 0,
+    y: isMobile ? 40 : -40,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.9,
+      ease: [0.25, 0.1, 0.25, 1], // cubic-bezier, более плавная кривая
+      delay: 0.4,
+    },
+  },
+  exit: {
+    opacity: 0,
+    y: isMobile ? 50 : -30,
+    transition: {
+      duration: 0.3,
+      ease: [0.4, 0.2, 0.7, 0.8], // быстрая анимация исчезновения
+    },
+  },
+};
+
   
 
 return (
@@ -242,10 +267,10 @@ return (
       {showContent && (
         <motion.div
           key="about"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.4 }}
+          variants={aboutVariants}
+          initial="hidden"
+          animate="visible"
+          exit="exit"
           style={{
             position: 'fixed',
             top: isMobile ? "187px" : 0,

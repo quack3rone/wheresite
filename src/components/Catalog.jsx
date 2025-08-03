@@ -35,6 +35,9 @@ const Catalog = ({ scrollY, onScrollEnd, isInteractive }) => {
   const [autoScrolling, setAutoScrolling] = useState(false);
   const [isAutoScrolling, setIsAutoScrolling] = useState(false);
 
+  const [isLoading, setIsLoading] = useState(false);
+  const [loadingProgress, setLoadingProgress] = useState(0);
+
   // Динамическое вычисление left в зависимости от ширины экрана
   const leftPosition = window.innerWidth <= 450
     ? "30px"
@@ -158,7 +161,7 @@ useEffect(() => {
 
 useEffect(() => {
   // Запускаем переход после анимации
-  if (transitionActive && navigationTarget) {
+  if (transitionActive && navigationTarget && !isLoading) { 
     const timeout = setTimeout(() => {
       navigate(navigationTarget);
     }, 800);
@@ -172,7 +175,7 @@ useEffect(() => {
     }, 800);
     return () => clearTimeout(timeout);
   }
-}, [transitionActive, navigationTarget, isBackNavigation, navigate]);
+}, [transitionActive, navigationTarget, isBackNavigation, navigate, isLoading]);
 
 
   const baseProgress = Math.pow(Math.min(Math.max(scrollY / 220, 0), 1), 1.4); 
@@ -336,6 +339,77 @@ useEffect(() => {
 const targetMargin = progress >= 1
   ? 0
   : (1 - smoothedProgress) * -shift;
+
+  useEffect(() => {
+  if (!isLoading) return;
+
+  const assetsToLoad = [
+    '/video/wheresitemp52white.mp4',
+    '/icons/user.svg',
+    '/icons/sensor-alert.svg',
+    '/icons/magic-wand.svg',
+    '/icons/key.svg',
+    '/icons/money-simple-from-bracket.svg',
+    '/icons/site-browser.svg',
+    '/icons/apps.svg',
+    '/icons/fingerprint.svg',
+    '/icons/quote.svg',
+    '/icons/telegram.svg'
+  ];
+
+  let loadedCount = 0;
+  const totalAssets = assetsToLoad.length;
+  const minLoadTime = 2000; // минимум 1.5 секунды
+  const startTime = Date.now();
+
+  const updateProgress = () => {
+    const elapsedTime = Date.now() - startTime;
+    const timeProgress = Math.min(elapsedTime / minLoadTime, 1);
+    const assetProgress = loadedCount / totalAssets;
+    const finalProgress = Math.min(timeProgress, assetProgress) * 100;
+    
+    setLoadingProgress(Math.floor(finalProgress));
+    
+    if (finalProgress >= 100) {
+      setTimeout(() => {
+        setIsLoading(false);
+        setLoadingProgress(0);
+      }, 200);
+    }
+  };
+
+  // Загружаем ассеты
+  assetsToLoad.forEach(src => {
+    if (src.includes('.mp4')) {
+      const video = document.createElement('video');
+      video.onloadeddata = () => {
+        loadedCount++;
+        updateProgress();
+      };
+      video.onerror = () => {
+        loadedCount++;
+        updateProgress();
+      };
+      video.src = src;
+    } else {
+      const img = new Image();
+      img.onload = () => {
+        loadedCount++;
+        updateProgress();
+      };
+      img.onerror = () => {
+        loadedCount++;
+        updateProgress();
+      };
+      img.src = src;
+    }
+  });
+
+  // Интервал для обновления прогресса по времени
+  const progressInterval = setInterval(updateProgress, 50);
+
+  return () => clearInterval(progressInterval);
+}, [isLoading]);
 
 
   return (
@@ -691,50 +765,52 @@ const targetMargin = progress >= 1
             )}
 
             <div className="footer-links">
-  {["О нас", "Отзывы", "Цены", "Заказать сайт"].map((text) => (
-    <div
-      key={text}
-      className={`footer-link ${activeLink === text ? "active" : ""}`}
-      onClick={() => {
-        const route = "/about";
-        const isCurrentlyOnAbout = location.pathname === route;
-        
-        console.log('Click:', { text, activeLink, isCurrentlyOnAbout, transitionActive }); // Для отладки
-        
-        if (activeLink === text && isCurrentlyOnAbout && transitionActive) {
-          // Если уже активная ссылка на About И мы там И transition активен - закрываем
-          setTransitionActive(false);
-          setActiveLink(null);
-          setTargetSection(null);
-          setTimeout(() => {
-            navigate('/');
-          }, 800);
-        } else if (activeLink === text && !isCurrentlyOnAbout) {
-          // Если ссылка активна, но мы НЕ на about странице - деактивируем
-          setActiveLink(null);
-          setTargetSection(null);
-          setTransitionActive(false);
-        } else if (activeLink === text && isCurrentlyOnAbout && !transitionActive) {
-          // Если активна и мы на about но transition неактивен - деактивируем
-          setActiveLink(null);
-          setTargetSection(null);
-        } else if (isCurrentlyOnAbout && activeLink !== text) {
-          // Если уже на About, но другая ссылка - меняем активную секцию
-          setActiveLink(text);
-          setTargetSection(text);
-        } else {
-          // Обычный переход - активируем ссылку и переходим
-          setTransitionActive(true);
-          setActiveLink(text);
-          setNavigationTarget(route);
-          setTargetSection(text);
-        }
-      }}
-    >
-      <span className={activeLink === text ? "active" : ""}>{text}</span>
-    </div>
-  ))}
-</div>
+              {["О нас", "Отзывы", "Цены", "Заказать сайт"].map((text) => (
+                <div
+                  key={text}
+                  className={`footer-link ${activeLink === text ? "active" : ""}`}
+                  onClick={() => {
+                    const route = "/about";
+                    const isCurrentlyOnAbout = location.pathname === route;
+                    
+                    console.log('Click:', { text, activeLink, isCurrentlyOnAbout, transitionActive }); // Для отладки
+                    
+                    if (activeLink === text && isCurrentlyOnAbout && transitionActive) {
+                      // Если уже активная ссылка на About И мы там И transition активен - закрываем
+                      setTransitionActive(false);
+                      setActiveLink(null);
+                      setTargetSection(null);
+                      setTimeout(() => {
+                        navigate('/');
+                      }, 800);
+                    } else if (activeLink === text && !isCurrentlyOnAbout) {
+                      // Если ссылка активна, но мы НЕ на about странице - деактивируем
+                      setActiveLink(null);
+                      setTargetSection(null);
+                      setTransitionActive(false);
+                    } else if (activeLink === text && isCurrentlyOnAbout && !transitionActive) {
+                      // Если активна и мы на about но transition неактивен - деактивируем
+                      setActiveLink(null);
+                      setTargetSection(null);
+                    } else if (isCurrentlyOnAbout && activeLink !== text) {
+                      // Если уже на About, но другая ссылка - меняем активную секцию
+                      setActiveLink(text);
+                      setTargetSection(text);
+                    } else {
+                      // Обычный переход - активируем ссылку и переходим
+                      setIsLoading(true); // Добавить
+                      setLoadingProgress(0); // Добавить
+                      setTransitionActive(true);
+                      setActiveLink(text);
+                      setNavigationTarget(route);
+                      setTargetSection(text);
+                    }
+                  }}
+                >
+                  <span className={activeLink === text ? "active" : ""}>{text}</span>
+                </div>
+              ))}
+            </div>
 
             {!isMobile && (
               <div className="footer-meta">
@@ -761,10 +837,10 @@ const targetMargin = progress >= 1
             />
         </motion.div>
         <About 
-          transitionActive={transitionActive} 
+          transitionActive={transitionActive && !isLoading} // Изменить эту строку
           footerRef={footerRef}
           targetSection={targetSection}
-          isAlreadyOnAbout={location.pathname === '/about'} // Передаем текущее состояние
+          isAlreadyOnAbout={location.pathname === '/about'}
           onSectionReached={(section) => {
             setActiveLink(section);
             if (section === targetSection) {
@@ -774,6 +850,73 @@ const targetMargin = progress >= 1
         />
 
       </motion.div>
+      {/* Loading Screen */}
+      <AnimatePresence>
+        {isLoading && (
+          <motion.div
+            initial={{ opacity: 1 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.6, ease: 'easeOut' }}
+            style={{
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              width: '100vw',
+              height: '100vh',
+              backgroundColor: 'transparent',
+              zIndex: 100,
+              display: 'flex',
+              alignItems: 'flex-start',
+              justifyContent: 'flex-end',
+              pointerEvents: 'auto'
+            }}
+          >
+            <motion.div
+              initial={isMobile ? 
+                { x: '100vw', scaleX: 0.5, scaleY: 1.5 } : 
+                { y: '-100vh', scaleX: 0.01, scaleY: 18}
+              }
+              animate={isMobile ? 
+                { x: '-20px', scaleX: 1, scaleY: 1 } : 
+                { y: '20px', scaleX: 1, scaleY: 1 }
+              }
+              exit={isMobile ? 
+                { x: '100vw', scaleX: 0.5, scaleY: 0.4, opacity: 0 } : 
+                { y: '-100vh', scaleX: 0.01, scaleY: 18, opacity: 0 }
+              }
+              transition={{ 
+                type: 'spring',
+                duration: 1,
+                damping: isMobile ? 14 : 13,
+                stiffness: isMobile ? 80 : 120,
+                mass: isMobile ? 2 : 0.6,
+                delay: 0.1,
+              }}
+              style={{
+                position: 'absolute',
+                top: isMobile ? '200px' : '0px',
+                right: isMobile ? '0px' : '50px',
+                transformOrigin: 'center'
+              }}
+            >
+              <div
+                className="loading-text"
+                style={{
+                  fontSize: isMobile ? '50px' : '70px',
+                  fontWeight: '200',
+                  color: 'transparent',
+                  WebkitTextStroke: '1px white',
+                  textStroke: '1px white',
+                  fontFamily: 'WS'
+                }}
+              >
+                {loadingProgress}%
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 };
