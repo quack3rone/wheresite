@@ -787,7 +787,7 @@ return (
           )}
         </motion.div>
       )}
-    </AnimatePresence>
+    </AnimatePresence> 
   );
 };
 
