@@ -28,7 +28,6 @@ const Home = () => {
       '/images/2primer.png',
       '/images/3primer.png',
       '/images/4primer.png',
-      '/video/wheresitemp52white.mp4', // добавь эту строку
     ];
 
     let loadedCount = 0;
