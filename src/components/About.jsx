@@ -21,7 +21,7 @@ const About = ({ transitionActive, footerRef, targetSection, onSectionReached, i
 
   const getDesktopSectionThresholds = (width) => {
     // Базовые значения (можно настроить под ваш дизайн)
-    if (width < 1600) return { reviews: 2800, prices: 3650, order: 4850 };
+    if (width < 1600) return { reviews: 2710, prices: 3735, order: 4965 };
     if (width < 1680) return { reviews: 2770, prices: 3600, order: 4670 };
     if (width < 1920) return { reviews: 3020, prices: 4075, order: 5340 };
     if (width < 2048) return { reviews: 3080, prices: 4170, order: 5490 };
