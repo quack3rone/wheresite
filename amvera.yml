@@ -1,0 +1,12 @@
+---
+version: null
+meta:
+  environment: node
+  toolchain:
+    name: browser
+    version: 18
+build:
+  additionalCommands: npm install && npm run build
+  artifacts:
+    build/*: /
+run: {}
