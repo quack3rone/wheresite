@@ -1,3 +1,14 @@
-# https://www.robotstxt.org/robotstxt.html
 User-agent: *
 Allow: /
+
+# Sitemap
+Sitemap: https://wheresite.ru/sitemap.xml
+
+Disallow: /static/
+Disallow: /*.json$
+Disallow: /manifest.json
+
+Allow: /images/
+Allow: /icons/
+Allow: /video/
+Allow: /fonts/
