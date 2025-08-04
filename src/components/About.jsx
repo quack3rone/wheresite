@@ -17,7 +17,7 @@ import '../styles/about.css';
   };
 
 
-const About = ({ transitionActive, footerRef, targetSection, onSectionReached, isAlreadyOnAbout }) => {
+const About = ({ transitionActive, footerRef, targetSection, onSectionReached, isAlreadyOnAbout, videoPreloaded, preloadedVideoRef }) => {
   const location = useLocation();
   const isActive = location.pathname === '/about';
   const [showContent, setShowContent] = useState(false);
@@ -126,11 +126,18 @@ const About = ({ transitionActive, footerRef, targetSection, onSectionReached, i
 
   useEffect(() => {
   if (isActive && videoRef.current) {
+    // Если видео предзагружено, используем его
+    if (videoPreloaded && preloadedVideoRef.current) {
+      // Копируем предзагруженное видео в текущий элемент
+      videoRef.current.src = preloadedVideoRef.current.src;
+      videoRef.current.currentTime = 0;
+    }
+    
     videoRef.current.play().catch((e) => {
       console.error("Video failed to play:", e);
     });
   }
-}, [isActive]);
+}, [isActive, videoPreloaded]);
 
 
 

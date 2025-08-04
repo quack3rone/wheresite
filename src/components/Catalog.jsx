@@ -38,6 +38,9 @@ const Catalog = ({ scrollY, onScrollEnd, isInteractive }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [loadingProgress, setLoadingProgress] = useState(0);
 
+  const [videoPreloaded, setVideoPreloaded] = useState(false);
+  const preloadVideoRef = useRef(null);
+
   // Динамическое вычисление left в зависимости от ширины экрана
   const leftPosition = window.innerWidth <= 450
     ? "30px"
@@ -247,6 +250,44 @@ useEffect(() => {
   return () => cancelAnimationFrame(animationFrame);
 }, [progress]);
 
+// ✅ Добавить этот useEffect
+useEffect(() => {
+  const preloadVideo = () => {
+    if (!preloadVideoRef.current) {
+      preloadVideoRef.current = document.createElement('video');
+      preloadVideoRef.current.src = '/video/wheresitemp52white.mp4';
+      preloadVideoRef.current.muted = true;
+      preloadVideoRef.current.playsInline = true;
+      preloadVideoRef.current.preload = 'auto';
+      
+      // Когда видео готово к воспроизведению
+      preloadVideoRef.current.oncanplaythrough = () => {
+        console.log('Video preloaded successfully');
+        setVideoPreloaded(true);
+      };
+      
+      // Обработка ошибок
+      preloadVideoRef.current.onerror = (e) => {
+        console.error('Video preload failed:', e);
+        setVideoPreloaded(true); // Устанавливаем true чтобы не блокировать UI
+      };
+      
+      // Принудительная загрузка
+      preloadVideoRef.current.load();
+    }
+  };
+
+  preloadVideo();
+
+  // Очистка при размонтировании
+  return () => {
+    if (preloadVideoRef.current) {
+      preloadVideoRef.current.src = '';
+      preloadVideoRef.current = null;
+    }
+  };
+}, []);
+
 
   // useEffect(() => {
   //   const tiffa = projects.find(p => p.name === "mbirthday");
@@ -344,7 +385,7 @@ const targetMargin = progress >= 1
   if (!isLoading) return;
 
   const assetsToLoad = [
-    '/video/wheresitemp52white.mp4',
+    ...(videoPreloaded ? [] : ['/video/wheresitemp52white.mp4']),
     '/icons/user.svg',
     '/icons/sensor-alert.svg',
     '/icons/magic-wand.svg',
@@ -836,18 +877,20 @@ const targetMargin = progress >= 1
               }}
             />
         </motion.div>
-        <About 
-          transitionActive={transitionActive && !isLoading} // Изменить эту строку
-          footerRef={footerRef}
-          targetSection={targetSection}
-          isAlreadyOnAbout={location.pathname === '/about'}
-          onSectionReached={(section) => {
-            setActiveLink(section);
-            if (section === targetSection) {
-              setTargetSection(null);
-            }
-          }}
-        />
+<About 
+  transitionActive={transitionActive && !isLoading} 
+  footerRef={footerRef}
+  targetSection={targetSection}
+  isAlreadyOnAbout={location.pathname === '/about'}
+  videoPreloaded={videoPreloaded} // ✅ Добавить эту строку
+  preloadedVideoRef={preloadVideoRef} // ✅ И эту строку
+  onSectionReached={(section) => {
+    setActiveLink(section);
+    if (section === targetSection) {
+      setTargetSection(null);
+    }
+  }}
+/>
 
       </motion.div>
       {/* Loading Screen */}
