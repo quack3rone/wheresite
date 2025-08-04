@@ -2,10 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
 const imagePaths = [
-  "/images/4primer.png",
-  "/images/2primer.png",
-  "/images/3primer.png",
-  "/images/1primer.png"
+  "/images/2primer.jpeg",
+  "/images/1primer.jpeg",
+  "/images/3primer.jpeg"
 ];
 
 const isMobile = window.innerWidth <= 768;

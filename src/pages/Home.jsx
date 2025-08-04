@@ -23,10 +23,10 @@ const Home = () => {
   // Предзагрузка критических ресурсов
   useEffect(() => {
   const criticalAssets = [
-    '/images/1primer.png',
-    '/images/2primer.png',
-    '/images/3primer.png',
-    '/images/4primer.png',
+    '/images/1primer.jpeg',
+    '/images/2primer.jpeg',
+    '/images/3primer.jpeg',
+    '/images/4primer.jpeg',
   ];
 
   let loadedCount = 0;

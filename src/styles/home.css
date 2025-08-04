@@ -489,31 +489,31 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    max-width: 50%;
+    max-width: 40%;
     margin-left: 40px;
   }
 
   .footer-logo {
     width: 180px;
     height: auto;
-    margin-left: -1rem;
+    margin-left: -0.5rem;
     object-fit: contain;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
   }
 
   .footer-label {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     margin-top: 0;
     position: relative;
-    bottom: 30px;
+    bottom: 20px;
   }
 
   .footer-meta {
-    font-size: 0.6rem;
+    font-size: 0.72rem;
     text-align: left;
     margin-top: 0;
     position: relative;
-    bottom: 30px;
+    bottom: 20px;
     width: auto;
     padding-bottom: 0;
   }
@@ -521,16 +521,18 @@
   .footer-links {
     display: flex;
     flex-direction: column;
-    gap: 0.7rem;
+    gap: 0.8rem;
     width: 60%;
     max-width: 250px;
     box-sizing: border-box;
-    margin-top: 1rem;
+    margin-top: 0.1rem;
     margin-left: 0;
   }
 
   .footer-link {
-    font-size: 1.1rem;
+    font-size: 1.3rem;
+    letter-spacing: -1.4px;
+    margin-left: -0.7rem;
   }
     
   .catalog-title-container{
@@ -603,31 +605,31 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    max-width: 50%;
+    max-width: 45%;
     margin-left: 40px;
   }
 
   .footer-logo {
-    width: 180px;
+    width: 190px;
     height: auto;
-    margin-left: -1rem;
+    margin-left: 0rem;
     object-fit: contain;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
   }
 
   .footer-label {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     margin-top: 0;
     position: relative;
-    bottom: 30px;
+    bottom: 20px;
   }
 
   .footer-meta {
-    font-size: 0.6rem;
+    font-size: 0.75rem;
     text-align: left;
     margin-top: 0;
     position: relative;
-    bottom: 30px;
+    bottom: 20px;
     width: auto;
     padding-bottom: 0;
   }
@@ -635,17 +637,17 @@
   .footer-links {
     display: flex;
     flex-direction: column;
-    gap: 0.6rem;
+    gap: 0.75rem;
     width: 60%;
     max-width: 250px;
     box-sizing: border-box;
-    margin-top: 1rem;
+    margin-top: 0.4rem;
     margin-left: 0;
   }
 
   .footer-link {
-    font-size: 1.25rem;
-    margin-left: -1rem;
+    font-size: 1.40rem;
+    margin-left: -2rem;
   }
     
   .catalog-title-container{

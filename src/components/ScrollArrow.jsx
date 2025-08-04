@@ -16,6 +16,62 @@ const ScrollArrow = ({ onClick, scrollY }) => {
     return () => clearTimeout(timer);
   }, []);
 
+  // Добавляем обработчик touch-событий для мобильных устройств
+  useEffect(() => {
+    if (!isMobile) return;
+
+    let startY = 0;
+    let isScrollAttempt = false;
+
+    const handleTouchStart = (e) => {
+      // Проверяем что пользователь не кликает по элементам UI (кнопки, ссылки и т.д.)
+      if (e.target.closest('button, a, [role="button"], .catalog-footer, .footer-link')) {
+        return;
+      }
+      
+      startY = e.touches[0].clientY;
+      isScrollAttempt = false;
+    };
+
+    const handleTouchMove = (e) => {
+      if (!startY) return;
+      
+      const currentY = e.touches[0].clientY;
+      const deltaY = startY - currentY;
+      
+      // Если пользователь попытался скроллить на 30+ пикселей
+      if (Math.abs(deltaY) > 30) {
+        isScrollAttempt = true;
+      }
+    };
+
+    const handleTouchEnd = (e) => {
+      // Проверяем что пользователь не кликает по элементам UI
+      if (e.target.closest('button, a, [role="button"], .catalog-footer, .footer-link')) {
+        return;
+      }
+
+      if (isScrollAttempt && visible && !clicked && scrollY <= 10) {
+        // Имитируем клик по стрелке при попытке скролла
+        handleClick();
+      }
+      
+      startY = 0;
+      isScrollAttempt = false;
+    };
+
+    // Добавляем passive: false чтобы предотвратить стандартное поведение
+    document.addEventListener('touchstart', handleTouchStart, { passive: true });
+    document.addEventListener('touchmove', handleTouchMove, { passive: true });
+    document.addEventListener('touchend', handleTouchEnd, { passive: true });
+
+    return () => {
+      document.removeEventListener('touchstart', handleTouchStart);
+      document.removeEventListener('touchmove', handleTouchMove);
+      document.removeEventListener('touchend', handleTouchEnd);
+    };
+  }, [isMobile, visible, clicked, scrollY]);
+
   useEffect(() => {
     if (visible && !clicked) {
       controlsMain.start({

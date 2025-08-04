@@ -188,8 +188,7 @@ const MultipleFolders = ({ project, isMobile }) => {
               color: "#333",
               textAlign: "center",
               fontFamily: "g",
-              filter: isMobile ? "drop-shadow(0 4px 6px rgba(0,0,0,1))" : "none",
-              filter: isMobile ? "drop-shadow(1px 1px 1px rgba(255, 255, 255, 1))" : "none",
+              filter: isMobile ? "drop-shadow(1px 1px 1px 3px rgba(255, 255, 255, 1))" : "none",
             }}
           >
             {folder.name}
@@ -454,9 +453,9 @@ useEffect(() => {
   const projects = [
   {
     name: "Wheresite",
-    url: "localhost:3000",
+    url: "https://wheresite.ru",
     image: "/images/wheresitefolder.png",
-    hoverColor: "#49b6ffff",
+    hoverColor: "#5ECCFA",
     position: { left: "50%", top: "10%" },
     size: { width: "640px", height: "auto" },
     imageSize: { width: "640px", height: "auto" },
@@ -487,15 +486,15 @@ useEffect(() => {
         distance: 140, 
         delay: 0.2, 
         height: 300,
-        mobileDistance: 50,
-        mobileHeight: -100
+        mobileDistance: -20,
+        mobileHeight: 140
       },
       { 
         name: "soon?", 
         distance: 400, 
         delay: 0.3, 
         height: 225,
-        mobileDistance: 280,
+        mobileDistance: 320,
         mobileHeight: 20
       }
     ]
@@ -504,11 +503,11 @@ useEffect(() => {
     name: "TiffaLi",
     url: "https://tiffali.ru",
     image: "/images/tttt.png",
-    hoverColor: "#ffa5e5",
+    hoverColor: "#f2879cff",
     position: { left: "50%", top: "10%" },
     size: { width: "640px", height: "auto" },
     imageSize: { width: "640px", height: "auto" },
-    mobilePosition: { left: "10%", top: "30%" },
+    mobilePosition: { left: "10%", top: "35%" },
     mobileSize: { width: "320px", height: "auto" },
     mobileImageSize: { width: "320px", height: "auto" }
   },
@@ -516,17 +515,17 @@ useEffect(() => {
     name: "mbirthday",
     url: "https://momsbirthday.ru",
     image: "/images/mbirthday.jpg",
-    hoverColor: "#00751bff",
+    hoverColor: "#548647ff",
     position: { left: "60%", top: "25%" },
     size: { width: "640px", height: "auto" },
     imageSize: { width: "350px", height: "auto" },
-    mobilePosition: { left: "20%", top: "25%" },
+    mobilePosition: { left: "30%", top: "45%" },
     mobileSize: { width: "320px", height: "auto" },
-    mobileImageSize: { width: "250px", height: "auto" }
+    mobileImageSize: { width: "230px", height: "auto" }
   },
   {
     name: "buysoon",
-    url: "https://example.com",
+    url: "https://wheresite.ru",
     image: "/images/.png",
     hoverColor: "#808080ff",
     position: { left: "50%", top: "10%" },
@@ -539,7 +538,7 @@ useEffect(() => {
   },
   {
     name: "Comesoon",
-    url: "https://example.com",
+    url: "https://wheresite.ru",
     image: "/images/.png",
     hoverColor: "#808080ff",
     position: { left: "50%", top: "10%" },
@@ -891,14 +890,14 @@ const targetMargin = progress >= 1
                 zIndex: 2, // Это выше, чем основной блок, чтобы быть поверх
                 borderRadius: '36px', // Скругление углов
                 border: '2.5px solid rgba(197, 197, 197, 0.7)', // Обводка
-                boxShadow: '0 1px 20px rgba(0, 0, 0, 0.25)', // Тень к обводке
+                boxShadow: '0 1px 20px rgba(0, 0, 0, 0.3)', // Тень к обводке
                 pointerEvents: 'none',
                 ...(isMobile
                   ? {
                       bottom: 0,
                       left: leftPosition,
                       right: 0,
-                      height: '187px',
+                      height: '185.5px',
                       width: `calc(100% - (${parseInt(leftPosition, 10) * 1.6}px))`,
                     }
                   : {
@@ -927,14 +926,14 @@ const targetMargin = progress >= 1
                 position: 'absolute',
                 zIndex: 3, // Это выше, чем первый блок, но ниже основного
                 borderRadius: '36px', // Скругление углов
-                border: '2px solid rgba(255, 255, 255, 0.7)', // Обводка
+                border: '3px solid rgba(255, 255, 255, 0.7)', // Обводка
                 pointerEvents: 'none', // Блок с обводкой не блокирует клики
                 ...(isMobile
                   ? {
                       bottom: 0,
                       left: leftPosition,
                       right: 0,
-                      height: '184px',
+                      height: '182px',
                       width: `calc(100% - (${parseInt(leftPosition, 10) * 1.6}px))`,
                     }
                   : {
