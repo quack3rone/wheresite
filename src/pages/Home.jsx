@@ -32,7 +32,7 @@ const Home = () => {
 
     let loadedCount = 0;
     const totalAssets = criticalAssets.length + 1; // +1 для проверки шрифтов
-    const minLoadTime = 800; // минимум 800ms для плавности
+    const minLoadTime = 400; // минимум 800ms для плавности
     const startTime = Date.now();
 
     const updateProgress = () => {
