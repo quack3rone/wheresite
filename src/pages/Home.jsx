@@ -22,49 +22,62 @@ const Home = () => {
 
   // Предзагрузка критических ресурсов
   useEffect(() => {
-    const criticalAssets = [
-      '/images/1primer.png',
-      '/images/2primer.png',
-      '/images/3primer.png',
-      '/images/4primer.png',
-    ];
+  const criticalAssets = [
+    '/images/1primer.png',
+    '/images/2primer.png',
+    '/images/3primer.png',
+    '/images/4primer.png',
+  ];
 
-    let loadedCount = 0;
-    const totalAssets = criticalAssets.length;
-    const minLoadTime = 100;
-    const startTime = Date.now();
+  let loadedCount = 0;
+  const totalAssets = criticalAssets.length;
+  
+  const updateProgress = () => {
+    const assetProgress = loadedCount / totalAssets;
+    const finalProgress = assetProgress * 100;
+    
+    setLoadingProgress(Math.floor(finalProgress));
+    
+    // Убираем загрузку сразу когда все ресурсы готовы
+    if (finalProgress >= 100) {
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 100); // Минимальная задержка для плавности
+    }
+  };
 
-    const updateProgress = () => {
-      const elapsedTime = Date.now() - startTime;
-      const timeProgress = Math.min(elapsedTime / minLoadTime, 1);
-      const assetProgress = loadedCount / totalAssets;
-      const finalProgress = Math.min(timeProgress, assetProgress) * 100;
-
-      setLoadingProgress(Math.floor(finalProgress));
-
-      if (finalProgress >= 100) {
-        setTimeout(() => {
-          setIsLoading(false);
-        }, 200);
-      }
-    };
-
-    criticalAssets.forEach(src => {
+  // Предзагрузка с Promise.all для более точного контроля
+  const loadImage = (src) => {
+    return new Promise((resolve, reject) => {
       const img = new Image();
       img.onload = () => {
         loadedCount++;
         updateProgress();
+        resolve(img);
       };
       img.onerror = () => {
         loadedCount++;
         updateProgress();
+        reject(new Error(`Failed to load ${src}`));
       };
       img.src = src;
     });
+  };
 
-    const progressInterval = setInterval(updateProgress, 50);
-    return () => clearInterval(progressInterval);
-  }, []);
+  // Загружаем все изображения параллельно
+  const loadAllImages = criticalAssets.map(loadImage);
+  
+  Promise.allSettled(loadAllImages).then(() => {
+    // Все изображения обработаны (загружены или ошибка)
+    if (loadedCount === totalAssets) {
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 100);
+    }
+  });
+
+  // Cleanup не нужен, так как убрали setInterval
+}, []);
 
 
   // Обработка колёсика мыши

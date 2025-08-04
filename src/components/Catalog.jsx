@@ -359,7 +359,7 @@ const targetMargin = progress >= 1
 
   let loadedCount = 0;
   const totalAssets = assetsToLoad.length;
-  const minLoadTime = 3500; // минимум 1.5 секунды
+  const minLoadTime = 3000; // минимум 1.5 секунды
   const startTime = Date.now();
 
   const updateProgress = () => {
