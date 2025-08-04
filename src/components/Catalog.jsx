@@ -4,6 +4,202 @@ import { useNavigate } from 'react-router-dom';
 import { useLocation, useNavigationType} from 'react-router-dom';
 import About from '../components/About';
 
+const MatrixEffect = ({ isVisible, isMobile }) => {
+  const canvasRef = useRef(null);
+  const animationRef = useRef(null);
+
+  useEffect(() => {
+    if (!isVisible || !canvasRef.current) return;
+
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext('2d');
+
+    const updateSize = () => {
+      canvas.width = isMobile ? window.innerWidth : window.innerWidth / 2;
+      canvas.height = window.innerHeight;
+    };
+    updateSize();
+    window.addEventListener('resize', updateSize);
+
+    const characters = "SO0N?#@son";
+    const fontSize = isMobile ? 14 : 15;
+    const columns = Math.floor(canvas.width / fontSize);
+    const drops = Array(columns).fill(0);
+
+    ctx.font = `${fontSize}px monospace`;
+    ctx.fillStyle = '#000';
+
+    // лестница — только на десктопе
+    const maxHeights = isMobile
+      ? null
+      : drops.map((_, i) => {
+          const progress = i / columns;
+          return Math.floor(canvas.height * (0.005 + 3 * progress)); // от 5% → 100%
+        });
+
+    const draw = () => {
+      for (let i = 0; i < drops.length; i++) {
+        const x = i * fontSize;
+        const y = drops[i] * fontSize;
+
+        ctx.clearRect(x, y - fontSize, fontSize, fontSize * 1.2);
+
+        // реже в mobile → больше "дыр"
+        if (!isMobile || Math.random() > 0.5) {
+          const char = characters[Math.floor(Math.random() * characters.length)];
+          ctx.fillText(char, x, y);
+        }
+
+        // лесенка — только desktop
+        if (!isMobile && y > maxHeights[i] && Math.random() > 0.5) {
+          drops[i] = 0;
+        }
+        // mobile — обычный сброс
+        if (isMobile && y > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+
+        drops[i]++;
+      }
+    };
+
+    const animate = () => {
+      draw();
+      animationRef.current = requestAnimationFrame(animate);
+    };
+    animate();
+
+    return () => {
+      window.removeEventListener('resize', updateSize);
+      if (animationRef.current) cancelAnimationFrame(animationRef.current);
+    };
+  }, [isVisible, isMobile]);
+
+  if (!isVisible) return null;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
+      style={{
+        position: 'fixed',
+        top: 0,
+        right: 0,
+        width: isMobile ? '100%' : '50%',
+        height: '100vh',
+        zIndex: 1,
+        backgroundColor: 'transparent',
+        pointerEvents: 'none'
+      }}
+    >
+      <canvas
+        ref={canvasRef}
+        style={{ width: '100%', height: '100%', background: 'transparent', filter: isMobile ? 'drop-shadow(0 4px 12px rgba(0,0,0,10))' : 'none' }}
+      />
+    </motion.div>
+  );
+};
+
+const MultipleFolders = ({ project, isMobile }) => {
+  if (!project || !project.isMultiple) return null;
+
+  return (
+    <div style={{ position: 'relative' }}>
+      {project.folders.map((folder, index) => (
+        <motion.div
+          key={folder.name}
+          initial={{
+            x: isMobile ? 0 : 800, // десктоп: справа, мобайл: по центру
+            y: isMobile ? 800 : 0,  // десктоп: по центру, мобайл: снизу
+            scale: 0.6,
+            opacity: 0,
+          }}
+          animate={{
+            x: isMobile ? folder.mobileHeight : folder.distance,
+            y: isMobile ? folder.mobileDistance : folder.height,
+            scale: 1,
+            opacity: 1,
+          }}
+          exit={{
+            x: isMobile ? 0 : 800,
+            y: isMobile ? 800 : 0,
+            scale: 0.6,
+            opacity: 0,
+          }}
+          transition={{
+            type: "spring",
+            stiffness: 120,
+            damping: 15,
+            mass: 1,
+            delay: folder.delay,
+            bounce: 0.3,
+          }}
+          style={{
+            position: "absolute",
+            left: isMobile
+              ? project.mobilePosition?.left
+              : project.position.left,
+            top: isMobile
+              ? project.mobilePosition?.top
+              : project.position.top,
+            transform: "translateX(-50%)",
+            zIndex: 3 - index,
+            pointerEvents: "none",
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          {/* Папка - ваша картинка */}
+          <motion.img
+            src={project.image} // используем вашу картинку папки
+            alt={folder.name}
+            animate={{
+              rotateY: [0, 3, -3, 0],
+            }}
+            transition={{
+              duration: 3,
+              repeat: Infinity,
+              delay: folder.delay + 1,
+            }}
+            style={{
+              width: isMobile ? "100px" : "200px",
+              height: isMobile ? "100px" : "200px",
+              objectFit: "contain",
+              filter: isMobile ? "drop-shadow(0 4px 6px rgba(0,0,0,1))" : "drop-shadow(0 4px 6px rgba(0,0,0,0.5))",
+            }}
+          />
+          
+          {/* Текст под папкой */}
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{
+              delay: folder.delay + 0.3,
+              duration: 0.4,
+            }}
+            style={{
+              marginTop: isMobile ? "-15px" : "-28px",
+              fontSize: isMobile ? "16px" : "20px",
+              fontWeight: "900",
+              color: "#333",
+              textAlign: "center",
+              fontFamily: "g",
+              filter: isMobile ? "drop-shadow(0 4px 6px rgba(0,0,0,1))" : "none",
+              filter: isMobile ? "drop-shadow(1px 1px 1px rgba(255, 255, 255, 1))" : "none",
+            }}
+          >
+            {folder.name}
+          </motion.div>
+        </motion.div>
+      ))}
+    </div>
+  );
+};
+
 const Catalog = ({ scrollY, onScrollEnd, isInteractive }) => {
   const [isScrolling, setIsScrolling] = useState(false);
   const [lastScrollTime, setLastScrollTime] = useState(Date.now());
@@ -259,14 +455,50 @@ useEffect(() => {
   {
     name: "Wheresite",
     url: "localhost:3000",
-    image: "/images/wheresite.png",
-    hoverColor: "#FF0733",
+    image: "/images/wheresitefolder.png",
+    hoverColor: "#49b6ffff",
     position: { left: "50%", top: "10%" },
     size: { width: "640px", height: "auto" },
     imageSize: { width: "640px", height: "auto" },
     mobilePosition: { left: "30%", top: "50%" },
     mobileSize: { width: "320px", height: "auto" },
-    mobileImageSize: { width: "320px", height: "auto" }
+    mobileImageSize: { width: "320px", height: "auto" },
+    // Новые свойства для множественных папок
+    isMultiple: true,
+    folders: [
+      { 
+        name: "wheresite?", 
+        distance: 20, 
+        delay: 0, 
+        height: -215,
+        mobileDistance: 150,
+        mobileHeight: 150
+      },
+      { 
+        name: "tiffali?", 
+        distance: 240, 
+        delay: 0.1, 
+        height: 55,
+        mobileDistance: -120,
+        mobileHeight: 30
+      },
+      { 
+        name: "mbirthday?", 
+        distance: 140, 
+        delay: 0.2, 
+        height: 300,
+        mobileDistance: 50,
+        mobileHeight: -100
+      },
+      { 
+        name: "soon?", 
+        distance: 400, 
+        delay: 0.3, 
+        height: 225,
+        mobileDistance: 280,
+        mobileHeight: 20
+      }
+    ]
   },
   {
     name: "TiffaLi",
@@ -282,12 +514,12 @@ useEffect(() => {
   },
   {
     name: "mbirthday",
-    url: "https://momsbirthday.online",
+    url: "https://momsbirthday.ru",
     image: "/images/mbirthday.jpg",
     hoverColor: "#00751bff",
-    position: { left: "50%", top: "15%" },
+    position: { left: "60%", top: "25%" },
     size: { width: "640px", height: "auto" },
-    imageSize: { width: "380px", height: "auto" },
+    imageSize: { width: "350px", height: "auto" },
     mobilePosition: { left: "20%", top: "25%" },
     mobileSize: { width: "320px", height: "auto" },
     mobileImageSize: { width: "250px", height: "auto" }
@@ -502,74 +734,101 @@ const targetMargin = progress >= 1
               Наши проекты
             </h2>
           </div>
-          {/* ВСТАВИТЬ СЮДА */}
+          
+          {/* Матрица для disabled проектов */}
           <AnimatePresence>
-            {activeProject && (
-              <motion.div
-                key={activeProject.name}
-                initial={{
-                  x: isMobile ? 0 : 800,
-                  y: isMobile ? 800 : 0,
-                  scale: 1.6,
-                  opacity: 0,
-                }}
-                animate={{
-                  x: 0,
-                  y: 0,
-                  scale: 1,
-                  opacity: 1,
-                }}
-                exit={{
-                  x: isMobile ? 0 : 800,
-                  y: isMobile ? 800 : 0,
-                  scale: 1.6,
-                  opacity: 0,
-                }}
-                transition={{
-                  type: "spring",
-                  stiffness: 90,
-                  damping: 20,
-                  mass: 0.8,
-                }}
-                style={{
-                  position: "fixed",
-                  left: isMobile
-                    ? activeProject.mobilePosition?.left
-                    : activeProject.position.left,
-                  top: isMobile
-                    ? activeProject.mobilePosition?.top
-                    : activeProject.position.top,
-                  transform: "translateX(-50%)",
-                  width: isMobile
-                    ? activeProject.mobileSize?.width
-                    : activeProject.size.width,
-                  height: isMobile
-                    ? activeProject.mobileSize?.height
-                    : activeProject.size.height,
-                  zIndex: 1,
-                  pointerEvents: "none",
-                  overflow: "hidden",
-                  clipPath: "inset(0 0 0 0)",
-                  transformOrigin: "right center",
-                }}
-              >
-                <motion.img
-                  src={activeProject.image}
-                  alt={activeProject.name}
-                  initial={false}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.6 }}
-                  style={{
-                    width: isMobile
-                      ? activeProject.mobileImageSize?.width
-                      : activeProject.imageSize?.width,
-                    height: isMobile
-                      ? activeProject.mobileImageSize?.height
-                      : activeProject.imageSize?.height,
-                    objectFit: "cover",
-                  }}
-                />
-              </motion.div>
+            {activeProject && activeProject.disabled && (
+              <MatrixEffect 
+                key="matrix-effect"
+                isVisible={true} 
+                isMobile={isMobile} 
+              />
+            )}
+          </AnimatePresence>
+          
+          {/* Картинки для обычных проектов */}
+          {/* Картинки для обычных проектов и множественные папки */}
+          <AnimatePresence>
+            {activeProject && !activeProject.disabled && (
+              <>
+                {activeProject.isMultiple ? (
+                  <MultipleFolders 
+                    key={activeProject.name}
+                    project={activeProject} 
+                    isMobile={isMobile} 
+                  />
+                ) : (
+                  <motion.div
+                    key={activeProject.name}
+                    initial={{
+                      x: isMobile ? 0 : 800,
+                      y: isMobile ? 800 : 0,
+                      scale: 1.6,
+                      opacity: 0,
+                    }}
+                    animate={{
+                      x: 0,
+                      y: 0,
+                      scale: 1,
+                      opacity: 1,
+                    }}
+                    exit={{
+                      x: isMobile ? 0 : 800,
+                      y: isMobile ? 800 : 0,
+                      scale: 1.6,
+                      opacity: 0,
+                    }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 90,
+                      damping: 20,
+                      mass: 0.8,
+                    }}
+                    style={{
+                      position: "fixed",
+                      left: isMobile
+                        ? activeProject.mobilePosition?.left
+                        : activeProject.position.left,
+                      top: isMobile
+                        ? activeProject.mobilePosition?.top
+                        : activeProject.position.top,
+                      transform: "translateX(-50%)",
+                      width: isMobile
+                        ? activeProject.mobileSize?.width
+                        : activeProject.size.width,
+                      height: isMobile
+                        ? activeProject.mobileSize?.height
+                        : activeProject.size.height,
+                      zIndex: 1,
+                      pointerEvents: "none",
+                      overflow: "hidden",
+                      clipPath: "inset(0 0 0 0)",
+                      transformOrigin: "right center",
+                    }}
+                  >
+                    <motion.img
+                      src={activeProject.image}
+                      alt={activeProject.name}
+                      initial={false}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 0.6 }}
+                      style={{
+                        width: isMobile
+                          ? activeProject.mobileImageSize?.width
+                          : activeProject.imageSize?.width,
+                        height: isMobile
+                          ? activeProject.mobileImageSize?.height
+                          : activeProject.imageSize?.height,
+                        objectFit: "cover",
+                        borderRadius: activeProject.name === 'mbirthday' ? '20px' : 'none',
+                        boxShadow: activeProject.name === 'mbirthday'
+                        ? '5px 3px 3px 0px rgba(0, 0, 0, 0.1)' // зелёное мягкое свечение
+                        : 'none'
+                      }}
+                    />
+                  </motion.div>
+                )}
+              </>
             )}
           </AnimatePresence>
 
