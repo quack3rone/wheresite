@@ -23,7 +23,6 @@ const Home = () => {
   // Предзагрузка критических ресурсов
   useEffect(() => {
     const criticalAssets = [
-      '/images/wheresite4.png',
       '/images/1primer.png',
       '/images/2primer.png',
       '/images/3primer.png',
@@ -32,7 +31,7 @@ const Home = () => {
 
     let loadedCount = 0;
     const totalAssets = criticalAssets.length;
-    const minLoadTime = 300;
+    const minLoadTime = 100;
     const startTime = Date.now();
 
     const updateProgress = () => {
