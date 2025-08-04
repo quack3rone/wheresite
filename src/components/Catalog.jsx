@@ -833,7 +833,6 @@ const Catalog = ({ scrollY, onScrollEnd, isInteractive }) => {
               }}
             />
 
-            {/* Новый блок для обводки */}
             <motion.div
               className="border-overlay"
               animate={
@@ -848,10 +847,10 @@ const Catalog = ({ scrollY, onScrollEnd, isInteractive }) => {
               transition={{ duration: 0.8, ease: 'easeInOut' }}
               style={{
                 position: 'absolute',
-                zIndex: 2, // Это выше, чем основной блок, чтобы быть поверх
-                borderRadius: '36px', // Скругление углов
-                border: '2.5px solid rgba(197, 197, 197, 0.7)', // Обводка
-                boxShadow: '0 1px 20px rgba(0, 0, 0, 0.3)', // Тень к обводке
+                zIndex: 2,
+                borderRadius: '36px',
+                border: '2.5px solid rgba(197, 197, 197, 0.7)',
+                boxShadow: '0 1px 20px rgba(0, 0, 0, 0.3)',
                 pointerEvents: 'none',
                 ...(isMobile
                   ? {
@@ -870,7 +869,6 @@ const Catalog = ({ scrollY, onScrollEnd, isInteractive }) => {
               }}
             />
 
-            {/* Второй блок для обводки без тени, сдвинутый на 1 пиксель вправо */}
             <motion.div
               className="border-overlay-2"
               animate={
@@ -885,10 +883,10 @@ const Catalog = ({ scrollY, onScrollEnd, isInteractive }) => {
               transition={{ duration: 0.8, ease: 'easeInOut' }}
               style={{
                 position: 'absolute',
-                zIndex: 3, // Это выше, чем первый блок, но ниже основного
-                borderRadius: '36px', // Скругление углов
-                border: '3px solid rgba(255, 255, 255, 0.7)', // Обводка
-                pointerEvents: 'none', // Блок с обводкой не блокирует клики
+                zIndex: 3,
+                borderRadius: '36px',
+                border: '3px solid rgba(255, 255, 255, 0.7)',
+                pointerEvents: 'none',
                 ...(isMobile
                   ? {
                       bottom: 0,
@@ -899,7 +897,7 @@ const Catalog = ({ scrollY, onScrollEnd, isInteractive }) => {
                     }
                   : {
                       top: 0,
-                      right: "28px", // Сдвигаем на 1 пиксель вправо
+                      right: "28px",
                       width: '270px',
                       height: '100%',
                     }),
@@ -928,7 +926,6 @@ const Catalog = ({ scrollY, onScrollEnd, isInteractive }) => {
               onMouseLeave={handleProjectMouseLeave}
               style={{ "--hover-color": project.hoverColor, pointerEvents: transitionActive ? 'none' : (progress >= 1 ? 'auto' : 'none'), }}
             >
-              {/* Обёртка для ограничения размеров обводки */}
               <div style={{ position: 'relative', display: 'inline-block' }}>
                 <motion.div
                   className={`project-item-outline ${project.disabled ? 'project-item--disabled' : ''}`}
@@ -957,7 +954,7 @@ const Catalog = ({ scrollY, onScrollEnd, isInteractive }) => {
 
           <motion.div
             className="catalog-footer"
-            ref={footerRef}  // 👈 Вот он!
+            ref={footerRef}
             animate={
               isMobile
                 ? { y: transitionActive ? -footerHeight : 0 }
@@ -1001,10 +998,9 @@ const Catalog = ({ scrollY, onScrollEnd, isInteractive }) => {
                     const route = "/about";
                     const isCurrentlyOnAbout = location.pathname === route;
                     
-                    console.log('Click:', { text, activeLink, isCurrentlyOnAbout, transitionActive }); // Для отладки
+                    console.log('Click:', { text, activeLink, isCurrentlyOnAbout, transitionActive });
                     
                     if (activeLink === text && isCurrentlyOnAbout && transitionActive) {
-                      // Если уже активная ссылка на About И мы там И transition активен - закрываем
                       setTransitionActive(false);
                       setActiveLink(null);
                       setTargetSection(null);
@@ -1012,22 +1008,18 @@ const Catalog = ({ scrollY, onScrollEnd, isInteractive }) => {
                         navigate('/');
                       }, 800);
                     } else if (activeLink === text && !isCurrentlyOnAbout) {
-                      // Если ссылка активна, но мы НЕ на about странице - деактивируем
                       setActiveLink(null);
                       setTargetSection(null);
                       setTransitionActive(false);
                     } else if (activeLink === text && isCurrentlyOnAbout && !transitionActive) {
-                      // Если активна и мы на about но transition неактивен - деактивируем
                       setActiveLink(null);
                       setTargetSection(null);
                     } else if (isCurrentlyOnAbout && activeLink !== text) {
-                      // Если уже на About, но другая ссылка - меняем активную секцию
                       setActiveLink(text);
                       setTargetSection(text);
                     } else {
-                      // Обычный переход - активируем ссылку и переходим
-                      setIsLoading(true); // Добавить
-                      setLoadingProgress(0); // Добавить
+                      setIsLoading(true);
+                      setLoadingProgress(0);
                       setTransitionActive(true);
                       setActiveLink(text);
                       setNavigationTarget(route);
@@ -1074,7 +1066,7 @@ const Catalog = ({ scrollY, onScrollEnd, isInteractive }) => {
             />
         </motion.div>
         <About 
-          transitionActive={transitionActive && !isLoading} // Изменить эту строку
+          transitionActive={transitionActive && !isLoading}
           footerRef={footerRef}
           targetSection={targetSection}
           isAlreadyOnAbout={location.pathname === '/about'}
@@ -1087,7 +1079,6 @@ const Catalog = ({ scrollY, onScrollEnd, isInteractive }) => {
         />
 
       </motion.div>
-      {/* Loading Screen */}
       <AnimatePresence>
         {isLoading && (
           <motion.div

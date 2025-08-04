@@ -10,8 +10,7 @@ import { useLocation } from 'react-router-dom';
 
 const Home = () => {
   const location = useLocation();
-  const isCatalogRoute = location.pathname !== '/'; // если не главная
-
+  const isCatalogRoute = location.pathname !== '/';
   const [scrollY, setScrollY] = useState(isCatalogRoute ? 250 : 0);
   const [isAnimationComplete, setIsAnimationComplete] = useState(isCatalogRoute);
   const [showCatalog, setShowCatalog] = useState(isCatalogRoute);
@@ -20,7 +19,6 @@ const Home = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [loadingProgress, setLoadingProgress] = useState(0);
 
-  // Предзагрузка критических ресурсов
   useEffect(() => {
   const criticalAssets = [
     '/images/1primer.jpeg',
@@ -38,15 +36,13 @@ const Home = () => {
     
     setLoadingProgress(Math.floor(finalProgress));
     
-    // Убираем загрузку сразу когда все ресурсы готовы
     if (finalProgress >= 100) {
       setTimeout(() => {
         setIsLoading(false);
-      }, 100); // Минимальная задержка для плавности
+      }, 100);
     }
   };
 
-  // Предзагрузка с Promise.all для более точного контроля
   const loadImage = (src) => {
     return new Promise((resolve, reject) => {
       const img = new Image();
@@ -64,11 +60,9 @@ const Home = () => {
     });
   };
 
-  // Загружаем все изображения параллельно
   const loadAllImages = criticalAssets.map(loadImage);
   
   Promise.allSettled(loadAllImages).then(() => {
-    // Все изображения обработаны (загружены или ошибка)
     if (loadedCount === totalAssets) {
       setTimeout(() => {
         setIsLoading(false);
@@ -76,11 +70,9 @@ const Home = () => {
     }
   });
 
-  // Cleanup не нужен, так как убрали setInterval
 }, []);
 
 
-  // Обработка колёсика мыши
   const handleWheel = (e) => {
     if (!isAnimationComplete || showCatalog) return;
 
@@ -96,7 +88,6 @@ const Home = () => {
     }
   };
 
-  // Обработка нажатия на стрелку (заменено на анимацию!)
   const handleArrowClick = () => {
     if (!isAnimationComplete) {
       setIsAnimationComplete(true);

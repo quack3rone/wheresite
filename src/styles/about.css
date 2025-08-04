@@ -8,11 +8,11 @@
 }
 
 .no-scrollbar {
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE/Edge */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 .no-scrollbar::-webkit-scrollbar {
-  display: none; /* Chrome/Safari */
+  display: none;
 }
 
 
@@ -64,16 +64,16 @@
   height: 280px;
   display: flex;
   overflow: hidden;
-  justify-content: center;    /* горизонтальное центрирование */
+  justify-content: center;
   margin: 0 auto;
-  border-radius: 32px; /* опционально - скругление углов */
+  border-radius: 32px;
   margin-top: 50px;
 }
 
 .video-container-mobile video {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* заполняет контейнер без искажений */
+  object-fit: cover;
 }
 
 .mobile-description {
@@ -181,15 +181,15 @@
   width: 850px;
   height: 550px;
   display: flex;
-  justify-content: center;    /* горизонтальное центрирование */
+  justify-content: center;
   overflow: hidden;
-  border-radius: 100px; /* опционально - скругление углов */
+  border-radius: 100px;
 }
 
 .video-container video {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* заполняет контейнер без искажений */
+  object-fit: cover;
 }
 
 .description {
@@ -1079,7 +1079,7 @@
   display: flex;
   gap: 5rem;
   justify-content: space-between;
-  align-items: flex-start; /* Добавлено для выравнивания по верху */
+  align-items: flex-start;
 }
 
 .text-content {
@@ -1462,7 +1462,6 @@
   line-height: 1;
 }
 
-/* Блок контактов в Telegram */
 .telegram-contact-section {
   display: flex;
   justify-content: space-between;
