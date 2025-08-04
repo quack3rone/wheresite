@@ -359,7 +359,7 @@ const targetMargin = progress >= 1
 
   let loadedCount = 0;
   const totalAssets = assetsToLoad.length;
-  const minLoadTime = 2000;
+  const minLoadTime = 3500;
   const startTime = Date.now();
 
   const updateProgress = () => {
@@ -367,8 +367,9 @@ const targetMargin = progress >= 1
     const timeProgress = Math.min(elapsedTime / minLoadTime, 1);
     const assetProgress = loadedCount / totalAssets;
     const finalProgress = Math.min(timeProgress, assetProgress) * 100;
+    
     setLoadingProgress(Math.floor(finalProgress));
-
+    
     if (finalProgress >= 100) {
       setTimeout(() => {
         setIsLoading(false);
@@ -377,19 +378,27 @@ const targetMargin = progress >= 1
     }
   };
 
+  // Загружаем ассеты
   assetsToLoad.forEach(src => {
     if (src.includes('.mp4')) {
-      const video = document.createElement('video');
-      video.preload = 'auto';
-      video.src = src;
-      video.oncanplaythrough = () => {
-        loadedCount++;
-        updateProgress();
-      };
-      video.onerror = () => {
-        loadedCount++;
-        updateProgress();
-      };
+      fetch(src)
+        .then(response => response.blob())
+        .then(blob => {
+          const objectURL = URL.createObjectURL(blob);
+          const video = document.createElement('video');
+          video.preload = 'auto';
+          video.src = objectURL;
+          video.onloadeddata = () => {
+            URL.revokeObjectURL(objectURL);
+            loadedCount++;
+            updateProgress();
+          };
+          video.onerror = () => {
+            URL.revokeObjectURL(objectURL);
+            loadedCount++;
+            updateProgress();
+          };
+        });
     } else {
       const img = new Image();
       img.onload = () => {
@@ -404,7 +413,9 @@ const targetMargin = progress >= 1
     }
   });
 
+  // Интервал для обновления прогресса по времени
   const progressInterval = setInterval(updateProgress, 50);
+
   return () => clearInterval(progressInterval);
 }, [isLoading]);
 
