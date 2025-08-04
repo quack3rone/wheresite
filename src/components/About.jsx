@@ -17,7 +17,7 @@ import '../styles/about.css';
   };
 
 
-const About = ({ transitionActive, footerRef, targetSection, onSectionReached, isAlreadyOnAbout, videoPreloaded, preloadedVideoRef }) => {
+const About = ({ transitionActive, footerRef, targetSection, onSectionReached, isAlreadyOnAbout }) => {
   const location = useLocation();
   const isActive = location.pathname === '/about';
   const [showContent, setShowContent] = useState(false);
@@ -125,19 +125,21 @@ const About = ({ transitionActive, footerRef, targetSection, onSectionReached, i
   }, [targetSection, isAlreadyOnAbout, showContent, onSectionReached]); // Убрали transitionActive из зависимостей
 
   useEffect(() => {
-  if (isActive && videoRef.current) {
-    // Если видео предзагружено, используем его
-    if (videoPreloaded && preloadedVideoRef.current) {
-      // Копируем предзагруженное видео в текущий элемент
-      videoRef.current.src = preloadedVideoRef.current.src;
-      videoRef.current.currentTime = 0;
-    }
-    
-    videoRef.current.play().catch((e) => {
-      console.error("Video failed to play:", e);
-    });
+  const video = videoRef.current;
+  if (isActive && video) {
+    const tryPlay = () => {
+      if (video.readyState >= 3) {
+        video.play().catch(e => console.error("Video failed to play:", e));
+      } else {
+        video.addEventListener("canplaythrough", () => {
+          video.play().catch(e => console.error("Video failed to play after canplaythrough:", e));
+        }, { once: true });
+      }
+    };
+    tryPlay();
   }
-}, [isActive, videoPreloaded]);
+}, [isActive]);
+
 
 
 
