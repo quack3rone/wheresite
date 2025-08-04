@@ -29,12 +29,11 @@ const MatrixEffect = ({ isVisible, isMobile }) => {
     ctx.font = `${fontSize}px monospace`;
     ctx.fillStyle = '#000';
 
-    // лестница — только на десктопе
     const maxHeights = isMobile
       ? null
       : drops.map((_, i) => {
           const progress = i / columns;
-          return Math.floor(canvas.height * (0.005 + 3 * progress)); // от 5% → 100%
+          return Math.floor(canvas.height * (0.005 + 3 * progress));
         });
 
     const draw = () => {
@@ -44,17 +43,15 @@ const MatrixEffect = ({ isVisible, isMobile }) => {
 
         ctx.clearRect(x, y - fontSize, fontSize, fontSize * 1.2);
 
-        // реже в mobile → больше "дыр"
         if (!isMobile || Math.random() > 0.5) {
           const char = characters[Math.floor(Math.random() * characters.length)];
           ctx.fillText(char, x, y);
         }
 
-        // лесенка — только desktop
         if (!isMobile && y > maxHeights[i] && Math.random() > 0.5) {
           drops[i] = 0;
         }
-        // mobile — обычный сброс
+
         if (isMobile && y > canvas.height && Math.random() > 0.975) {
           drops[i] = 0;
         }
@@ -111,8 +108,8 @@ const MultipleFolders = ({ project, isMobile }) => {
         <motion.div
           key={folder.name}
           initial={{
-            x: isMobile ? 0 : 800, // десктоп: справа, мобайл: по центру
-            y: isMobile ? 800 : 0,  // десктоп: по центру, мобайл: снизу
+            x: isMobile ? 0 : 800,
+            y: isMobile ? 800 : 0,
             scale: 0.6,
             opacity: 0,
           }}
@@ -152,9 +149,8 @@ const MultipleFolders = ({ project, isMobile }) => {
             alignItems: 'center',
           }}
         >
-          {/* Папка - ваша картинка */}
           <motion.img
-            src={project.image} // используем вашу картинку папки
+            src={project.image}
             alt={folder.name}
             animate={{
               rotateY: [0, 3, -3, 0],
@@ -172,7 +168,6 @@ const MultipleFolders = ({ project, isMobile }) => {
             }}
           />
           
-          {/* Текст под папкой */}
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -205,7 +200,7 @@ const Catalog = ({ scrollY, onScrollEnd, isInteractive }) => {
   const [offset, setOffset] = useState(0);
   const [autoScrollProgress, setAutoScrollProgress] = useState(0);
   const [autoScrollStart, setAutoScrollStart] = useState(null);
-  const [activeProject, setActiveProject] = useState(null); // <--- Текущий hover
+  const [activeProject, setActiveProject] = useState(null);
   const lastScrollY = useRef(0);
   const [transitionActive, setTransitionActive] = useState(false);
   const [activeLink, setActiveLink] = useState(null);
@@ -220,7 +215,7 @@ const Catalog = ({ scrollY, onScrollEnd, isInteractive }) => {
 
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
-  const footerRef = useRef(null); // ✅ добавлено
+  const footerRef = useRef(null);
 
   const mobileShift = 40;
   const desktopShift = 200;
@@ -233,29 +228,28 @@ const Catalog = ({ scrollY, onScrollEnd, isInteractive }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [loadingProgress, setLoadingProgress] = useState(0);
 
-  // Динамическое вычисление left в зависимости от ширины экрана
   const leftPosition = window.innerWidth <= 450
     ? "30px"
     : window.innerWidth >= 451 && window.innerWidth <= 768
-    ? "60px" // сдвигаем на 20px влево для ширины от 451px до 768px
-    : "60px"; // для ширины больше 768px, оставляем как было
+    ? "60px"
+    : "60px";
 
   useEffect(() => {
-  const updateMobileShift = () => {
-    const footerBaseHeight = 186; // базовая расчетная высота (как 268 у ширины)
-    const screenHeight = window.innerHeight;
+    const updateMobileShift = () => {
+      const footerBaseHeight = 186;
+      const screenHeight = window.innerHeight;
 
-    const adjustedHeight = screenHeight; // никаких zoom-факторов
-    const shift = Math.max(adjustedHeight - footerBaseHeight, 0);
-    setFooterHeight(shift);
-  };
+      const adjustedHeight = screenHeight;
+      const shift = Math.max(adjustedHeight - footerBaseHeight, 0);
+      setFooterHeight(shift);
+    };
 
-  if (window.innerWidth <= 768) {
-    updateMobileShift();
-    window.addEventListener("resize", updateMobileShift);
-    return () => window.removeEventListener("resize", updateMobileShift);
-  }
-}, []);
+    if (window.innerWidth <= 768) {
+      updateMobileShift();
+      window.addEventListener("resize", updateMobileShift);
+      return () => window.removeEventListener("resize", updateMobileShift);
+    }
+  }, []);
 
 
   useEffect(() => {
@@ -269,108 +263,95 @@ const Catalog = ({ scrollY, onScrollEnd, isInteractive }) => {
 
 
   useEffect(() => {
-  const updateShift = () => {
-    const footerWidth = 268;
-    const screenWidth = window.innerWidth;
+    const updateShift = () => {
+      const footerWidth = 268;
+      const screenWidth = window.innerWidth;
 
-    // Динамический zoomFactor
-    let zoomFactor = 1;
-    if (screenWidth >= 3840) {
-      zoomFactor = 2.273;
-    } else if (screenWidth >= 2560) {
-      zoomFactor = 1.540;
-    } else if (screenWidth >= 2048) {
-      zoomFactor = 1.204;
-    } else if (screenWidth >= 1920) {
-      zoomFactor = 1.123;
-    } else if (screenWidth >= 1680) {
-      zoomFactor = 1.175;
-    } else if (screenWidth >= 1600) {
-      zoomFactor = 1.001;
-    } 
+      let zoomFactor = 1;
+      if (screenWidth >= 3840) {
+        zoomFactor = 2.273;
+      } else if (screenWidth >= 2560) {
+        zoomFactor = 1.540;
+      } else if (screenWidth >= 2048) {
+        zoomFactor = 1.204;
+      } else if (screenWidth >= 1920) {
+        zoomFactor = 1.123;
+      } else if (screenWidth >= 1680) {
+        zoomFactor = 1.175;
+      } else if (screenWidth >= 1600) {
+        zoomFactor = 1.001;
+      } 
 
-    const adjustedWidth = screenWidth / zoomFactor;
-    const shift = Math.max(adjustedWidth - footerWidth, 0);
-    setFooterShift(shift);
-  };
+      const adjustedWidth = screenWidth / zoomFactor;
+      const shift = Math.max(adjustedWidth - footerWidth, 0);
+      setFooterShift(shift);
+    };
 
-  updateShift(); // сразу
-  window.addEventListener("resize", updateShift);
-  return () => window.removeEventListener("resize", updateShift);
-}, []);
-
+    updateShift();
+    window.addEventListener("resize", updateShift);
+    return () => window.removeEventListener("resize", updateShift);
+  }, []);
 
 
-// 👉 если на about, сразу активируем transition
-useEffect(() => {
-  const handleClickOutside = (event) => {
-    // Проверяем, был ли клик вне футера
-    if (footerRef.current && !footerRef.current.contains(event.target)) {
-      // Если мы не на about странице и есть активная ссылка - сбрасываем
-      if (location.pathname !== '/about' && activeLink) {
-        setActiveLink(null);
-        setTargetSection(null);
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (footerRef.current && !footerRef.current.contains(event.target)) {
+        if (location.pathname !== '/about' && activeLink) {
+          setActiveLink(null);
+          setTargetSection(null);
+        }
+      }
+    };
+
+    if (isMobile) {
+      document.addEventListener('touchstart', handleClickOutside);
+      return () => document.removeEventListener('touchstart', handleClickOutside);
+    }
+  }, [activeLink, location.pathname, isMobile]);
+
+
+  useEffect(() => {
+    if (location.pathname === '/about') {
+      if (navigationType === 'POP') {
+        setTransitionActive(true);
+        setActiveLink("О нас");
+      } else {
+        setTransitionActive(true);
+        setActiveLink("О нас");
       }
     }
-  };
 
-  // Добавляем обработчик только на мобильных устройствах
-  if (isMobile) {
-    document.addEventListener('touchstart', handleClickOutside);
-    return () => document.removeEventListener('touchstart', handleClickOutside);
-  }
-}, [activeLink, location.pathname, isMobile]);
-
-
-useEffect(() => {
-  // Обработка прямого перехода на /about
-  if (location.pathname === '/about') {
-    if (navigationType === 'POP') {
-      // Нажата стрелка "вперёд" из истории
-      setTransitionActive(true);
-      setActiveLink("О нас");
-    } else {
-      // Обычный переход с кнопки
-      setTransitionActive(true);
-      setActiveLink("О нас");
+    if (location.pathname === '/' && navigationType === 'POP') {
+      setIsBackNavigation(true);
+      setTransitionActive(false);
+      setActiveLink(null);
+      setTargetSection(null);
     }
-  }
+  }, [location.pathname, navigationType]);
 
-  if (location.pathname === '/' && navigationType === 'POP') {
-    // Назад по стрелке браузера
-    setIsBackNavigation(true);
-    setTransitionActive(false); // проигрываем анимацию обратно
-    setActiveLink(null);
-    setTargetSection(null); // Добавить эту строку
-  }
-}, [location.pathname, navigationType]);
-
-// Сброс при программном переходе на главную
-useEffect(() => {
-  if (location.pathname === '/' && !transitionActive && !isBackNavigation) {
-    setTargetSection(null);
-    setActiveLink(null);
-  }
-}, [location.pathname, transitionActive, isBackNavigation]);
+  useEffect(() => {
+    if (location.pathname === '/' && !transitionActive && !isBackNavigation) {
+      setTargetSection(null);
+      setActiveLink(null);
+    }
+  }, [location.pathname, transitionActive, isBackNavigation]);
 
 
-useEffect(() => {
-  // Запускаем переход после анимации
-  if (transitionActive && navigationTarget && !isLoading) { 
-    const timeout = setTimeout(() => {
-      navigate(navigationTarget);
-    }, 800);
-    return () => clearTimeout(timeout);
-  }
+  useEffect(() => {
+    if (transitionActive && navigationTarget && !isLoading) { 
+      const timeout = setTimeout(() => {
+        navigate(navigationTarget);
+      }, 800);
+      return () => clearTimeout(timeout);
+    }
 
-  if (isBackNavigation) {
-    const timeout = setTimeout(() => {
-      // Просто сбрасываем флаг — переход уже был браузером
-      setIsBackNavigation(false);
-    }, 800);
-    return () => clearTimeout(timeout);
-  }
-}, [transitionActive, navigationTarget, isBackNavigation, navigate, isLoading]);
+    if (isBackNavigation) {
+      const timeout = setTimeout(() => {
+        setIsBackNavigation(false);
+      }, 800);
+      return () => clearTimeout(timeout);
+    }
+  }, [transitionActive, navigationTarget, isBackNavigation, navigate, isLoading]);
 
 
   const baseProgress = Math.pow(Math.min(Math.max(scrollY / 220, 0), 1), 1.4); 
@@ -393,7 +374,6 @@ useEffect(() => {
 
   useEffect(() => {
     const handleScroll = (e) => {
-      // ❗ Не обрабатываем скролл, если progress == 1 и мы не на главной
       if (progress >= 1 && location.pathname !== '/') return;
 
       const direction = e.deltaY > 0 ? 1 : -1;
@@ -426,43 +406,34 @@ useEffect(() => {
   const [smoothedProgress, setSmoothedProgress] = useState(0);
 
   useEffect(() => {
-  let animationFrame;
+    let animationFrame;
 
-  const animate = () => {
-    setSmoothedProgress(prev => {
-      const diff = progress - prev;
-      const speed = 0.1; // 0.05 — медленно, 0.2 — быстро
-      if (Math.abs(diff) < 0.001) return progress;
-      return prev + diff * speed;
-    });
+    const animate = () => {
+      setSmoothedProgress(prev => {
+        const diff = progress - prev;
+        const speed = 0.1;
+        if (Math.abs(diff) < 0.001) return progress;
+        return prev + diff * speed;
+      });
+      animationFrame = requestAnimationFrame(animate);
+    };
+
     animationFrame = requestAnimationFrame(animate);
-  };
+    return () => cancelAnimationFrame(animationFrame);
+  }, [progress]);
 
-  animationFrame = requestAnimationFrame(animate);
-  return () => cancelAnimationFrame(animationFrame);
-}, [progress]);
-
-
-  // useEffect(() => {
-  //   const tiffa = projects.find(p => p.name === "mbirthday");
-  //   setActiveProject(tiffa);
-  // }, []);
-
-
-  // Проекты с URL и картинкой
   const projects = [
   {
     name: "Wheresite",
     url: "https://wheresite.ru",
     image: "/images/wheresitefolder.png",
-    hoverColor: "#5ECCFA",
+    hoverColor: "#4faed6ff",
     position: { left: "50%", top: "10%" },
     size: { width: "640px", height: "auto" },
     imageSize: { width: "640px", height: "auto" },
     mobilePosition: { left: "30%", top: "50%" },
     mobileSize: { width: "320px", height: "auto" },
     mobileImageSize: { width: "320px", height: "auto" },
-    // Новые свойства для множественных папок
     isMultiple: true,
     folders: [
       { 
@@ -549,98 +520,94 @@ useEffect(() => {
     mobileImageSize: { width: "320px", height: "auto" },
     disabled: true,
   },
-];
-
-// Обработчики событий мыши (остаются без изменений)
-const handleProjectMouseEnter = (project) => {
-  setActiveProject(project);
-};
-
-const handleProjectMouseLeave = () => {
-  setActiveProject(null);
-};
-
-// Сброс targetSection при переходе на главную
-useEffect(() => {
-  if (location.pathname === '/' && !transitionActive) {
-    setTargetSection(null);
-  }
-}, [location.pathname, transitionActive]);
-
-const targetMargin = progress >= 1
-  ? 0
-  : (1 - smoothedProgress) * -shift;
-
-  useEffect(() => {
-  if (!isLoading) return;
-
-  const assetsToLoad = [
-    '/video/wheresitemp52whitefast.mp4',
-    '/icons/user.svg',
-    '/icons/sensor-alert.svg',
-    '/icons/magic-wand.svg',
-    '/icons/key.svg',
-    '/icons/money-simple-from-bracket.svg',
-    '/icons/site-browser.svg',
-    '/icons/apps.svg',
-    '/icons/fingerprint.svg',
-    '/icons/quote.svg',
-    '/icons/telegram.svg'
   ];
 
-  let loadedCount = 0;
-  const totalAssets = assetsToLoad.length;
-  const minLoadTime = 2500; // минимум 1.5 секунды
-  const startTime = Date.now();
-
-  const updateProgress = () => {
-    const elapsedTime = Date.now() - startTime;
-    const timeProgress = Math.min(elapsedTime / minLoadTime, 1);
-    const assetProgress = loadedCount / totalAssets;
-    const finalProgress = Math.min(timeProgress, assetProgress) * 100;
-    
-    setLoadingProgress(Math.floor(finalProgress));
-    
-    if (finalProgress >= 100) {
-      setTimeout(() => {
-        setIsLoading(false);
-        setLoadingProgress(0);
-      }, 200);
-    }
+  const handleProjectMouseEnter = (project) => {
+    setActiveProject(project);
   };
 
-  // Загружаем ассеты
-  assetsToLoad.forEach(src => {
-    if (src.includes('.mp4')) {
-      const video = document.createElement('video');
-      video.onloadeddata = () => {
-        loadedCount++;
-        updateProgress();
-      };
-      video.onerror = () => {
-        loadedCount++;
-        updateProgress();
-      };
-      video.src = src;
-    } else {
-      const img = new Image();
-      img.onload = () => {
-        loadedCount++;
-        updateProgress();
-      };
-      img.onerror = () => {
-        loadedCount++;
-        updateProgress();
-      };
-      img.src = src;
+  const handleProjectMouseLeave = () => {
+    setActiveProject(null);
+  };
+
+  useEffect(() => {
+    if (location.pathname === '/' && !transitionActive) {
+      setTargetSection(null);
     }
-  });
+  }, [location.pathname, transitionActive]);
 
-  // Интервал для обновления прогресса по времени
-  const progressInterval = setInterval(updateProgress, 50);
+  const targetMargin = progress >= 1
+    ? 0
+    : (1 - smoothedProgress) * -shift;
 
-  return () => clearInterval(progressInterval);
-}, [isLoading]);
+  useEffect(() => {
+    if (!isLoading) return;
+
+    const assetsToLoad = [
+      '/video/wheresitemp52whitefast.mp4',
+      '/icons/user.svg',
+      '/icons/sensor-alert.svg',
+      '/icons/magic-wand.svg',
+      '/icons/key.svg',
+      '/icons/money-simple-from-bracket.svg',
+      '/icons/site-browser.svg',
+      '/icons/apps.svg',
+      '/icons/fingerprint.svg',
+      '/icons/quote.svg',
+      '/icons/telegram.svg'
+    ];
+
+    let loadedCount = 0;
+    const totalAssets = assetsToLoad.length;
+    const minLoadTime = 2500;
+    const startTime = Date.now();
+
+    const updateProgress = () => {
+      const elapsedTime = Date.now() - startTime;
+      const timeProgress = Math.min(elapsedTime / minLoadTime, 1);
+      const assetProgress = loadedCount / totalAssets;
+      const finalProgress = Math.min(timeProgress, assetProgress) * 100;
+      
+      setLoadingProgress(Math.floor(finalProgress));
+      
+      if (finalProgress >= 100) {
+        setTimeout(() => {
+          setIsLoading(false);
+          setLoadingProgress(0);
+        }, 200);
+      }
+    };
+
+    assetsToLoad.forEach(src => {
+      if (src.includes('.mp4')) {
+        const video = document.createElement('video');
+        video.onloadeddata = () => {
+          loadedCount++;
+          updateProgress();
+        };
+        video.onerror = () => {
+          loadedCount++;
+          updateProgress();
+        };
+        video.src = src;
+      } else {
+        const img = new Image();
+        img.onload = () => {
+          loadedCount++;
+          updateProgress();
+        };
+        img.onerror = () => {
+          loadedCount++;
+          updateProgress();
+        };
+        img.src = src;
+      }
+    });
+
+    const progressInterval = setInterval(updateProgress, 50);
+
+    return () => clearInterval(progressInterval);
+  }, [isLoading]);
 
 
   return (
@@ -675,22 +642,20 @@ const targetMargin = progress >= 1
           zIndex: 4,
           padding: '1rem',
           overflow: 'hidden',
-          pointerEvents: progress >= 1 ? 'auto' : 'none', // ✅ Вот это главное
+          pointerEvents: progress >= 1 ? 'auto' : 'none',
 
-          overflow: 'hidden', // 🔒 чтобы контент не вылезал за границы
+          overflow: 'hidden',
         }}
       >
         <div className="left-rounded-bar"></div>
 
         <div className="grid-overlay">
-          {/* Горизонтальные */}
           <div className="horizontal-line" />
           <div className="horizontal-line" />
           <div className="horizontal-line" />
           <div className="horizontal-line" />
           <div className="horizontal-line" />
 
-          {/* Вертикальные */}
           <div className="vertical-line center" />
           <div className="vertical-line left-1" />
           <div className="vertical-line left-2" />
@@ -708,7 +673,6 @@ const targetMargin = progress >= 1
             ease: "easeOut"
           }}
         >
-
 
           <div className="catalog-title-container" style={{ position: 'relative' }}>
             <motion.h2
@@ -733,8 +697,7 @@ const targetMargin = progress >= 1
               Наши проекты
             </h2>
           </div>
-          
-          {/* Матрица для disabled проектов */}
+ 
           <AnimatePresence>
             {activeProject && activeProject.disabled && (
               <MatrixEffect 
@@ -745,8 +708,6 @@ const targetMargin = progress >= 1
             )}
           </AnimatePresence>
           
-          {/* Картинки для обычных проектов */}
-          {/* Картинки для обычных проектов и множественные папки */}
           <AnimatePresence>
             {activeProject && !activeProject.disabled && (
               <>
@@ -821,7 +782,7 @@ const targetMargin = progress >= 1
                         objectFit: "cover",
                         borderRadius: activeProject.name === 'mbirthday' ? '20px' : 'none',
                         boxShadow: activeProject.name === 'mbirthday'
-                        ? '5px 3px 3px 0px rgba(0, 0, 0, 0.1)' // зелёное мягкое свечение
+                        ? '5px 3px 3px 0px rgba(0, 0, 0, 0.1)'
                         : 'none'
                       }}
                     />
@@ -839,21 +800,21 @@ const targetMargin = progress >= 1
                   ? {
                       y: transitionActive ? -footerHeight : 0,
                       backdropFilter: transitionActive ? 'blur(6px) saturate(180%) contrast(90%)' : 'blur(3px) saturate(180%) contrast(90%)',
-                      WebkitBackdropFilter: transitionActive ? 'blur(6px) saturate(180%) contrast(90%)' : 'blur(3px) saturate(180%) contrast(90%)', // Safari
+                      WebkitBackdropFilter: transitionActive ? 'blur(6px) saturate(180%) contrast(90%)' : 'blur(3px) saturate(180%) contrast(90%)',
                     }
                   : {
                       x: transitionActive ? -footerShift : 0,
                       backdropFilter: transitionActive ? 'blur(9px) saturate(180%) contrast(90%)' : 'blur(3px) saturate(180%) contrast(90%)',
-                      WebkitBackdropFilter: transitionActive ? 'blur(9px) saturate(180%) contrast(90%)' : 'blur(3px) saturate(180%) contrast(90%)', // Safari
+                      WebkitBackdropFilter: transitionActive ? 'blur(9px) saturate(180%) contrast(90%)' : 'blur(3px) saturate(180%) contrast(90%)',
                     }
               }
               transition={{ duration: 0.8, ease: 'easeInOut' }}
               style={{
                 position: 'absolute',
                 zIndex: 1,
-                filter: 'url(#liquid-distortion)', // Применяем искажения
-                WebkitFilter: 'url(#liquid-distortion)', // Для Safari
-                borderRadius: '36px', // Скругление углов
+                filter: 'url(#liquid-distortion)',
+                WebkitFilter: 'url(#liquid-distortion)',
+                borderRadius: '36px',
                 ...(isMobile
                   ? {
                       bottom: 0,
@@ -1010,7 +971,16 @@ const targetMargin = progress >= 1
                 <div className="footer-label">WHERE SITE?</div>
                 <div className="footer-meta">
                   <div>2025, Where is site?</div>
-                  <div>wheresite9@gmail.com</div>
+                  <div>
+                  <a 
+                    href="https://t.me/wheresite" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    style={{ color: 'inherit', textDecoration: 'underline' }}
+                  >
+                    t.me/wheresite
+                  </a>
+                </div>
                 </div>
               </div>
             ) : (
@@ -1074,7 +1044,16 @@ const targetMargin = progress >= 1
               <div className="footer-meta">
                 <div>2025</div>
                 <div>Where is site?</div>
-                <div>wheresite9@gmail.com</div>
+                <div>
+                  <a 
+                    href="https://t.me/wheresite" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    style={{ color: 'inherit', textDecoration: 'underline' }}
+                  >
+                    t.me/wheresite
+                  </a>
+                </div>
               </div>
             )}
 

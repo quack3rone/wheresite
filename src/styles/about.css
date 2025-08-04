@@ -7,6 +7,15 @@
   color: rgba(255,255,255,0.25);
 }
 
+.no-scrollbar {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+
+
 /* Мобильная версия */
 .container-mobile {
   height: 3500px;

@@ -3,7 +3,6 @@ import { useLocation } from 'react-router-dom';
 import { motion, AnimatePresence, delay } from 'framer-motion';
 import '../styles/about.css';
 
-  // Добавь перед const About = ({ ... }) => {
   const debounce = (func, wait) => {
     let timeout;
     return function executedFunction(...args) {
@@ -26,7 +25,7 @@ const About = ({ transitionActive, footerRef, targetSection, onSectionReached, i
   const scrollRef = useRef(null);
   const containerRef = useRef(null);
   const [scrollY, setScrollY] = useState(0);
-  const [footerWidth, setFooterWidth] = useState(268); // начальное значение
+  const [footerWidth, setFooterWidth] = useState(268);
   const [aboutLeftShift, setAboutLeftShift] = useState(0);
   const videoRef = useRef(null);
 
@@ -34,13 +33,12 @@ const About = ({ transitionActive, footerRef, targetSection, onSectionReached, i
   const [isAutoScrolling, setIsAutoScrolling] = useState(false);
 
   const getDesktopSectionThresholds = (width) => {
-    // Базовые значения (можно настроить под ваш дизайн)
     if (width < 1600) return { reviews: 2710, prices: 3735, order: 4965 };
     if (width < 1680) return { reviews: 2770, prices: 3600, order: 4670 };
     if (width < 1920) return { reviews: 3020, prices: 4075, order: 5340 };
     if (width < 2048) return { reviews: 3080, prices: 4170, order: 5490 };
     if (width < 2560) return { reviews: 3500, prices: 4300, order: 6000 };
-    return { reviews: 4000, prices: 5000, order: 7000 }; // Для очень больших экранов
+    return { reviews: 4000, prices: 5000, order: 7000 };
   };
 
   const getMobileSectionThresholds = (width) => {
@@ -49,39 +47,32 @@ const About = ({ transitionActive, footerRef, targetSection, onSectionReached, i
     if (width < 400) return { reviews: 1900, prices: 2675, order: 3610 };
     if (width < 420) return { reviews: 1900, prices: 2675, order: 3545 };
     if (width < 440) return { reviews: 1815, prices: 2545, order: 3445 };
-    return { reviews: 1885, prices: 2620, order: 3440 }; // Примерные значения для мобилок
+    return { reviews: 1885, prices: 2620, order: 3440 };
   };
 
-  // Сброс скролла при выходе с About
   useEffect(() => {
     if (!showContent && scrollRef.current) {
-      // Сбрасываем когда контент скрывается (переход на главную)
       scrollRef.current.scrollTop = 0;
       setScrollY(0);
       setCurrentSection("О нас");
     }
   }, [showContent]);
 
-  // Автоскролл к нужной секции
   useEffect(() => {
     if (targetSection && !isAutoScrolling) {
-      // Если уже были на About - скролим сразу, если нет - ждем 2 секунды
       const delay = isAlreadyOnAbout ? 0 : 2000;
       
       const timer = setTimeout(() => {
-        // Проверяем что About действительно открыт и готов к скроллу
         if (!scrollRef.current || !showContent) return;
         
         setIsAutoScrolling(true);
         
         let targetScrollPosition = 0;
       
-        // Получаем текущие пороги с учетом ширины экрана
         const thresholds = isMobile 
           ? getMobileSectionThresholds(window.innerWidth) 
           : getDesktopSectionThresholds(window.innerWidth);
         
-        // Добавляем +10 к каждому порогу
         switch (targetSection) {
           case "О нас":
             targetScrollPosition = 1;
@@ -106,14 +97,12 @@ const About = ({ transitionActive, footerRef, targetSection, onSectionReached, i
           });
         }
 
-        // Устанавливаем правильную секцию сразу после начала скролла
         setTimeout(() => {
           setCurrentSection(targetSection);
           if (onSectionReached) {
             onSectionReached(targetSection);
           }
           
-          // Отключаем флаг автоскролла
           setTimeout(() => {
             setIsAutoScrolling(false);
           }, 500);
@@ -122,23 +111,23 @@ const About = ({ transitionActive, footerRef, targetSection, onSectionReached, i
 
       return () => clearTimeout(timer);
     }
-  }, [targetSection, isAlreadyOnAbout, showContent, onSectionReached]); // Убрали transitionActive из зависимостей
+  }, [targetSection, isAlreadyOnAbout, showContent, onSectionReached]);
 
   useEffect(() => {
-  const video = videoRef.current;
-  if (isActive && video) {
-    const tryPlay = () => {
-      if (video.readyState >= 3) {
-        video.play().catch(e => console.error("Video failed to play:", e));
-      } else {
-        video.addEventListener("canplaythrough", () => {
-          video.play().catch(e => console.error("Video failed to play after canplaythrough:", e));
-        }, { once: true });
-      }
-    };
-    tryPlay();
-  }
-}, [isActive]);
+    const video = videoRef.current;
+    if (isActive && video) {
+      const tryPlay = () => {
+        if (video.readyState >= 3) {
+          video.play().catch(e => console.error("Video failed to play:", e));
+        } else {
+          video.addEventListener("canplaythrough", () => {
+            video.play().catch(e => console.error("Video failed to play after canplaythrough:", e));
+          }, { once: true });
+        }
+      };
+      tryPlay();
+    }
+  }, [isActive]);
 
 
 
@@ -150,10 +139,9 @@ const About = ({ transitionActive, footerRef, targetSection, onSectionReached, i
     if (width >= 2048 && width < 2560) return -295;
     if (width >= 2560 && width < 3840) return -335;
     if (width >= 3840) return -415;
-    return -190; // значение по умолчанию
+    return -190;
   };
 
-   // Получаем ширину футера через footerRef
   useEffect(() => {
     const updateFooterWidth = () => {
       if (footerRef.current) {
@@ -165,7 +153,7 @@ const About = ({ transitionActive, footerRef, targetSection, onSectionReached, i
 
     const debouncedResize = debounce(updateFooterWidth, 150);
 
-    updateFooterWidth(); // сразу
+    updateFooterWidth();
     window.addEventListener('resize', debouncedResize);
 
     return () => {
@@ -173,7 +161,6 @@ const About = ({ transitionActive, footerRef, targetSection, onSectionReached, i
     };
   }, [footerRef]);
 
-  // Также можно использовать ResizeObserver для более точного отслеживания
   useEffect(() => {
     if (!footerRef.current) return;
 
@@ -197,19 +184,18 @@ const About = ({ transitionActive, footerRef, targetSection, onSectionReached, i
       let shift = 0;
 
       if (width < 1680) {
-        shift = -31; // левее на 10px
+        shift = -31;
       } else if (width >= 1680 && width < 1920) {
-        shift = 15; // правее на 5px
+        shift = 15;
       } else if (width >= 1920 && width < 2048) {
         shift = 1;
       } else if (width >= 2048 && width < 2560) {
-        shift = 22; // примерно правее
+        shift = 22;
       } else if (width >= 2560 && width < 3840) {
-        shift = 111; // ещё правее
+        shift = 111;
       } else if (width >= 3840) {
-        shift = 305; // ещё правее
+        shift = 305;
       }
-
 
       setAboutLeftShift(shift);
     };
@@ -233,35 +219,35 @@ const About = ({ transitionActive, footerRef, targetSection, onSectionReached, i
   }, [isActive, transitionActive]);
 
   useEffect(() => {
-  const currentRef = scrollRef.current;
-  if (!currentRef) return;
+    const currentRef = scrollRef.current;
+    if (!currentRef) return;
 
-  const handleScroll = () => {
-    const scrollTop = currentRef.scrollTop;
-    setScrollY(scrollTop);
+    const handleScroll = () => {
+      const scrollTop = currentRef.scrollTop;
+      setScrollY(scrollTop);
 
-    if (isAutoScrolling) return;
+      if (isAutoScrolling) return;
 
-    const thresholds = isMobile 
-      ? getMobileSectionThresholds(window.innerWidth) 
-      : getDesktopSectionThresholds(window.innerWidth);
+      const thresholds = isMobile 
+        ? getMobileSectionThresholds(window.innerWidth) 
+        : getDesktopSectionThresholds(window.innerWidth);
 
-    let newSection = "О нас";
+      let newSection = "О нас";
 
-    if (scrollTop > thresholds.order) newSection = "Заказать сайт";
-    else if (scrollTop > thresholds.prices) newSection = "Цены";
-    else if (scrollTop > thresholds.reviews) newSection = "Отзывы";
+      if (scrollTop > thresholds.order) newSection = "Заказать сайт";
+      else if (scrollTop > thresholds.prices) newSection = "Цены";
+      else if (scrollTop > thresholds.reviews) newSection = "Отзывы";
 
-    if (newSection !== currentSection) {
-      setCurrentSection(newSection);
-      onSectionReached?.(newSection);
-    }
-  };
+      if (newSection !== currentSection) {
+        setCurrentSection(newSection);
+        onSectionReached?.(newSection);
+      }
+    };
 
-  currentRef.addEventListener('scroll', handleScroll);
-  return () => currentRef.removeEventListener('scroll', handleScroll);
-}, [scrollRef.current, currentSection, isMobile, onSectionReached, isAutoScrolling]); // Добавили isAutoScrolling в зависимости
-  if (!isActive) return null;
+    currentRef.addEventListener('scroll', handleScroll);
+    return () => currentRef.removeEventListener('scroll', handleScroll);
+  }, [scrollRef.current, currentSection, isMobile, onSectionReached, isAutoScrolling]);
+    if (!isActive) return null;
 
   const aboutVariants = {
   hidden: {
@@ -273,7 +259,7 @@ const About = ({ transitionActive, footerRef, targetSection, onSectionReached, i
     y: 0,
     transition: {
       duration: 0.9,
-      ease: [0.25, 0.1, 0.25, 1], // cubic-bezier, более плавная кривая
+      ease: [0.25, 0.1, 0.25, 1],
       delay: 0.4,
     },
   },
@@ -282,17 +268,16 @@ const About = ({ transitionActive, footerRef, targetSection, onSectionReached, i
     y: isMobile ? 50 : -30,
     transition: {
       duration: 0.3,
-      ease: [0.4, 0.2, 0.7, 0.8], // быстрая анимация исчезновения
+      ease: [0.4, 0.2, 0.7, 0.8],
     },
   },
 };
-
-  
 
 return (
     <AnimatePresence mode="wait">
       {showContent && (
         <motion.div
+          className="no-scrollbar"
           key="about"
           variants={aboutVariants}
           initial="hidden"
@@ -308,7 +293,7 @@ return (
             overflowX: 'hidden',
             zIndex: 10,
             backgroundColor: 'transparent',
-            borderRadius: isMobile ? '36px 36px 0px 0px' : '36px 0px 0px 36px', // ✅ добавлено
+            borderRadius: isMobile ? '36px 36px 0px 0px' : '36px 0px 0px 36px',
           }}
           ref={scrollRef}
         >
@@ -449,7 +434,7 @@ return (
                   ))}
                 </motion.div>
               </motion.div>
-              {/* Блок 2 — отзывы */}
+              {/* Блок 2 - отзывы */}
               <div className="mobile-reviews-section">
                 <div className="mobile-review-card">
                   <div className="mobile-review-header-block">
@@ -683,12 +668,12 @@ return (
                   {/* Вопросительные знаки */}
                   <motion.div
                     className="question-line"
-                    animate={{ x: Math.min(scrollY * -1, -500) }} // ограничим до 4 блоков
+                    animate={{ x: Math.min(scrollY * -1, -500) }}
                     transition={{ type: 'tween', ease: 'linear', duration: 0.1 }}
                   >
                     {'? '.repeat(12)}
                   </motion.div>
-                  {/* Блок 2 — вертикальный текст */}
+                  {/* Блок 2 - вертикальный текст */}
                   <motion.div className="vertical-text-section-reviews-about">
                     <motion.div
                       animate={{ 
@@ -708,7 +693,7 @@ return (
                       ))}
                     </motion.div>
                   </motion.div>
-                  {/* Блок 2 — отзывы */}
+                  {/* Блок 2 - отзывы */}
                   <div className="reviews-section">
                     <div className="review-card">
                       <div className="review-header-block">
@@ -742,7 +727,7 @@ return (
                       </a>
                     </div>
                   </div>
-                  {/* Блок 3 — вертикальный текст */}
+                  {/* Блок 3 - вертикальный текст */}
                   <motion.div className="vertical-text-section-price-about">
                     <motion.div
                       animate={{ 
@@ -788,7 +773,7 @@ return (
                       </div>
                     </div>
                   </div>
-                  {/* Блок 4 — вертикальный текст */}
+                  {/* Блок 4 - вертикальный текст */}
                   <motion.div className="vertical-text-section-order-about">
                     <motion.div
                       animate={{ 
@@ -808,7 +793,7 @@ return (
                       ))}
                     </motion.div>
                   </motion.div>
-                  {/* Блок 4 — заказать сайт */}
+                  {/* Блок 4 - заказать сайт */}
                   <div className="telegram-contact-section">
                     <div className="telegram-contact-content">
                       <div className="telegram-text-block">
