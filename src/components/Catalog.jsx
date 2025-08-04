@@ -344,7 +344,7 @@ const targetMargin = progress >= 1
   if (!isLoading) return;
 
   const assetsToLoad = [
-    '/video/wheresitemp52white.mp4',
+    '/video/wheresitemp52whitefast.mp4',
     '/icons/user.svg',
     '/icons/sensor-alert.svg',
     '/icons/magic-wand.svg',

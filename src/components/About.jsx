@@ -341,7 +341,7 @@ return (
                 <div className="video-container-mobile">
                       <video
                         ref={videoRef}
-                        src="/video/wheresitemp52white.mp4"
+                        src="/video/wheresitemp52whitefast.mp4"
                         autoPlay
                         muted
                         playsInline
@@ -602,7 +602,7 @@ return (
                     <div className="video-container">
                       <video
                         ref={videoRef}
-                        src="/video/wheresitemp52white.mp4"
+                        src="/video/wheresitemp52whitefast.mp4"
                         autoPlay
                         muted
                         playsInline
