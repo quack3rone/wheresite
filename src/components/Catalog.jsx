@@ -3,6 +3,7 @@ import { motion, useMotionValue, useSpring, AnimatePresence } from 'framer-motio
 import { useNavigate } from 'react-router-dom';
 import { useLocation, useNavigationType} from 'react-router-dom';
 import About from '../components/About';
+import VinesEffect from '../components/VinesEffect';
 
 const MatrixEffect = ({ isVisible, isMobile }) => {
   const canvasRef = useRef(null);
@@ -495,17 +496,16 @@ const Catalog = ({ scrollY, onScrollEnd, isInteractive }) => {
     mobileImageSize: { width: "230px", height: "auto" }
   },
   {
-    name: "buysoon",
-    url: "https://wheresite.ru",
-    image: "/images/.png",
-    hoverColor: "#808080ff",
-    position: { left: "50%", top: "10%" },
+    name: "rostokfit",
+    url: "https://rostokfit.ru",
+    image: "/images/rostoklogo.png",
+    hoverColor: "#009846",
+    position: { left: "50%", top: "35%" },
     size: { width: "640px", height: "auto" },
     imageSize: { width: "640px", height: "auto" },
-    mobilePosition: { left: "30%", top: "50%" },
+    mobilePosition: { left: "10%", top: "50%" },
     mobileSize: { width: "320px", height: "auto" },
-    mobileImageSize: { width: "320px", height: "auto" },
-    disabled: true,
+    mobileImageSize: { width: "300px", height: "auto" },
   },
   {
     name: "Comesoon",
@@ -699,98 +699,108 @@ const Catalog = ({ scrollY, onScrollEnd, isInteractive }) => {
           </div>
  
           <AnimatePresence>
-            {activeProject && activeProject.disabled && (
-              <MatrixEffect 
-                key="matrix-effect"
-                isVisible={true} 
-                isMobile={isMobile} 
-              />
-            )}
-          </AnimatePresence>
-          
-          <AnimatePresence>
-            {activeProject && !activeProject.disabled && (
-              <>
-                {activeProject.isMultiple ? (
-                  <MultipleFolders 
-                    key={activeProject.name}
-                    project={activeProject} 
-                    isMobile={isMobile} 
-                  />
-                ) : (
-                  <motion.div
-                    key={activeProject.name}
-                    initial={{
-                      x: isMobile ? 0 : 800,
-                      y: isMobile ? 800 : 0,
-                      scale: 1.6,
-                      opacity: 0,
-                    }}
-                    animate={{
-                      x: 0,
-                      y: 0,
-                      scale: 1,
-                      opacity: 1,
-                    }}
-                    exit={{
-                      x: isMobile ? 0 : 800,
-                      y: isMobile ? 800 : 0,
-                      scale: 1.6,
-                      opacity: 0,
-                    }}
-                    transition={{
-                      type: "spring",
-                      stiffness: 90,
-                      damping: 20,
-                      mass: 0.8,
-                    }}
-                    style={{
-                      position: "fixed",
-                      left: isMobile
-                        ? activeProject.mobilePosition?.left
-                        : activeProject.position.left,
-                      top: isMobile
-                        ? activeProject.mobilePosition?.top
-                        : activeProject.position.top,
-                      transform: "translateX(-50%)",
-                      width: isMobile
-                        ? activeProject.mobileSize?.width
-                        : activeProject.size.width,
-                      height: isMobile
-                        ? activeProject.mobileSize?.height
-                        : activeProject.size.height,
-                      zIndex: 1,
-                      pointerEvents: "none",
-                      overflow: "hidden",
-                      clipPath: "inset(0 0 0 0)",
-                      transformOrigin: "right center",
-                    }}
-                  >
-                    <motion.img
-                      src={activeProject.image}
-                      alt={activeProject.name}
-                      initial={false}
-                      animate={{ opacity: 1 }}
-                      transition={{ duration: 0.6 }}
-                      style={{
-                        width: isMobile
-                          ? activeProject.mobileImageSize?.width
-                          : activeProject.imageSize?.width,
-                        height: isMobile
-                          ? activeProject.mobileImageSize?.height
-                          : activeProject.imageSize?.height,
-                        objectFit: "cover",
-                        borderRadius: activeProject.name === 'mbirthday' ? '20px' : 'none',
-                        boxShadow: activeProject.name === 'mbirthday'
-                        ? '5px 3px 3px 0px rgba(0, 0, 0, 0.1)'
-                        : 'none'
-                      }}
-                    />
-                  </motion.div>
-                )}
-              </>
-            )}
-          </AnimatePresence>
+  {activeProject && activeProject.disabled && (
+    <MatrixEffect 
+      key="matrix-effect"
+      isVisible={true} 
+      isMobile={isMobile} 
+    />
+  )}
+</AnimatePresence>
+
+{/* <AnimatePresence>
+  {activeProject && activeProject.name === "rostokfit" && !activeProject.disabled && (
+    <VinesEffect
+      key="vines-effect"
+      isVisible={true}
+      isMobile={isMobile}
+    />
+  )}
+</AnimatePresence> */}
+
+<AnimatePresence>
+  {activeProject && !activeProject.disabled && activeProject.name !== "" && (
+    <>
+      {activeProject.isMultiple ? (
+        <MultipleFolders 
+          key={activeProject.name}
+          project={activeProject} 
+          isMobile={isMobile} 
+        />
+      ) : (
+        <motion.div
+          key={activeProject.name}
+          initial={{
+            x: isMobile ? 0 : 800,
+            y: isMobile ? 800 : 0,
+            scale: 1.6,
+            opacity: 0,
+          }}
+          animate={{
+            x: 0,
+            y: 0,
+            scale: 1,
+            opacity: 1,
+          }}
+          exit={{
+            x: isMobile ? 0 : 800,
+            y: isMobile ? 800 : 0,
+            scale: 1.6,
+            opacity: 0,
+          }}
+          transition={{
+            type: "spring",
+            stiffness: 90,
+            damping: 20,
+            mass: 0.8,
+          }}
+          style={{
+            position: "fixed",
+            left: isMobile
+              ? activeProject.mobilePosition?.left
+              : activeProject.position.left,
+            top: isMobile
+              ? activeProject.mobilePosition?.top
+              : activeProject.position.top,
+            transform: "translateX(-50%)",
+            width: isMobile
+              ? activeProject.mobileSize?.width
+              : activeProject.size.width,
+            height: isMobile
+              ? activeProject.mobileSize?.height
+              : activeProject.size.height,
+            zIndex: 1,
+            pointerEvents: "none",
+            overflow: "hidden",
+            clipPath: "inset(0 0 0 0)",
+            transformOrigin: "right center",
+          }}
+        >
+          <motion.img
+            src={activeProject.image}
+            alt={activeProject.name}
+            initial={false}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6 }}
+            style={{
+              width: isMobile
+                ? activeProject.mobileImageSize?.width
+                : activeProject.imageSize?.width,
+              height: isMobile
+                ? activeProject.mobileImageSize?.height
+                : activeProject.imageSize?.height,
+              objectFit: "cover",
+              borderRadius: activeProject.name === 'mbirthday' ? '20px' : 'none',
+              boxShadow: activeProject.name === 'mbirthday'
+              ? '5px 3px 3px 0px rgba(0, 0, 0, 0.1)'
+              : 'none'
+            }}
+          />
+        </motion.div>
+      )}
+    </>
+  )}
+</AnimatePresence>
 
            {/* Блюр-зона справа */}
            <motion.div
