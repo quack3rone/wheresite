@@ -298,7 +298,7 @@ return (
           ref={scrollRef}
         >
           {isMobile ? (
-            // Мобильная версия
+            // Мобильная версияa
             <div className="container-mobile">
               {/* Блок 1 - горизонтальный текст с прокруткой */}
               <motion.div className="mobile-horizontal-scroll">
