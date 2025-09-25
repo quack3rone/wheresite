@@ -1,70 +1,42 @@
-# Getting Started with Create React App
+# WHERESITE
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**Современная веб-студия для создания индивидуальных сайтов**
 
-## Available Scripts
+WHERESITE — это платформа, где встречаются умный дизайн и чистый код. Каждый проект — уникальное решение под конкретные задачи бизнеса.
+![Анимация интерфейса](public/video/wheresite.gif)
 
-In the project directory, you can run:
+## О проекте
 
-### `npm start`
+Архитектура интерфейса построена на контрасте взаимодействий — горизонтальное путешествие по контенту на больших экранах трансформируется в интуитивную вертикальную навигацию на мобильных устройствах. Каждая анимация, каждый переход служит одной цели — создать незабываемый пользовательский опыт.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Ключевые особенности
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+**Интерактивные элементы**
+- Анимированные переходы между страницами
+- Динамические эффекты при скролле
+- Живая типографика и визуальные акценты
 
-### `npm test`
+**Техническая реализация**
+- Компонентная архитектура React
+- Продуманная система состояний и переходов
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+![Анимация интерфейса](public/video/whereprojects.gif)
 
-### `npm run build`
+## Портфолио и проекты
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+В разделе проектов реализована особенная интерактивность. Это не просто галерея, а живая презентация наших возможностей.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Философия разработки
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Мы верим, что сайт должен рассказывать историю бренда через каждый пиксель. Поэтому в WHERESITE нет универсальных решений — каждый проект создается с нуля, исходя из задач клиента и особенностей его аудитории.
 
-### `npm run eject`
+**Полный цикл разработки:**
+- Аналитика и стратегия
+- UI/UX дизайн  
+- Frontend и Backend разработка
+- Тестирование и оптимизация
+- Деплой и техподдержка
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+---
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+*WHERE SITE? Вы уже знаете, где.*
