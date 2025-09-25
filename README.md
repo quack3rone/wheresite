@@ -5,7 +5,7 @@
 WHERESITE — это платформа, где встречаются умный дизайн и чистый код. Каждый проект — уникальное решение под конкретные задачи бизнеса.
 
 <video width="800" height="400" autoplay muted loop>
-  <source src="public/video/wheresite.mp4" type="video/mp4">
+  <source src="/public/video/wheresite.mp4" type="video/mp4">
 </video>
 
 ## О проекте
@@ -24,7 +24,7 @@ WHERESITE — это платформа, где встречаются умны�
 - Продуманная система состояний и переходов
 
 <video width="800" height="400" autoplay muted loop>
-  <source src="public/video/whereprojects.mp4" type="video/mp4">
+  <source src="/public/video/whereprojects.mp4" type="video/mp4">
 </video>
 
 
