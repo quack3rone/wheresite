@@ -78,12 +78,9 @@
 
 .mobile-description {
   font-size: 1rem;
-  text-align: left;
+  text-align: center;
   line-height: 1.2;
   font-family: 'g';
-  width: 100%;
-  max-width: 340px;
-  padding: 1rem 0.5rem;
 }
 
 .glow-title-about-mobile {
@@ -196,7 +193,7 @@
   position: relative;
   margin-top: 2rem;
   font-size: 1.3rem;
-  text-align: left;
+  text-align: center;
   line-height: 1.2;
   font-family: 'g';
   width: 100%;
@@ -2031,4 +2028,16 @@
   font-size: 4rem;
   margin-top: 0rem;
 }
+}
+
+.video-container-mobile,
+.video-container {
+  touch-action: pan-y; /* Разрешает только вертикальный скролл */
+  -webkit-overflow-scrolling: touch; /* Для плавного скролла на iOS */
+}
+
+.video-container-mobile video,
+.video-container video {
+  pointer-events: none;
+  touch-action: none;
 }

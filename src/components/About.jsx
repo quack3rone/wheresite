@@ -335,7 +335,7 @@ return (
                     </div>
                 <p className="mobile-description">
                   Делаем сайты, которые работают. Без шаблонов — только индивидуальные решения с аналитикой,
-                  продуманным дизайном и мощным кодом. Для бизнеса, а не для галочки.
+                  продуманным дизайном и мощным кодом.
                 </p>
               </div>
 
@@ -374,7 +374,7 @@ return (
                 </div>
 
                 <div className="mobile-info-column">
-                  <h5>Какие сайты мы разрабатываем</h5>
+                  <h5>Что мы разрабатываем</h5>
                   <div className="mobile-info-block">
                     <img src="/icons/money-simple-from-bracket.svg" alt="Лендинги" className="mobile-info-icon" />
                     <div>

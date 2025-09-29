@@ -500,7 +500,7 @@ const Catalog = ({ scrollY, onScrollEnd, isInteractive }) => {
     url: "https://rostokfit.ru",
     image: "/images/rostoklogo.png",
     hoverColor: "#009846",
-    position: { left: "50%", top: "35%" },
+    position: { left: "50%", top: "40%" },
     size: { width: "640px", height: "auto" },
     imageSize: { width: "640px", height: "auto" },
     mobilePosition: { left: "10%", top: "50%" },
@@ -508,17 +508,16 @@ const Catalog = ({ scrollY, onScrollEnd, isInteractive }) => {
     mobileImageSize: { width: "300px", height: "auto" },
   },
   {
-    name: "Comesoon",
-    url: "https://wheresite.ru",
-    image: "/images/.png",
-    hoverColor: "#808080ff",
+    name: "AptStroy",
+    url: "https://aptstroy.ru",
+    image: "/images/AptStruylogoclear.png",
+    hoverColor: "#9A161C",
     position: { left: "50%", top: "10%" },
     size: { width: "640px", height: "auto" },
-    imageSize: { width: "640px", height: "auto" },
-    mobilePosition: { left: "30%", top: "50%" },
+    imageSize: { width: "440px", height: "auto" },
+    mobilePosition: { left: "15%", top: "30%" },
     mobileSize: { width: "320px", height: "auto" },
     mobileImageSize: { width: "320px", height: "auto" },
-    disabled: true,
   },
   ];
 
@@ -836,7 +835,7 @@ const Catalog = ({ scrollY, onScrollEnd, isInteractive }) => {
                     }
                   : {
                       top: 0,
-                      right: "30px",
+                      right: "31px",
                       width: '270px',
                       height: '100%',
                     }),
@@ -872,7 +871,7 @@ const Catalog = ({ scrollY, onScrollEnd, isInteractive }) => {
                     }
                   : {
                       top: 0,
-                      right: "30px",
+                      right: "31px",
                       width: '269px',
                       height: '100%',
                     }),
